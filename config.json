@@ -6,20 +6,13 @@
   "dns": {
     "servers": [
       {
-        "tag": "google",
-        "address": "tls://8.8.8.8",
-        "detour": "select"
+        "type": "tls",
+        "server": "8.8.8.8",
+        "tag": "google"
       },
       {
-        "tag": "local",
-        "address": "local",
-        "detour": "direct"
-      }
-    ],
-    "rules": [
-      {
-        "outbound": "any",
-        "server": "local"
+        "type": "local",
+        "tag": "local"
       }
     ]
   },
@@ -28,7 +21,7 @@
       "type": "tun",
       "tag": "tun-in",
       "interface_name": "tun0",
-      "inet4_address": "172.19.0.1/30",
+      "address": ["172.19.0.1/30"],
       "auto_route": true,
       "strict_route": true,
       "stack": "system",
@@ -66,15 +59,20 @@
         "outbound": "select"
       }
     ],
-    "auto_detect_interface": true
+    "auto_detect_interface": true,
+    "default_domain_resolver": {
+      "server": "local"
+    }
   },
   "experimental": {
     "clash_api": {
       "external_controller": "127.0.0.1:8080",
       "external_ui": "ui",
-      "secret": "",
-      "store_selected": true,
-      "cache_file": "cache.db"
+      "secret": ""
+    },
+    "cache_file": {
+      "enabled": true,
+      "path": "cache.db"
     }
   }
 }
