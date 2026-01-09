@@ -13,6 +13,49 @@
       {
         "type": "local",
         "tag": "local"
+      },
+      {
+        "type": "udp",
+        "server": "223.5.5.5",
+        "tag": "default-223-5-5-5"
+      },
+      {
+        "type": "udp",
+        "server": "2401:3200::1",
+        "tag": "default-2401-3200"
+      },
+      {
+        "type": "udp",
+        "server": "1.1.1.1",
+        "tag": "default-1-1-1-1"
+      },
+      {
+        "type": "udp",
+        "server": "2606:4700:4700::1111",
+        "tag": "default-2606-4700"
+      },
+      {
+        "type": "https",
+        "server": "dns.google",
+        "tag": "doh-google",
+        "domain_resolver": "default-1-1-1-1"
+      },
+      {
+        "type": "https",
+        "server": "cloudflare-dns.com",
+        "tag": "doh-cloudflare",
+        "domain_resolver": "default-2606-4700"
+      },
+      {
+        "type": "quic",
+        "server": "dns.adguard-dns.com",
+        "tag": "quic-adguard",
+        "domain_resolver": "default-1-1-1-1"
+      },
+      {
+        "type": "fakeip",
+        "tag": "fakeip",
+        "inet4_range": "198.18.0.1/16"
       }
     ]
   },
@@ -25,7 +68,21 @@
       "auto_route": true,
       "strict_route": true,
       "stack": "system",
-      "sniff": true
+      "sniff": true,
+      "route_exclude_address": [
+        "192.168.0.0/16",
+        "10.0.0.0/8",
+        "172.16.0.0/12",
+        "100.64.0.0/10",
+        "127.0.0.0/8",
+        "169.254.0.0/16",
+        "224.0.0.0/4",
+        "::1/128",
+        "fc00::/7",
+        "fe80::/10",
+        "ff00::/8",
+        "fd7a:115c:a1e0::/48"
+      ]
     }
   ],
   "outbounds": [
@@ -64,6 +121,7 @@
       "server": "local"
     }
   },
+
   "experimental": {
     "clash_api": {
       "external_controller": "127.0.0.1:8080",
