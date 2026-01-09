@@ -63,6 +63,32 @@
         "domain": ["geosite:ads", "trackerslist"],
         "action": "predefined",
         "rcode": "REFUSED"
+      },
+      {
+        "domain": [
+          "geosite:cn",
+          "apple-cn",
+          "microsoft-cn",
+          "google-cn",
+          "games-cn"
+        ],
+        "server": "default-223-5-5-5"
+      },
+      {
+        "domain": ["geosite:private", "*.local", "*.home.arpa"],
+        "server": "default-223-5-5-5"
+      },
+      {
+        "domain": ["geosite:proxy", "ai", "gfw", "tld-proxy"],
+        "server": "doh-google"
+      },
+      {
+        "domain": ["geosite:media", "games"],
+        "server": "doh-google"
+      },
+      {
+        "domain": ["geosite:networktest"],
+        "server": "default-223-5-5-5"
       }
     ]
   },
