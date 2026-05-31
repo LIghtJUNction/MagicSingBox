@@ -60,34 +60,7 @@
     ],
     "rules": [
       {
-        "domain": ["geosite:ads", "trackerslist"],
-        "action": "predefined",
-        "rcode": "REFUSED"
-      },
-      {
-        "domain": [
-          "geosite:cn",
-          "apple-cn",
-          "microsoft-cn",
-          "google-cn",
-          "games-cn"
-        ],
-        "server": "default-223-5-5-5"
-      },
-      {
-        "domain": ["geosite:private", "*.local", "*.home.arpa"],
-        "server": "default-223-5-5-5"
-      },
-      {
-        "domain": ["geosite:proxy", "ai", "gfw", "tld-proxy"],
-        "server": "doh-google"
-      },
-      {
-        "domain": ["geosite:media", "games"],
-        "server": "doh-google"
-      },
-      {
-        "domain": ["geosite:networktest"],
+        "domain_suffix": ["local", "home.arpa", "lan"],
         "server": "default-223-5-5-5"
       }
     ]
@@ -101,6 +74,19 @@
       "auto_route": true,
       "strict_route": true,
       "stack": "system",
+      "exclude_package": [
+        "com.tailscale.ipn",
+        "com.wireguard.android",
+        "net.openvpn.openvpn",
+        "de.blinkt.openvpn",
+        "com.zerotier.one",
+        "com.cloudflare.onedotonedotonedotone",
+        "io.nekohasekai.sfa",
+        "moe.nb4a",
+        "com.v2ray.ang",
+        "com.github.kr328.clash",
+        "com.github.metacubex.clash.meta"
+      ],
       "route_exclude_address": [
         "192.168.0.0/16",
         "10.0.0.0/8",
@@ -138,6 +124,30 @@
       {
         "protocol": "dns",
         "action": "hijack-dns"
+      },
+      {
+        "ip_is_private": true,
+        "outbound": "direct"
+      },
+      {
+        "domain_suffix": ["local", "home.arpa", "lan"],
+        "outbound": "direct"
+      },
+      {
+        "ip_cidr": [
+          "10.0.0.0/8",
+          "100.64.0.0/10",
+          "127.0.0.0/8",
+          "169.254.0.0/16",
+          "172.16.0.0/12",
+          "192.168.0.0/16",
+          "224.0.0.0/4",
+          "::1/128",
+          "fc00::/7",
+          "fe80::/10",
+          "ff00::/8"
+        ],
+        "outbound": "direct"
       },
       {
         "clash_mode": "Direct",
