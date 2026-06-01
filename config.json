@@ -1,6 +1,6 @@
 {
   "log": {
-    "level": "info",
+    "level": "warn",
     "timestamp": true
   },
   "dns": {
@@ -8,6 +8,7 @@
       {
         "type": "tls",
         "tag": "google",
+        "detour": "proxy",
         "server": "8.8.8.8"
       },
       {
@@ -37,19 +38,22 @@
       {
         "type": "https",
         "tag": "doh-google",
-        "domain_resolver": "default-1-1-1-1",
+        "domain_resolver": "default-223-5-5-5",
+        "detour": "proxy",
         "server": "dns.google"
       },
       {
         "type": "https",
         "tag": "doh-cloudflare",
-        "domain_resolver": "default-2606-4700",
+        "domain_resolver": "default-223-5-5-5",
+        "detour": "proxy",
         "server": "cloudflare-dns.com"
       },
       {
         "type": "quic",
         "tag": "quic-adguard",
-        "domain_resolver": "default-1-1-1-1",
+        "domain_resolver": "default-223-5-5-5",
+        "detour": "proxy",
         "server": "dns.adguard-dns.com"
       },
       {
@@ -96,10 +100,10 @@
       },
       {
         "clash_mode": "Global",
-        "server": "doh-google"
+        "server": "default-223-5-5-5"
       }
     ],
-    "final": "doh-google",
+    "final": "default-223-5-5-5",
     "strategy": "prefer_ipv4"
   },
   "inbounds": [
@@ -340,11 +344,11 @@
       "type": "selector",
       "tag": "final",
       "outbounds": [
-        "direct",
         "proxy",
+        "direct",
         "block"
       ],
-      "default": "direct"
+      "default": "proxy"
     },
     {
       "type": "direct",
