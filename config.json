@@ -99,7 +99,7 @@
         "server": "doh-google"
       }
     ],
-    "final": "default-223-5-5-5",
+    "final": "doh-google",
     "strategy": "prefer_ipv4"
   },
   "inbounds": [
@@ -356,6 +356,98 @@
     }
   ],
   "route": {
+    "rule_set": [
+      {
+        "type": "local",
+        "tag": "lyc-geosite-private",
+        "format": "binary",
+        "path": "rules/geosite-private.srs"
+      },
+      {
+        "type": "local",
+        "tag": "lyc-geoip-private",
+        "format": "binary",
+        "path": "rules/geoip-private.srs"
+      },
+      {
+        "type": "local",
+        "tag": "lyc-geosite-ads",
+        "format": "binary",
+        "path": "rules/geosite-category-ads-all.srs"
+      },
+      {
+        "type": "local",
+        "tag": "lyc-geosite-cn",
+        "format": "binary",
+        "path": "rules/geosite-cn.srs"
+      },
+      {
+        "type": "local",
+        "tag": "lyc-geosite-geolocation-cn",
+        "format": "binary",
+        "path": "rules/geosite-geolocation-cn.srs"
+      },
+      {
+        "type": "local",
+        "tag": "lyc-geoip-cn",
+        "format": "binary",
+        "path": "rules/geoip-cn.srs"
+      },
+      {
+        "type": "local",
+        "tag": "lyc-geosite-ai",
+        "format": "binary",
+        "path": "rules/geosite-category-ai-!cn.srs"
+      },
+      {
+        "type": "local",
+        "tag": "lyc-geosite-dev",
+        "format": "binary",
+        "path": "rules/geosite-category-dev.srs"
+      },
+      {
+        "type": "local",
+        "tag": "lyc-geosite-media",
+        "format": "binary",
+        "path": "rules/geosite-category-media.srs"
+      },
+      {
+        "type": "local",
+        "tag": "lyc-geosite-games",
+        "format": "binary",
+        "path": "rules/geosite-category-games.srs"
+      },
+      {
+        "type": "local",
+        "tag": "lyc-geosite-social",
+        "format": "binary",
+        "path": "rules/geosite-category-social-media-!cn.srs"
+      },
+      {
+        "type": "local",
+        "tag": "lyc-geosite-telegram",
+        "format": "binary",
+        "path": "rules/geosite-telegram.srs"
+      },
+      {
+        "type": "local",
+        "tag": "lyc-geoip-telegram",
+        "format": "binary",
+        "path": "rules/geoip-telegram.srs"
+      },
+      {
+        "type": "local",
+        "tag": "lyc-geosite-gfw",
+        "format": "binary",
+        "path": "rules/geosite-gfw.srs"
+      },
+      {
+        "type": "local",
+        "tag": "lyc-geosite-proxy",
+        "format": "binary",
+        "path": "rules/geosite-geolocation-!cn.srs"
+      }
+    ],
     "rules": [
       {
         "inbound": [
@@ -755,6 +847,59 @@
         "outbound": "cn-direct"
       },
       {
+        "rule_set": [
+          "lyc-geosite-private",
+          "lyc-geoip-private"
+        ],
+        "outbound": "lan"
+      },
+      {
+        "rule_set": "lyc-geosite-ads",
+        "outbound": "ad-block"
+      },
+      {
+        "rule_set": [
+          "lyc-geosite-cn",
+          "lyc-geosite-geolocation-cn",
+          "lyc-geoip-cn"
+        ],
+        "outbound": "cn-direct"
+      },
+      {
+        "rule_set": "lyc-geosite-ai",
+        "outbound": "ai-proxy"
+      },
+      {
+        "rule_set": "lyc-geosite-dev",
+        "outbound": "dev-proxy"
+      },
+      {
+        "rule_set": "lyc-geosite-media",
+        "outbound": "media-proxy"
+      },
+      {
+        "rule_set": "lyc-geosite-games",
+        "outbound": "game-proxy"
+      },
+      {
+        "rule_set": "lyc-geosite-social",
+        "outbound": "social-proxy"
+      },
+      {
+        "rule_set": [
+          "lyc-geosite-telegram",
+          "lyc-geoip-telegram"
+        ],
+        "outbound": "telegram-proxy"
+      },
+      {
+        "rule_set": [
+          "lyc-geosite-gfw",
+          "lyc-geosite-proxy"
+        ],
+        "outbound": "proxy-rule"
+      },
+      {
         "domain_suffix": [
           "openai.com",
           "chatgpt.com",
@@ -886,7 +1031,7 @@
         "outbound": "proxy-rule"
       }
     ],
-    "final": "final",
+    "final": "proxy",
     "auto_detect_interface": true,
     "default_domain_resolver": "default-223-5-5-5"
   },
