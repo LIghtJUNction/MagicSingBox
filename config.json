@@ -553,6 +553,14 @@
       },
       {
         "package_name": [
+          "com.openai.chatgpt",
+          "com.openai.chat",
+          "ai.openai.chatgpt"
+        ],
+        "outbound": "ai-proxy"
+      },
+      {
+        "package_name": [
           "com.tencent.mm",
           "com.tencent.mobileqq",
           "com.tencent.tim",
@@ -903,8 +911,13 @@
         "domain_suffix": [
           "openai.com",
           "chatgpt.com",
+          "chat.openai.com",
+          "auth.openai.com",
           "oaistatic.com",
           "oaiusercontent.com",
+          "openaiapi-site.azureedge.net",
+          "challenges.cloudflare.com",
+          "turnstile.cloudflare.com",
           "anthropic.com",
           "claude.ai",
           "perplexity.ai",
