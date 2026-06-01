@@ -1,6 +1,6 @@
 {
   "log": {
-    "level": "warn",
+    "level": "error",
     "timestamp": true
   },
   "dns": {
@@ -463,6 +463,10 @@
       {
         "protocol": "dns",
         "action": "hijack-dns"
+      },
+      {
+        "protocol": "icmp",
+        "outbound": "block"
       },
       {
         "clash_mode": "Direct",
