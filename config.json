@@ -7,8 +7,8 @@
     "servers": [
       {
         "type": "tls",
-        "server": "8.8.8.8",
-        "tag": "google"
+        "tag": "google",
+        "server": "8.8.8.8"
       },
       {
         "type": "local",
@@ -16,41 +16,41 @@
       },
       {
         "type": "udp",
-        "server": "223.5.5.5",
-        "tag": "default-223-5-5-5"
+        "tag": "default-223-5-5-5",
+        "server": "223.5.5.5"
       },
       {
         "type": "udp",
-        "server": "2401:3200::1",
-        "tag": "default-2401-3200"
+        "tag": "default-2401-3200",
+        "server": "2401:3200::1"
       },
       {
         "type": "udp",
-        "server": "1.1.1.1",
-        "tag": "default-1-1-1-1"
+        "tag": "default-1-1-1-1",
+        "server": "1.1.1.1"
       },
       {
         "type": "udp",
-        "server": "2606:4700:4700::1111",
-        "tag": "default-2606-4700"
+        "tag": "default-2606-4700",
+        "server": "2606:4700:4700::1111"
       },
       {
         "type": "https",
-        "server": "dns.google",
         "tag": "doh-google",
-        "domain_resolver": "default-1-1-1-1"
+        "domain_resolver": "default-1-1-1-1",
+        "server": "dns.google"
       },
       {
         "type": "https",
-        "server": "cloudflare-dns.com",
         "tag": "doh-cloudflare",
-        "domain_resolver": "default-2606-4700"
+        "domain_resolver": "default-2606-4700",
+        "server": "cloudflare-dns.com"
       },
       {
         "type": "quic",
-        "server": "dns.adguard-dns.com",
         "tag": "quic-adguard",
-        "domain_resolver": "default-1-1-1-1"
+        "domain_resolver": "default-1-1-1-1",
+        "server": "dns.adguard-dns.com"
       },
       {
         "type": "fakeip",
@@ -58,10 +58,36 @@
         "inet4_range": "198.18.0.1/16"
       }
     ],
-    "final": "doh-google",
     "rules": [
       {
-        "domain_suffix": ["local", "home.arpa", "lan"],
+        "domain_suffix": [
+          "local",
+          "home.arpa",
+          "lan"
+        ],
+        "server": "default-223-5-5-5"
+      },
+      {
+        "domain_suffix": [
+          "tailscale.net",
+          "ts.net"
+        ],
+        "server": "default-223-5-5-5"
+      },
+      {
+        "domain_suffix": [
+          "cn",
+          "中国",
+          "公司",
+          "网络"
+        ],
+        "server": "default-223-5-5-5"
+      },
+      {
+        "domain_suffix": [
+          "msftconnecttest.com",
+          "msftncsi.com"
+        ],
         "server": "default-223-5-5-5"
       },
       {
@@ -73,6 +99,7 @@
         "server": "doh-google"
       }
     ],
+    "final": "default-223-5-5-5",
     "strategy": "prefer_ipv4"
   },
   "inbounds": [
@@ -86,23 +113,9 @@
       "type": "tun",
       "tag": "tun-in",
       "interface_name": "tun0",
-      "address": ["172.19.0.1/30"],
+      "address": "172.19.0.1/30",
       "auto_route": true,
       "strict_route": true,
-      "stack": "system",
-      "exclude_package": [
-        "com.tailscale.ipn",
-        "com.wireguard.android",
-        "net.openvpn.openvpn",
-        "de.blinkt.openvpn",
-        "com.zerotier.one",
-        "com.cloudflare.onedotonedotonedotone",
-        "io.nekohasekai.sfa",
-        "moe.nb4a",
-        "com.v2ray.ang",
-        "com.github.kr328.clash",
-        "com.github.metacubex.clash.meta"
-      ],
       "route_exclude_address": [
         "192.168.0.0/16",
         "10.0.0.0/8",
@@ -116,20 +129,221 @@
         "fe80::/10",
         "ff00::/8",
         "fd7a:115c:a1e0::/48"
-      ]
+      ],
+      "exclude_package": [
+        "com.tailscale.ipn",
+        "com.wireguard.android",
+        "net.openvpn.openvpn",
+        "de.blinkt.openvpn",
+        "com.zerotier.one",
+        "com.cloudflare.onedotonedotonedotone",
+        "io.nekohasekai.sfa",
+        "moe.nb4a",
+        "com.v2ray.ang",
+        "com.github.kr328.clash",
+        "com.github.metacubex.clash.meta"
+      ],
+      "stack": "system"
     }
   ],
   "outbounds": [
     {
       "type": "selector",
       "tag": "proxy",
-      "outbounds": ["direct", "block"],
+      "outbounds": [
+        "direct",
+        "block"
+      ],
       "default": "direct"
     },
     {
       "type": "selector",
       "tag": "select",
-      "outbounds": ["proxy", "direct", "block"],
+      "outbounds": [
+        "proxy",
+        "direct",
+        "block"
+      ],
+      "default": "proxy"
+    },
+    {
+      "type": "selector",
+      "tag": "lan",
+      "outbounds": [
+        "direct",
+        "proxy",
+        "block"
+      ],
+      "default": "direct"
+    },
+    {
+      "type": "selector",
+      "tag": "ad-block",
+      "outbounds": [
+        "block",
+        "direct",
+        "proxy"
+      ],
+      "default": "block"
+    },
+    {
+      "type": "selector",
+      "tag": "cn-direct",
+      "outbounds": [
+        "direct",
+        "proxy",
+        "block"
+      ],
+      "default": "direct"
+    },
+    {
+      "type": "selector",
+      "tag": "apple-cn",
+      "outbounds": [
+        "direct",
+        "proxy",
+        "block"
+      ],
+      "default": "direct"
+    },
+    {
+      "type": "selector",
+      "tag": "microsoft-cn",
+      "outbounds": [
+        "direct",
+        "proxy",
+        "block"
+      ],
+      "default": "direct"
+    },
+    {
+      "type": "selector",
+      "tag": "google-cn",
+      "outbounds": [
+        "direct",
+        "proxy",
+        "block"
+      ],
+      "default": "direct"
+    },
+    {
+      "type": "selector",
+      "tag": "icloud",
+      "outbounds": [
+        "direct",
+        "proxy",
+        "block"
+      ],
+      "default": "direct"
+    },
+    {
+      "type": "selector",
+      "tag": "bing",
+      "outbounds": [
+        "proxy",
+        "direct",
+        "block"
+      ],
+      "default": "proxy"
+    },
+    {
+      "type": "selector",
+      "tag": "network-test",
+      "outbounds": [
+        "direct",
+        "proxy",
+        "block"
+      ],
+      "default": "direct"
+    },
+    {
+      "type": "selector",
+      "tag": "ai-proxy",
+      "outbounds": [
+        "proxy",
+        "direct",
+        "block"
+      ],
+      "default": "proxy"
+    },
+    {
+      "type": "selector",
+      "tag": "proxy-rule",
+      "outbounds": [
+        "proxy",
+        "direct",
+        "block"
+      ],
+      "default": "proxy"
+    },
+    {
+      "type": "selector",
+      "tag": "dev-proxy",
+      "outbounds": [
+        "proxy",
+        "direct",
+        "block"
+      ],
+      "default": "proxy"
+    },
+    {
+      "type": "selector",
+      "tag": "social-proxy",
+      "outbounds": [
+        "proxy",
+        "direct",
+        "block"
+      ],
+      "default": "proxy"
+    },
+    {
+      "type": "selector",
+      "tag": "download-direct",
+      "outbounds": [
+        "direct",
+        "proxy",
+        "block"
+      ],
+      "default": "direct"
+    },
+    {
+      "type": "selector",
+      "tag": "media-proxy",
+      "outbounds": [
+        "proxy",
+        "direct",
+        "block"
+      ],
+      "default": "proxy"
+    },
+    {
+      "type": "selector",
+      "tag": "game-proxy",
+      "outbounds": [
+        "proxy",
+        "direct",
+        "block"
+      ],
+      "default": "proxy"
+    },
+    {
+      "type": "selector",
+      "tag": "telegram-proxy",
+      "outbounds": [
+        "proxy",
+        "direct",
+        "block"
+      ],
+      "default": "proxy"
+    },
+    {
+      "type": "selector",
+      "tag": "final",
+      "outbounds": [
+        "proxy",
+        "direct",
+        "block"
+      ],
       "default": "proxy"
     },
     {
@@ -144,7 +358,10 @@
   "route": {
     "rules": [
       {
-        "inbound": ["mixed-in", "tun-in"],
+        "inbound": [
+          "mixed-in",
+          "tun-in"
+        ],
         "action": "sniff"
       },
       {
@@ -152,16 +369,63 @@
         "action": "hijack-dns"
       },
       {
+        "clash_mode": "Direct",
+        "outbound": "direct"
+      },
+      {
+        "clash_mode": "Global",
+        "outbound": "select"
+      },
+      {
+        "ip_cidr": [
+          "127.0.0.1/32",
+          "::1/128",
+          "198.18.0.0/16",
+          "28.0.0.0/8"
+        ],
+        "outbound": "block"
+      },
+      {
+        "domain_suffix": [
+          "doubleclick.net",
+          "googlesyndication.com",
+          "googleadservices.com",
+          "adservice.google.com",
+          "adsystem.com",
+          "adnxs.com",
+          "scorecardresearch.com",
+          "umeng.com",
+          "umengcloud.com"
+        ],
+        "outbound": "ad-block"
+      },
+      {
+        "domain_keyword": [
+          "adservice",
+          "analytics",
+          "tracking",
+          "tracker"
+        ],
+        "outbound": "ad-block"
+      },
+      {
+        "domain_suffix": [
+          "local",
+          "home.arpa",
+          "lan"
+        ],
+        "outbound": "lan"
+      },
+      {
+        "domain_suffix": [
+          "tailscale.net",
+          "ts.net"
+        ],
+        "outbound": "lan"
+      },
+      {
         "ip_is_private": true,
-        "outbound": "direct"
-      },
-      {
-        "domain_suffix": ["local", "home.arpa", "lan"],
-        "outbound": "direct"
-      },
-      {
-        "domain_suffix": ["tailscale.net", "ts.net"],
-        "outbound": "direct"
+        "outbound": "lan"
       },
       {
         "ip_cidr": [
@@ -175,44 +439,354 @@
           "::1/128",
           "fc00::/7",
           "fe80::/10",
-          "ff00::/8"
+          "ff00::/8",
+          "fd7a:115c:a1e0::/48"
         ],
-        "outbound": "direct"
-      },
-      {
-        "clash_mode": "Direct",
-        "outbound": "direct"
-      },
-      {
-        "clash_mode": "Global",
-        "outbound": "select"
+        "outbound": "lan"
       },
       {
         "domain_suffix": [
           "msftconnecttest.com",
-          "msftncsi.com",
-          "push.apple.com",
-          "apple.com",
-          "icloud.com",
-          "itunes.apple.com"
+          "msftncsi.com"
+        ],
+        "outbound": "network-test"
+      },
+      {
+        "domain_keyword": [
+          "connectivitycheck",
+          "generate_204",
+          "captive"
+        ],
+        "outbound": "network-test"
+      },
+      {
+        "network": "udp",
+        "port": 123,
+        "outbound": "direct"
+      },
+      {
+        "network": "tcp",
+        "port": [
+          5228,
+          5229,
+          5230
         ],
         "outbound": "direct"
+      },
+      {
+        "network": "udp",
+        "port": [
+          135,
+          136,
+          137,
+          138,
+          139
+        ],
+        "outbound": "direct"
+      },
+      {
+        "domain_suffix": [
+          "apple.com",
+          "icloud.com",
+          "itunes.apple.com",
+          "push.apple.com"
+        ],
+        "outbound": "apple-cn"
+      },
+      {
+        "domain_suffix": [
+          "icloud.com",
+          "icloud-content.com",
+          "me.com"
+        ],
+        "outbound": "icloud"
+      },
+      {
+        "domain_suffix": [
+          "microsoft.com",
+          "windows.com",
+          "windowsupdate.com",
+          "msftauth.net",
+          "msauth.net",
+          "office.com",
+          "office365.com",
+          "live.com",
+          "msn.com"
+        ],
+        "outbound": "microsoft-cn"
+      },
+      {
+        "domain_suffix": [
+          "bing.com",
+          "bingapis.com",
+          "bing.net"
+        ],
+        "outbound": "bing"
+      },
+      {
+        "domain_suffix": [
+          "google.cn",
+          "g.cn",
+          "googleapis.cn",
+          "google-analytics.com"
+        ],
+        "outbound": "google-cn"
+      },
+      {
+        "domain_suffix": [
+          "cn",
+          "中国",
+          "公司",
+          "网络"
+        ],
+        "outbound": "cn-direct"
+      },
+      {
+        "domain_suffix": [
+          "baidu.com",
+          "bdstatic.com",
+          "bilibili.com",
+          "bilivideo.com",
+          "douyin.com",
+          "douyincdn.com",
+          "byteimg.com",
+          "bytedance.com",
+          "toutiao.com",
+          "qq.com",
+          "weixin.qq.com",
+          "gtimg.com",
+          "qpic.cn",
+          "alicdn.com",
+          "aliyun.com",
+          "taobao.com",
+          "tmall.com",
+          "jd.com",
+          "360buyimg.com",
+          "mi.com",
+          "xiaomi.com",
+          "163.com",
+          "126.net",
+          "sina.com.cn",
+          "weibo.com",
+          "zhihu.com",
+          "meituan.com",
+          "dianping.com",
+          "amap.com",
+          "autonavi.com",
+          "huawei.com",
+          "hicloud.com",
+          "honor.com",
+          "oppo.com",
+          "vivo.com"
+        ],
+        "outbound": "cn-direct"
+      },
+      {
+        "ip_cidr": [
+          "1.0.1.0/24",
+          "1.0.2.0/23",
+          "1.0.8.0/21",
+          "1.0.32.0/19",
+          "1.1.0.0/24",
+          "14.0.0.0/8",
+          "27.0.0.0/8",
+          "36.0.0.0/8",
+          "39.0.0.0/8",
+          "42.0.0.0/8",
+          "49.0.0.0/8",
+          "58.0.0.0/8",
+          "59.0.0.0/8",
+          "60.0.0.0/8",
+          "101.0.0.0/8",
+          "103.0.0.0/8",
+          "106.0.0.0/8",
+          "110.0.0.0/8",
+          "111.0.0.0/8",
+          "112.0.0.0/8",
+          "113.0.0.0/8",
+          "114.0.0.0/8",
+          "115.0.0.0/8",
+          "116.0.0.0/8",
+          "117.0.0.0/8",
+          "118.0.0.0/8",
+          "119.0.0.0/8",
+          "120.0.0.0/8",
+          "121.0.0.0/8",
+          "122.0.0.0/8",
+          "123.0.0.0/8",
+          "124.0.0.0/8",
+          "125.0.0.0/8",
+          "139.0.0.0/8",
+          "140.0.0.0/8",
+          "150.0.0.0/8",
+          "153.0.0.0/8",
+          "163.0.0.0/8",
+          "171.0.0.0/8",
+          "175.0.0.0/8",
+          "180.0.0.0/8",
+          "182.0.0.0/8",
+          "183.0.0.0/8",
+          "202.0.0.0/8",
+          "203.0.0.0/8",
+          "210.0.0.0/8",
+          "211.0.0.0/8",
+          "218.0.0.0/8",
+          "219.0.0.0/8",
+          "220.0.0.0/8",
+          "221.0.0.0/8",
+          "222.0.0.0/8",
+          "223.0.0.0/8"
+        ],
+        "outbound": "cn-direct"
+      },
+      {
+        "domain_suffix": [
+          "openai.com",
+          "chatgpt.com",
+          "oaistatic.com",
+          "oaiusercontent.com",
+          "anthropic.com",
+          "claude.ai",
+          "perplexity.ai",
+          "gemini.google.com",
+          "bard.google.com",
+          "deepmind.com"
+        ],
+        "outbound": "ai-proxy"
+      },
+      {
+        "domain_suffix": [
+          "github.com",
+          "githubusercontent.com",
+          "githubassets.com",
+          "githubcopilot.com",
+          "gitlab.com",
+          "docker.com",
+          "docker.io",
+          "dockerhub.com",
+          "npmjs.com",
+          "npmjs.org",
+          "pypi.org",
+          "pythonhosted.org",
+          "rubygems.org",
+          "crates.io",
+          "rust-lang.org",
+          "golang.org",
+          "go.dev"
+        ],
+        "outbound": "dev-proxy"
+      },
+      {
+        "domain_suffix": [
+          "youtube.com",
+          "ytimg.com",
+          "googlevideo.com",
+          "netflix.com",
+          "nflxvideo.net",
+          "disneyplus.com",
+          "hulu.com",
+          "spotify.com",
+          "twitch.tv"
+        ],
+        "outbound": "media-proxy"
+      },
+      {
+        "domain_suffix": [
+          "steamcommunity.com",
+          "steampowered.com",
+          "steamstatic.com",
+          "epicgames.com",
+          "playstation.net",
+          "xboxlive.com",
+          "nintendo.net"
+        ],
+        "outbound": "game-proxy"
+      },
+      {
+        "domain_suffix": [
+          "steamserver.net",
+          "steamcontent.com",
+          "steamusercontent.com",
+          "akamaihd.net",
+          "hwcdn.net",
+          "windowsupdate.com",
+          "download.windowsupdate.com"
+        ],
+        "outbound": "download-direct"
+      },
+      {
+        "domain_suffix": [
+          "facebook.com",
+          "fbcdn.net",
+          "instagram.com",
+          "threads.net",
+          "whatsapp.com",
+          "twitter.com",
+          "x.com",
+          "twimg.com",
+          "reddit.com",
+          "discord.com",
+          "discord.gg",
+          "discordapp.com"
+        ],
+        "outbound": "social-proxy"
+      },
+      {
+        "domain_suffix": [
+          "telegram.org",
+          "t.me",
+          "tdesktop.com"
+        ],
+        "outbound": "telegram-proxy"
+      },
+      {
+        "ip_cidr": [
+          "91.108.0.0/16",
+          "91.108.4.0/22",
+          "91.108.8.0/22",
+          "91.108.12.0/22",
+          "91.108.16.0/22",
+          "91.108.56.0/22",
+          "149.154.160.0/20",
+          "2001:67c:4e8::/48",
+          "2001:b28:f23c::/47",
+          "2001:b28:f23f::/48"
+        ],
+        "outbound": "telegram-proxy"
+      },
+      {
+        "domain_keyword": [
+          "google",
+          "youtube",
+          "facebook",
+          "instagram",
+          "twitter",
+          "x.com",
+          "github",
+          "telegram",
+          "wikipedia",
+          "reddit",
+          "discord"
+        ],
+        "outbound": "proxy-rule"
       }
     ],
-    "final": "select",
+    "final": "final",
     "auto_detect_interface": true,
-    "default_domain_resolver": {
-      "server": "local"
-    }
+    "default_domain_resolver": "local"
   },
-
   "experimental": {
+    "cache_file": {
+      "enabled": true,
+      "path": "cache.db",
+      "cache_id": "MagicNet",
+      "store_fakeip": true
+    },
     "clash_api": {
       "external_controller": "127.0.0.1:9090",
       "external_ui": "ui",
       "external_ui_download_url": "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip",
       "external_ui_download_detour": "direct",
-      "secret": "",
       "default_mode": "Rule",
       "access_control_allow_origin": [
         "http://127.0.0.1",
@@ -221,12 +795,6 @@
         "https://metacubex.github.io"
       ],
       "access_control_allow_private_network": true
-    },
-    "cache_file": {
-      "enabled": true,
-      "path": "cache.db",
-      "cache_id": "MagicNet",
-      "store_fakeip": true
     }
   }
 }
