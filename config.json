@@ -888,7 +888,7 @@
     ],
     "final": "final",
     "auto_detect_interface": true,
-    "default_domain_resolver": "local"
+    "default_domain_resolver": "default-223-5-5-5"
   },
   "experimental": {
     "cache_file": {
