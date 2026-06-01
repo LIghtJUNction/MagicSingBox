@@ -1,0 +1,5 @@
+# Put your Clash/Mihomo subscription URL here, then run action.sh and choose:
+# Update sing-box subscription nodes
+#
+# The importer reads common Clash YAML proxies and writes them into config.json
+# as sing-box outbounds. Unsupported node types are skipped.
