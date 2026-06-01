@@ -119,6 +119,7 @@
       "interface_name": "tun0",
       "address": "172.19.0.1/30",
       "auto_route": true,
+      "auto_redirect": true,
       "strict_route": true,
       "route_exclude_address": [
         "192.168.0.0/16",
@@ -147,7 +148,7 @@
         "com.github.kr328.clash",
         "com.github.metacubex.clash.meta"
       ],
-      "stack": "system"
+      "stack": "gvisor"
     }
   ],
   "outbounds": [
@@ -254,11 +255,11 @@
       "type": "selector",
       "tag": "network-test",
       "outbounds": [
-        "direct",
         "proxy",
+        "direct",
         "block"
       ],
-      "default": "direct"
+      "default": "proxy"
     },
     {
       "type": "selector",
@@ -548,6 +549,14 @@
         "domain_suffix": [
           "msftconnecttest.com",
           "msftncsi.com"
+        ],
+        "outbound": "direct"
+      },
+      {
+        "domain_suffix": [
+          "gstatic.com",
+          "gvt1.com",
+          "gvt2.com"
         ],
         "outbound": "network-test"
       },
