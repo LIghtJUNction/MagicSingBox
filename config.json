@@ -500,7 +500,8 @@
       {
         "inbound": [
           "mixed-in",
-          "tun-in"
+          "tun-in",
+          "tproxy-in"
         ],
         "action": "sniff"
       },
