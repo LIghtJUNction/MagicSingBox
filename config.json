@@ -6,55 +6,39 @@
   "dns": {
     "servers": [
       {
-        "type": "tls",
-        "tag": "google",
-        "detour": "proxy",
-        "server": "8.8.8.8"
-      },
-      {
-        "type": "local",
-        "tag": "local"
-      },
-      {
-        "type": "udp",
+        "type": "https",
         "tag": "default-223-5-5-5",
-        "server": "223.5.5.5"
-      },
-      {
-        "type": "udp",
-        "tag": "default-2401-3200",
-        "server": "2401:3200::1"
-      },
-      {
-        "type": "udp",
-        "tag": "default-1-1-1-1",
-        "server": "1.1.1.1"
-      },
-      {
-        "type": "udp",
-        "tag": "default-2606-4700",
-        "server": "2606:4700:4700::1111"
+        "server": "223.5.5.5",
+        "server_port": 443,
+        "path": "/dns-query",
+        "headers": {
+          "Host": "dns.alidns.com"
+        },
+        "tls": {
+          "server_name": "dns.alidns.com"
+        }
       },
       {
         "type": "https",
         "tag": "doh-google",
-        "domain_resolver": "default-223-5-5-5",
         "detour": "proxy",
-        "server": "dns.google"
+        "server": "8.8.8.8",
+        "server_port": 443,
+        "path": "/dns-query",
+        "tls": {
+          "server_name": "dns.google"
+        }
       },
       {
         "type": "https",
         "tag": "doh-cloudflare",
-        "domain_resolver": "default-223-5-5-5",
         "detour": "proxy",
-        "server": "cloudflare-dns.com"
-      },
-      {
-        "type": "quic",
-        "tag": "quic-adguard",
-        "domain_resolver": "default-223-5-5-5",
-        "detour": "proxy",
-        "server": "dns.adguard-dns.com"
+        "server": "1.1.1.1",
+        "server_port": 443,
+        "path": "/dns-query",
+        "tls": {
+          "server_name": "cloudflare-dns.com"
+        }
       },
       {
         "type": "fakeip",
