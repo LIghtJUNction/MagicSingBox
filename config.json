@@ -101,9 +101,52 @@
       {
         "clash_mode": "Global",
         "server": "default-223-5-5-5"
+      },
+      {
+        "rule_set": [
+          "lyc-geosite-private",
+          "lyc-geoip-private"
+        ],
+        "server": "default-223-5-5-5"
+      },
+      {
+        "rule_set": [
+          "lyc-geosite-cn",
+          "lyc-geosite-geolocation-cn",
+          "lyc-geoip-cn"
+        ],
+        "server": "default-223-5-5-5"
+      },
+      {
+        "rule_set": [
+          "lyc-geosite-ai",
+          "lyc-geosite-gfw",
+          "lyc-geosite-proxy"
+        ],
+        "server": "doh-google"
+      },
+      {
+        "rule_set": [
+          "lyc-geosite-dev",
+          "lyc-geosite-media",
+          "lyc-geosite-games",
+          "lyc-geosite-social",
+          "lyc-geosite-telegram",
+          "lyc-geoip-telegram"
+        ],
+        "server": "doh-cloudflare"
+      },
+      {
+        "domain_suffix": [
+          "connectivitycheck.gstatic.com",
+          "clients3.google.com",
+          "connect.rom.miui.com",
+          "connectivitycheck.platform.hicloud.com"
+        ],
+        "server": "default-223-5-5-5"
       }
     ],
-    "final": "default-223-5-5-5",
+    "final": "doh-google",
     "strategy": "prefer_ipv4"
   },
   "inbounds": [
@@ -1074,7 +1117,7 @@
         "outbound": "proxy-rule"
       }
     ],
-    "final": "proxy",
+    "final": "final",
     "auto_detect_interface": true,
     "default_domain_resolver": "default-223-5-5-5"
   },
