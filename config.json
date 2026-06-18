@@ -484,8 +484,7 @@
       {
         "inbound": [
           "mixed-in",
-          "tun-in",
-          "tproxy-in"
+          "tun-in"
         ],
         "action": "sniff"
       },
