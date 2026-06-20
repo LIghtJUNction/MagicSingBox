@@ -108,15 +108,28 @@
         "rule_set": [
           "lyc-geosite-cn",
           "lyc-geosite-geolocation-cn",
-          "lyc-geoip-cn"
+          "lyc-geoip-cn",
+          "metacubex-geosite-cn",
+          "metacubex-geoip-cn",
+          "ddch-direct",
+          "karing-acl4ssr-china-domain",
+          "karing-acl4ssr-china-ip",
+          "yuu-geosite-pcdn-cn"
         ],
         "server": "bootstrap-local-dns"
       },
       {
         "rule_set": [
           "lyc-geosite-ai",
+          "yuu-geosite-ai",
+          "karing-acl4ssr-ai",
           "lyc-geosite-gfw",
-          "lyc-geosite-proxy"
+          "ddch-gfw",
+          "lyc-geosite-proxy",
+          "metacubex-geosite-geolocation-not-cn",
+          "ddch-proxy",
+          "karing-acl4ssr-proxy-lite",
+          "karing-acl4ssr-proxy-gfwlist"
         ],
         "server": "doh-google"
       },
@@ -124,6 +137,8 @@
         "rule_set": [
           "lyc-geosite-dev",
           "lyc-geosite-media",
+          "yuu-geosite-stream-global",
+          "karing-acl4ssr-proxy-media",
           "lyc-geosite-games",
           "lyc-geosite-social",
           "lyc-geosite-telegram",
@@ -489,6 +504,120 @@
         "tag": "lyc-geosite-proxy",
         "format": "binary",
         "path": "rules/geosite-geolocation-!cn.srs"
+      },
+      {
+        "type": "local",
+        "tag": "metacubex-geosite-cn",
+        "format": "binary",
+        "path": "rules/metacubex-geosite-cn.srs"
+      },
+      {
+        "type": "local",
+        "tag": "metacubex-geoip-cn",
+        "format": "binary",
+        "path": "rules/metacubex-geoip-cn.srs"
+      },
+      {
+        "type": "local",
+        "tag": "metacubex-geosite-geolocation-not-cn",
+        "format": "binary",
+        "path": "rules/metacubex-geosite-geolocation-not-cn.srs"
+      },
+      {
+        "type": "local",
+        "tag": "yuu-geosite-pcdn-cn",
+        "format": "binary",
+        "path": "rules/yuu-geosite-pcdn-cn.srs"
+      },
+      {
+        "type": "local",
+        "tag": "yuu-geosite-stream-global",
+        "format": "binary",
+        "path": "rules/yuu-geosite-stream-global.srs"
+      },
+      {
+        "type": "local",
+        "tag": "yuu-geosite-ai",
+        "format": "binary",
+        "path": "rules/yuu-geosite-ai.srs"
+      },
+      {
+        "type": "local",
+        "tag": "ddch-direct",
+        "format": "binary",
+        "path": "rules/ddch-direct.srs"
+      },
+      {
+        "type": "local",
+        "tag": "ddch-proxy",
+        "format": "binary",
+        "path": "rules/ddch-proxy.srs"
+      },
+      {
+        "type": "local",
+        "tag": "ddch-gfw",
+        "format": "binary",
+        "path": "rules/ddch-gfw.srs"
+      },
+      {
+        "type": "local",
+        "tag": "hagezi-light",
+        "format": "binary",
+        "path": "rules/hagezi-light.srs"
+      },
+      {
+        "type": "local",
+        "tag": "hagezi-normal",
+        "format": "binary",
+        "path": "rules/hagezi-normal.srs"
+      },
+      {
+        "type": "local",
+        "tag": "hagezi-anti-piracy",
+        "format": "binary",
+        "path": "rules/hagezi-anti-piracy.srs"
+      },
+      {
+        "type": "local",
+        "tag": "karing-acl4ssr-ai",
+        "format": "binary",
+        "path": "rules/karing-acl4ssr-ai.srs"
+      },
+      {
+        "type": "local",
+        "tag": "karing-acl4ssr-proxy-lite",
+        "format": "binary",
+        "path": "rules/karing-acl4ssr-proxy-lite.srs"
+      },
+      {
+        "type": "local",
+        "tag": "karing-acl4ssr-proxy-gfwlist",
+        "format": "binary",
+        "path": "rules/karing-acl4ssr-proxy-gfwlist.srs"
+      },
+      {
+        "type": "local",
+        "tag": "karing-acl4ssr-banad",
+        "format": "binary",
+        "path": "rules/karing-acl4ssr-banad.srs"
+      },
+      {
+        "type": "local",
+        "tag": "karing-acl4ssr-china-domain",
+        "format": "binary",
+        "path": "rules/karing-acl4ssr-china-domain.srs"
+      },
+      {
+        "type": "local",
+        "tag": "karing-acl4ssr-china-ip",
+        "format": "binary",
+        "path": "rules/karing-acl4ssr-china-ip.srs"
+      },
+      {
+        "type": "local",
+        "tag": "karing-acl4ssr-proxy-media",
+        "format": "binary",
+        "path": "rules/karing-acl4ssr-proxy-media.srs"
       }
     ],
     "rules": [
@@ -966,14 +1095,36 @@
       },
       {
         "rule_set": [
+          "hagezi-light",
+          "hagezi-normal",
+          "hagezi-anti-piracy",
+          "karing-acl4ssr-banad"
+        ],
+        "outbound": "ad-block"
+      },
+      {
+        "rule_set": "yuu-geosite-pcdn-cn",
+        "outbound": "download-direct"
+      },
+      {
+        "rule_set": [
           "lyc-geosite-cn",
           "lyc-geosite-geolocation-cn",
-          "lyc-geoip-cn"
+          "lyc-geoip-cn",
+          "metacubex-geosite-cn",
+          "metacubex-geoip-cn",
+          "ddch-direct",
+          "karing-acl4ssr-china-domain",
+          "karing-acl4ssr-china-ip"
         ],
         "outbound": "cn-direct"
       },
       {
-        "rule_set": "lyc-geosite-ai",
+        "rule_set": [
+          "lyc-geosite-ai",
+          "yuu-geosite-ai",
+          "karing-acl4ssr-ai"
+        ],
         "outbound": "ai-proxy"
       },
       {
@@ -981,7 +1132,11 @@
         "outbound": "dev-proxy"
       },
       {
-        "rule_set": "lyc-geosite-media",
+        "rule_set": [
+          "lyc-geosite-media",
+          "yuu-geosite-stream-global",
+          "karing-acl4ssr-proxy-media"
+        ],
         "outbound": "media-proxy"
       },
       {
@@ -1002,7 +1157,12 @@
       {
         "rule_set": [
           "lyc-geosite-gfw",
-          "lyc-geosite-proxy"
+          "ddch-gfw",
+          "lyc-geosite-proxy",
+          "metacubex-geosite-geolocation-not-cn",
+          "ddch-proxy",
+          "karing-acl4ssr-proxy-lite",
+          "karing-acl4ssr-proxy-gfwlist"
         ],
         "outbound": "proxy-rule"
       },
