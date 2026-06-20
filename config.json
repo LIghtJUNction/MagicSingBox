@@ -7,7 +7,7 @@
     "servers": [
       {
         "type": "https",
-        "tag": "default-223-5-5-5",
+        "tag": "bootstrap-local-dns",
         "server": "223.5.5.5",
         "server_port": 443,
         "path": "/dns-query",
@@ -16,6 +16,17 @@
         },
         "tls": {
           "server_name": "dns.alidns.com"
+        }
+      },
+      {
+        "type": "https",
+        "tag": "default-remote-dns",
+        "detour": "proxy",
+        "server": "1.1.1.1",
+        "server_port": 443,
+        "path": "/dns-query",
+        "tls": {
+          "server_name": "cloudflare-dns.com"
         }
       },
       {
@@ -53,14 +64,14 @@
           "home.arpa",
           "lan"
         ],
-        "server": "default-223-5-5-5"
+        "server": "bootstrap-local-dns"
       },
       {
         "domain_suffix": [
           "tailscale.net",
           "ts.net"
         ],
-        "server": "default-223-5-5-5"
+        "server": "bootstrap-local-dns"
       },
       {
         "domain_suffix": [
@@ -69,29 +80,29 @@
           "公司",
           "网络"
         ],
-        "server": "default-223-5-5-5"
+        "server": "bootstrap-local-dns"
       },
       {
         "domain_suffix": [
           "msftconnecttest.com",
           "msftncsi.com"
         ],
-        "server": "default-223-5-5-5"
+        "server": "bootstrap-local-dns"
       },
       {
         "clash_mode": "Direct",
-        "server": "default-223-5-5-5"
+        "server": "bootstrap-local-dns"
       },
       {
         "clash_mode": "Global",
-        "server": "default-223-5-5-5"
+        "server": "default-remote-dns"
       },
       {
         "rule_set": [
           "lyc-geosite-private",
           "lyc-geoip-private"
         ],
-        "server": "default-223-5-5-5"
+        "server": "bootstrap-local-dns"
       },
       {
         "rule_set": [
@@ -99,7 +110,7 @@
           "lyc-geosite-geolocation-cn",
           "lyc-geoip-cn"
         ],
-        "server": "default-223-5-5-5"
+        "server": "bootstrap-local-dns"
       },
       {
         "rule_set": [
@@ -127,7 +138,7 @@
           "connect.rom.miui.com",
           "connectivitycheck.platform.hicloud.com"
         ],
-        "server": "default-223-5-5-5"
+        "server": "bootstrap-local-dns"
       }
     ],
     "final": "doh-google",
@@ -577,13 +588,32 @@
           "msftconnecttest.com",
           "msftncsi.com"
         ],
-        "outbound": "direct"
+        "outbound": "network-test"
       },
       {
         "domain_suffix": [
+          "connectivitycheck.gstatic.com",
+          "connectivitycheck.android.com",
+          "clients3.google.com",
+          "www.gstatic.com",
           "gstatic.com",
           "gvt1.com",
-          "gvt2.com"
+          "gvt2.com",
+          "captive.apple.com",
+          "cp.cloudflare.com",
+          "speed.cloudflare.com",
+          "speedtest.net",
+          "ooklaserver.net",
+          "speedtestcdn.com",
+          "fast.com",
+          "nperf.com",
+          "nperf.net",
+          "testmy.net",
+          "browserscan.net",
+          "measurementlab.net",
+          "speed.measurementlab.net",
+          "speedof.me",
+          "speedcheck.org"
         ],
         "outbound": "network-test"
       },
@@ -591,7 +621,10 @@
         "domain_keyword": [
           "connectivitycheck",
           "generate_204",
-          "captive"
+          "captive",
+          "speedtest",
+          "ookla",
+          "nperf"
         ],
         "outbound": "network-test"
       },
@@ -801,6 +834,23 @@
       },
       {
         "domain_suffix": [
+          "bing.com",
+          "bingapis.com",
+          "bing.net",
+          "msn.com",
+          "login.live.com",
+          "account.live.com",
+          "edgeservices.bing.com",
+          "assets.msn.com",
+          "c.bing.com",
+          "r.bing.com",
+          "www.bing.com",
+          "cn.bing.com"
+        ],
+        "outbound": "bing"
+      },
+      {
+        "domain_suffix": [
           "microsoft.com",
           "windows.com",
           "windowsupdate.com",
@@ -812,14 +862,6 @@
           "msn.com"
         ],
         "outbound": "microsoft-cn"
-      },
-      {
-        "domain_suffix": [
-          "bing.com",
-          "bingapis.com",
-          "bing.net"
-        ],
-        "outbound": "bing"
       },
       {
         "domain_suffix": [
@@ -1103,7 +1145,7 @@
     ],
     "final": "final",
     "auto_detect_interface": true,
-    "default_domain_resolver": "default-223-5-5-5"
+    "default_domain_resolver": "bootstrap-local-dns"
   },
   "experimental": {
     "cache_file": {
