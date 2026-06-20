@@ -75,6 +75,27 @@
       },
       {
         "domain_suffix": [
+          "bash.ws",
+          "browserscan.net",
+          "browserleaks.com",
+          "dns.sb",
+          "dnscheck.tools",
+          "doileak.com",
+          "dnsleak.com",
+          "dnsleaktest.com",
+          "dnsleaktest.org",
+          "ipleak.net",
+          "ipleak.org",
+          "ip-api.com",
+          "perfect-privacy.com",
+          "test.nextdns.io",
+          "surfsharkdns.com",
+          "whoer.net"
+        ],
+        "server": "doh-cloudflare"
+      },
+      {
+        "domain_suffix": [
           "cn",
           "中国",
           "公司",
@@ -167,10 +188,25 @@
       "listen_port": 7892
     },
     {
+      "type": "direct",
+      "tag": "magicnet-ebpf-dns4-in",
+      "listen": "127.0.0.1",
+      "listen_port": 1053
+    },
+    {
+      "type": "direct",
+      "tag": "magicnet-ebpf-dns6-in",
+      "listen": "::1",
+      "listen_port": 1053
+    },
+    {
       "type": "tun",
       "tag": "tun-in",
       "interface_name": "magicnet0",
-      "address": "172.19.0.1/30",
+      "address": [
+        "172.19.0.1/30",
+        "fdfe:dcba:9876::1/126"
+      ],
       "auto_route": true,
       "auto_redirect": true,
       "strict_route": true,
@@ -624,7 +660,9 @@
       {
         "inbound": [
           "mixed-in",
-          "tun-in"
+          "tun-in",
+          "magicnet-ebpf-dns4-in",
+          "magicnet-ebpf-dns6-in"
         ],
         "action": "sniff"
       },
