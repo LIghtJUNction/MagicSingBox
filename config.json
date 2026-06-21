@@ -78,19 +78,44 @@
           "bash.ws",
           "browserscan.net",
           "browserleaks.com",
+          "browserleaks.org",
           "dns.sb",
           "dnscheck.tools",
+          "dnschecker.org",
           "doileak.com",
+          "dns-oarc.net",
           "dnsleak.com",
           "dnsleaktest.com",
           "dnsleaktest.org",
+          "dnslytics.com",
           "ipleak.net",
           "ipleak.org",
           "ip-api.com",
           "perfect-privacy.com",
           "test.nextdns.io",
           "surfsharkdns.com",
+          "whatsmydnsserver.com",
           "whoer.net"
+        ],
+        "server": "doh-cloudflare"
+      },
+      {
+        "domain_suffix": [
+          "cloudflare-dns.com",
+          "mozilla.cloudflare-dns.com",
+          "dns.google",
+          "dns.quad9.net",
+          "quad9.net",
+          "dns.nextdns.io",
+          "nextdns.io",
+          "doh.opendns.com",
+          "dns.opendns.com",
+          "dns.adguard-dns.com",
+          "adguard-dns.io",
+          "family.adguard-dns.com",
+          "unfiltered.adguard-dns.com",
+          "doh.cleanbrowsing.org",
+          "doh.libredns.gr"
         ],
         "server": "doh-cloudflare"
       },
@@ -347,6 +372,16 @@
         "proxy",
         "direct",
         "block"
+      ],
+      "default": "proxy"
+    },
+    {
+      "type": "selector",
+      "tag": "dns-guard",
+      "outbounds": [
+        "proxy",
+        "block",
+        "direct"
       ],
       "default": "proxy"
     },
@@ -749,6 +784,81 @@
           "fd7a:115c:a1e0::/48"
         ],
         "outbound": "lan"
+      },
+      {
+        "domain_suffix": [
+          "bash.ws",
+          "browserscan.net",
+          "browserleaks.com",
+          "browserleaks.org",
+          "dns.sb",
+          "dnscheck.tools",
+          "dnschecker.org",
+          "doileak.com",
+          "dns-oarc.net",
+          "dnsleak.com",
+          "dnsleaktest.com",
+          "dnsleaktest.org",
+          "dnslytics.com",
+          "ipleak.net",
+          "ipleak.org",
+          "ip-api.com",
+          "perfect-privacy.com",
+          "test.nextdns.io",
+          "surfsharkdns.com",
+          "whatsmydnsserver.com",
+          "whoer.net"
+        ],
+        "outbound": "dns-guard"
+      },
+      {
+        "domain_suffix": [
+          "cloudflare-dns.com",
+          "mozilla.cloudflare-dns.com",
+          "dns.google",
+          "dns.quad9.net",
+          "quad9.net",
+          "dns.nextdns.io",
+          "nextdns.io",
+          "doh.opendns.com",
+          "dns.opendns.com",
+          "dns.adguard-dns.com",
+          "adguard-dns.io",
+          "family.adguard-dns.com",
+          "unfiltered.adguard-dns.com",
+          "doh.cleanbrowsing.org",
+          "doh.libredns.gr"
+        ],
+        "outbound": "dns-guard"
+      },
+      {
+        "port": 853,
+        "outbound": "dns-guard"
+      },
+      {
+        "network": "udp",
+        "port": 443,
+        "rule_set": [
+          "lyc-geosite-ai",
+          "yuu-geosite-ai",
+          "karing-acl4ssr-ai",
+          "lyc-geosite-gfw",
+          "ddch-gfw",
+          "lyc-geosite-proxy",
+          "metacubex-geosite-geolocation-not-cn",
+          "ddch-proxy",
+          "karing-acl4ssr-proxy-lite",
+          "karing-acl4ssr-proxy-gfwlist",
+          "lyc-geosite-dev",
+          "lyc-geosite-media",
+          "yuu-geosite-stream-global",
+          "karing-acl4ssr-proxy-media",
+          "lyc-geosite-games",
+          "lyc-geosite-social",
+          "lyc-geosite-telegram",
+          "lyc-geoip-telegram"
+        ],
+        "outbound": "proxy-rule"
       },
       {
         "domain_suffix": [
