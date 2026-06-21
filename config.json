@@ -213,18 +213,6 @@
       "listen_port": 7892
     },
     {
-      "type": "direct",
-      "tag": "magicnet-ebpf-dns4-in",
-      "listen": "127.0.0.1",
-      "listen_port": 1053
-    },
-    {
-      "type": "direct",
-      "tag": "magicnet-ebpf-dns6-in",
-      "listen": "::1",
-      "listen_port": 1053
-    },
-    {
       "type": "tun",
       "tag": "tun-in",
       "interface_name": "magicnet0",
@@ -695,9 +683,7 @@
       {
         "inbound": [
           "mixed-in",
-          "tun-in",
-          "magicnet-ebpf-dns4-in",
-          "magicnet-ebpf-dns6-in"
+          "tun-in"
         ],
         "action": "sniff"
       },
