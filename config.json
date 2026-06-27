@@ -327,11 +327,11 @@
       "type": "selector",
       "tag": "google-cn",
       "outbounds": [
-        "direct",
         "proxy",
+        "direct",
         "block"
       ],
-      "default": "direct"
+      "default": "proxy"
     },
     {
       "type": "selector",
@@ -693,6 +693,15 @@
       },
       {
         "protocol": "icmp",
+        "outbound": "block"
+      },
+      {
+        "package_name": [
+          "com.google.android.gms",
+          "com.google.android.gsf"
+        ],
+        "network": "udp",
+        "port": 443,
         "outbound": "block"
       },
       {
