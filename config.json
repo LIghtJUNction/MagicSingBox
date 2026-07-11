@@ -295,6 +295,15 @@
     },
     {
       "type": "selector",
+      "tag": "ad-allow",
+      "outbounds": [
+        "direct",
+        "proxy"
+      ],
+      "default": "direct"
+    },
+    {
+      "type": "selector",
       "tag": "cn-direct",
       "outbounds": [
         "direct",
