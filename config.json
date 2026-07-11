@@ -384,6 +384,38 @@
     },
     {
       "type": "selector",
+      "tag": "ai-chatgpt",
+      "outbounds": [
+        "block"
+      ],
+      "default": "block"
+    },
+    {
+      "type": "selector",
+      "tag": "ai-gemini",
+      "outbounds": [
+        "block"
+      ],
+      "default": "block"
+    },
+    {
+      "type": "selector",
+      "tag": "ai-grok",
+      "outbounds": [
+        "block"
+      ],
+      "default": "block"
+    },
+    {
+      "type": "selector",
+      "tag": "ai-claude",
+      "outbounds": [
+        "block"
+      ],
+      "default": "block"
+    },
+    {
+      "type": "selector",
       "tag": "ai-proxy",
       "outbounds": [
         "proxy",
@@ -706,6 +738,32 @@
       },
       {
         "package_name": [
+          "com.openai.chatgpt",
+          "com.openai.chat",
+          "ai.openai.chatgpt"
+        ],
+        "outbound": "ai-chatgpt"
+      },
+      {
+        "package_name": [
+          "com.google.android.apps.bard"
+        ],
+        "outbound": "ai-gemini"
+      },
+      {
+        "package_name": [
+          "ai.x.grok"
+        ],
+        "outbound": "ai-grok"
+      },
+      {
+        "package_name": [
+          "com.anthropic.claude"
+        ],
+        "outbound": "ai-claude"
+      },
+      {
+        "package_name": [
           "com.google.android.gms",
           "com.google.android.gsf"
         ],
@@ -921,14 +979,6 @@
           "googlevideo.com"
         ],
         "outbound": "proxy-rule"
-      },
-      {
-        "package_name": [
-          "com.openai.chatgpt",
-          "com.openai.chat",
-          "ai.openai.chatgpt"
-        ],
-        "outbound": "ai-proxy"
       },
       {
         "package_name": [
@@ -1235,6 +1285,42 @@
         "outbound": "cn-direct"
       },
       {
+        "domain_suffix": [
+          "openai.com",
+          "chatgpt.com",
+          "chat.openai.com",
+          "auth.openai.com",
+          "oaistatic.com",
+          "oaiusercontent.com",
+          "openaiapi-site.azureedge.net"
+        ],
+        "outbound": "ai-chatgpt"
+      },
+      {
+        "domain_suffix": [
+          "gemini.google.com",
+          "bard.google.com",
+          "generativelanguage.googleapis.com",
+          "ai.google.dev"
+        ],
+        "outbound": "ai-gemini"
+      },
+      {
+        "domain_suffix": [
+          "grok.com",
+          "x.ai",
+          "api.x.ai"
+        ],
+        "outbound": "ai-grok"
+      },
+      {
+        "domain_suffix": [
+          "anthropic.com",
+          "claude.ai"
+        ],
+        "outbound": "ai-claude"
+      },
+      {
         "rule_set": [
           "lyc-geosite-private",
           "lyc-geoip-private"
@@ -1320,20 +1406,9 @@
       },
       {
         "domain_suffix": [
-          "openai.com",
-          "chatgpt.com",
-          "chat.openai.com",
-          "auth.openai.com",
-          "oaistatic.com",
-          "oaiusercontent.com",
-          "openaiapi-site.azureedge.net",
           "challenges.cloudflare.com",
           "turnstile.cloudflare.com",
-          "anthropic.com",
-          "claude.ai",
           "perplexity.ai",
-          "gemini.google.com",
-          "bard.google.com",
           "deepmind.com"
         ],
         "outbound": "ai-proxy"
