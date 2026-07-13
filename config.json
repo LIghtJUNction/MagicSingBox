@@ -297,10 +297,11 @@
       "type": "selector",
       "tag": "ad-allow",
       "outbounds": [
+        "final",
         "direct",
         "proxy"
       ],
-      "default": "direct"
+      "default": "final"
     },
     {
       "type": "selector",
