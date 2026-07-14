@@ -387,7 +387,8 @@
       "type": "selector",
       "tag": "ai-chatgpt",
       "outbounds": [
-        "block"
+        "block",
+        "ai-proxy"
       ],
       "default": "block"
     },
@@ -395,7 +396,8 @@
       "type": "selector",
       "tag": "ai-gemini",
       "outbounds": [
-        "block"
+        "block",
+        "ai-proxy"
       ],
       "default": "block"
     },
@@ -403,7 +405,8 @@
       "type": "selector",
       "tag": "ai-grok",
       "outbounds": [
-        "block"
+        "block",
+        "ai-proxy"
       ],
       "default": "block"
     },
@@ -411,7 +414,8 @@
       "type": "selector",
       "tag": "ai-claude",
       "outbounds": [
-        "block"
+        "block",
+        "ai-proxy"
       ],
       "default": "block"
     },
@@ -419,11 +423,9 @@
       "type": "selector",
       "tag": "ai-proxy",
       "outbounds": [
-        "proxy",
-        "direct",
         "block"
       ],
-      "default": "proxy"
+      "default": "block"
     },
     {
       "type": "selector",
