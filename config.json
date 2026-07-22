@@ -20,17 +20,6 @@
       },
       {
         "type": "https",
-        "tag": "default-remote-dns",
-        "detour": "proxy",
-        "server": "1.1.1.1",
-        "server_port": 443,
-        "path": "/dns-query",
-        "tls": {
-          "server_name": "cloudflare-dns.com"
-        }
-      },
-      {
-        "type": "https",
         "tag": "doh-google",
         "detour": "proxy",
         "server": "8.8.8.8",
@@ -48,6 +37,7 @@
         "server_port": 443,
         "path": "/dns-query",
         "tls": {
+          "enabled": true,
           "server_name": "cloudflare-dns.com"
         }
       },
@@ -129,19 +119,103 @@
         "server": "bootstrap-local-dns"
       },
       {
-        "domain_suffix": [
-          "msftconnecttest.com",
-          "msftncsi.com"
-        ],
-        "server": "bootstrap-local-dns"
-      },
-      {
         "clash_mode": "Direct",
         "server": "bootstrap-local-dns"
       },
       {
         "clash_mode": "Global",
-        "server": "default-remote-dns"
+        "server": "doh-cloudflare"
+      },
+      {
+        "package_name": [
+          "com.tencent.mm"
+        ],
+        "server": "bootstrap-local-dns"
+      },
+      {
+        "domain_suffix": [
+          "connect.rom.miui.com",
+          "connectivitycheck.platform.hicloud.com"
+        ],
+        "server": "bootstrap-local-dns"
+      },
+      {
+        "domain_suffix": [
+          "msftconnecttest.com",
+          "msftncsi.com",
+          "connectivitycheck.gstatic.com",
+          "connectivitycheck.android.com",
+          "clients3.google.com",
+          "www.gstatic.com",
+          "gstatic.com",
+          "gvt1.com",
+          "gvt2.com",
+          "captive.apple.com",
+          "cp.cloudflare.com",
+          "speed.cloudflare.com",
+          "speedtest.net",
+          "ooklaserver.net",
+          "speedtestcdn.com",
+          "fast.com",
+          "nperf.com",
+          "nperf.net",
+          "testmy.net",
+          "browserscan.net",
+          "measurementlab.net",
+          "speed.measurementlab.net",
+          "speedof.me",
+          "speedcheck.org"
+        ],
+        "server": "doh-google"
+      },
+      {
+        "domain_suffix": [
+          "apple.com",
+          "icloud.com",
+          "icloud-content.com",
+          "me.com"
+        ],
+        "server": "bootstrap-local-dns"
+      },
+      {
+        "domain_suffix": [
+          "cn.bing.com"
+        ],
+        "server": "bootstrap-local-dns"
+      },
+      {
+        "domain_suffix": [
+          "bing.com",
+          "bingapis.com",
+          "bing.net",
+          "msn.com",
+          "login.live.com",
+          "account.live.com",
+          "edgeservices.bing.com",
+          "assets.msn.com",
+          "c.bing.com",
+          "r.bing.com",
+          "www.bing.com"
+        ],
+        "server": "doh-google"
+      },
+      {
+        "domain_suffix": [
+          "microsoft.com",
+          "windows.com",
+          "windowsupdate.com",
+          "msftauth.net",
+          "msauth.net",
+          "office.com",
+          "office365.com",
+          "live.com",
+          "steamserver.net",
+          "steamcontent.com",
+          "steamusercontent.com",
+          "akamaihd.net",
+          "hwcdn.net"
+        ],
+        "server": "bootstrap-local-dns"
       },
       {
         "rule_set": [
@@ -151,11 +225,128 @@
         "server": "bootstrap-local-dns"
       },
       {
+        "domain_suffix": [
+          "mmstat.com"
+        ],
+        "server": "bootstrap-local-dns"
+      },
+      {
+        "domain_suffix": [
+          "doubleclick.net",
+          "googlesyndication.com",
+          "googleadservices.com",
+          "adservice.google.com",
+          "adsystem.com",
+          "adnxs.com",
+          "scorecardresearch.com",
+          "umeng.com",
+          "umengcloud.com"
+        ],
+        "server": "doh-cloudflare"
+      },
+      {
+        "domain_keyword": [
+          "adservice",
+          "analytics",
+          "tracking",
+          "tracker"
+        ],
+        "server": "doh-cloudflare"
+      },
+      {
+        "rule_set": [
+          "lyc-geosite-ads",
+          "hagezi-light",
+          "hagezi-normal",
+          "hagezi-anti-piracy",
+          "karing-acl4ssr-banad"
+        ],
+        "server": "doh-cloudflare"
+      },
+      {
+        "domain_suffix": [
+          "steamcommunity.com",
+          "steampowered.com",
+          "steamstatic.com",
+          "epicgames.com",
+          "epicgames.dev",
+          "unrealengine.com",
+          "paragon.com",
+          "playstation.com",
+          "playstation.net",
+          "playstationnetwork.com",
+          "sonyentertainmentnetwork.com",
+          "xboxlive.com",
+          "nintendo.net"
+        ],
+        "server": "doh-cloudflare"
+      },
+      {
+        "domain_suffix": [
+          "acm.org",
+          "acs.org",
+          "aiaa.org",
+          "amd.com",
+          "annualreviews.org",
+          "asm.org",
+          "asme.org",
+          "astm.org",
+          "bmj.com",
+          "cambridge.org",
+          "cdn.jetbrains.com",
+          "ieee.org",
+          "nature.com",
+          "sciencedirect.com",
+          "springer.com",
+          "wiley.com",
+          "ams.org",
+          "aps.org",
+          "ascelibrary.org",
+          "cas.org",
+          "clarivate.com",
+          "ebscohost.com",
+          "emerald.com",
+          "engineeringvillage.com",
+          "icevirtuallibrary.com",
+          "iop.org",
+          "jamanetwork.com",
+          "jstor.org",
+          "karger.com",
+          "oecd-ilibrary.org",
+          "osapublishing.org",
+          "oup.com",
+          "ovid.com",
+          "oxfordartonline.com",
+          "oxfordbibliographies.com",
+          "oxfordmusiconline.com",
+          "pnas.org",
+          "proquest.com",
+          "rsc.org",
+          "sagepub.com",
+          "scopus.com",
+          "siam.org",
+          "spiedigitallibrary.org",
+          "springerlink.com",
+          "tandfonline.com",
+          "udacity.com",
+          "un.org",
+          "webofknowledge.com",
+          "westlaw.com",
+          "worldscientific.com",
+          "oracle.com",
+          "sony.com",
+          "teamviewer.com",
+          "abercrombie.com",
+          "hollisterco.com",
+          "weather.com"
+        ],
+        "server": "doh-google"
+      },
+      {
         "rule_set": [
           "lyc-geosite-cn",
           "lyc-geosite-geolocation-cn",
           "lyc-geoip-cn",
-          "metacubex-geosite-cn",
           "metacubex-geoip-cn",
           "ddch-direct",
           "karing-acl4ssr-china-domain",
@@ -193,17 +384,53 @@
         "server": "doh-cloudflare"
       },
       {
-        "domain_suffix": [
-          "connectivitycheck.gstatic.com",
-          "clients3.google.com",
-          "connect.rom.miui.com",
-          "connectivitycheck.platform.hicloud.com"
+        "package_name": [
+          "com.tencent.mm",
+          "com.tencent.mobileqq",
+          "com.tencent.tim",
+          "com.tencent.wework",
+          "com.tencent.mobileqqi",
+          "com.tencent.minihd.qq",
+          "com.tencent.qqlite",
+          "com.tencent.qqmusic",
+          "com.tencent.news",
+          "com.tencent.tmgp.sgame",
+          "com.tencent.tmgp.pubgmhd",
+          "com.eg.android.AlipayGphone",
+          "com.taobao.taobao",
+          "com.tmall.wireless",
+          "com.jingdong.app.mall",
+          "com.sina.weibo",
+          "com.ss.android.ugc.aweme",
+          "com.ss.android.article.news",
+          "com.smile.gifmaker",
+          "tv.danmaku.bili",
+          "com.xingin.xhs",
+          "com.zhihu.android",
+          "com.netease.cloudmusic",
+          "com.autonavi.minimap",
+          "com.baidu.BaiduMap",
+          "com.baidu.searchbox",
+          "com.baidu.netdisk",
+          "com.meituan.android",
+          "com.sankuai.meituan",
+          "com.dianping.v1",
+          "com.xunmeng.pinduoduo",
+          "com.xunmeng.merchant",
+          "com.huawei.appmarket",
+          "com.heytap.market",
+          "com.bbk.appstore",
+          "com.xiaomi.market",
+          "com.miui.weather2",
+          "com.coloros.weather2",
+          "com.lenovo.leos.appstore"
         ],
         "server": "bootstrap-local-dns"
       }
     ],
     "final": "doh-google",
-    "strategy": "prefer_ipv4"
+    "strategy": "prefer_ipv4",
+    "cache_capacity": 4096
   },
   "inbounds": [
     {
@@ -250,7 +477,7 @@
         "com.github.kr328.clash",
         "com.github.metacubex.clash.meta"
       ],
-      "stack": "gvisor"
+      "stack": "mixed"
     }
   ],
   "outbounds": [
@@ -258,10 +485,9 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "direct",
         "block"
       ],
-      "default": "direct"
+      "default": "block"
     },
     {
       "type": "selector",
@@ -335,16 +561,6 @@
     },
     {
       "type": "selector",
-      "tag": "google-cn",
-      "outbounds": [
-        "proxy",
-        "direct",
-        "block"
-      ],
-      "default": "proxy"
-    },
-    {
-      "type": "selector",
       "tag": "icloud",
       "outbounds": [
         "direct",
@@ -387,8 +603,7 @@
       "type": "selector",
       "tag": "ai-chatgpt",
       "outbounds": [
-        "block",
-        "ai-proxy"
+        "block"
       ],
       "default": "block"
     },
@@ -396,8 +611,7 @@
       "type": "selector",
       "tag": "ai-gemini",
       "outbounds": [
-        "block",
-        "ai-proxy"
+        "block"
       ],
       "default": "block"
     },
@@ -405,8 +619,7 @@
       "type": "selector",
       "tag": "ai-grok",
       "outbounds": [
-        "block",
-        "ai-proxy"
+        "block"
       ],
       "default": "block"
     },
@@ -414,8 +627,7 @@
       "type": "selector",
       "tag": "ai-claude",
       "outbounds": [
-        "block",
-        "ai-proxy"
+        "block"
       ],
       "default": "block"
     },
@@ -740,6 +952,12 @@
         "outbound": "block"
       },
       {
+        "ip_version": 6,
+        "action": "reject",
+        "method": "default",
+        "no_drop": true
+      },
+      {
         "package_name": [
           "com.openai.chatgpt",
           "com.openai.chat",
@@ -783,6 +1001,32 @@
         "outbound": "select"
       },
       {
+        "domain_suffix": [
+          "qq.com",
+          "weixin.qq.com",
+          "wechat.com",
+          "wechatapp.com",
+          "wechatpay.cn",
+          "tenpay.com",
+          "tencent.com",
+          "tencent-cloud.com",
+          "myqcloud.com",
+          "qcloud.com",
+          "gtimg.com",
+          "idqqimg.com",
+          "qpic.cn",
+          "qlogo.cn",
+          "qmail.com",
+          "smtcdns.com",
+          "servicewechat.com",
+          "weixinbridge.com",
+          "weixinsxy.com",
+          "wx.gtimg.com",
+          "wx.qq.com"
+        ],
+        "outbound": "cn-direct"
+      },
+      {
         "ip_cidr": [
           "127.0.0.1/32",
           "::1/128",
@@ -790,29 +1034,6 @@
           "28.0.0.0/8"
         ],
         "outbound": "block"
-      },
-      {
-        "domain_suffix": [
-          "doubleclick.net",
-          "googlesyndication.com",
-          "googleadservices.com",
-          "adservice.google.com",
-          "adsystem.com",
-          "adnxs.com",
-          "scorecardresearch.com",
-          "umeng.com",
-          "umengcloud.com"
-        ],
-        "outbound": "ad-block"
-      },
-      {
-        "domain_keyword": [
-          "adservice",
-          "analytics",
-          "tracking",
-          "tracker"
-        ],
-        "outbound": "ad-block"
       },
       {
         "domain_suffix": [
@@ -849,6 +1070,29 @@
           "fd7a:115c:a1e0::/48"
         ],
         "outbound": "lan"
+      },
+      {
+        "domain_suffix": [
+          "doubleclick.net",
+          "googlesyndication.com",
+          "googleadservices.com",
+          "adservice.google.com",
+          "adsystem.com",
+          "adnxs.com",
+          "scorecardresearch.com",
+          "umeng.com",
+          "umengcloud.com"
+        ],
+        "outbound": "ad-block"
+      },
+      {
+        "domain_keyword": [
+          "adservice",
+          "analytics",
+          "tracking",
+          "tracker"
+        ],
+        "outbound": "ad-block"
       },
       {
         "domain_suffix": [
@@ -901,29 +1145,40 @@
         "outbound": "dns-guard"
       },
       {
-        "network": "udp",
-        "port": 443,
-        "rule_set": [
-          "lyc-geosite-ai",
-          "yuu-geosite-ai",
-          "karing-acl4ssr-ai",
-          "lyc-geosite-gfw",
-          "ddch-gfw",
-          "lyc-geosite-proxy",
-          "metacubex-geosite-geolocation-not-cn",
-          "ddch-proxy",
-          "karing-acl4ssr-proxy-lite",
-          "karing-acl4ssr-proxy-gfwlist",
-          "lyc-geosite-dev",
-          "lyc-geosite-media",
-          "yuu-geosite-stream-global",
-          "karing-acl4ssr-proxy-media",
-          "lyc-geosite-games",
-          "lyc-geosite-social",
-          "lyc-geosite-telegram",
-          "lyc-geoip-telegram"
+        "domain_suffix": [
+          "openai.com",
+          "chatgpt.com",
+          "chat.openai.com",
+          "auth.openai.com",
+          "oaistatic.com",
+          "oaiusercontent.com",
+          "openaiapi-site.azureedge.net"
         ],
-        "outbound": "proxy-rule"
+        "outbound": "ai-chatgpt"
+      },
+      {
+        "domain_suffix": [
+          "gemini.google.com",
+          "bard.google.com",
+          "generativelanguage.googleapis.com",
+          "ai.google.dev"
+        ],
+        "outbound": "ai-gemini"
+      },
+      {
+        "domain_suffix": [
+          "grok.com",
+          "x.ai",
+          "api.x.ai"
+        ],
+        "outbound": "ai-grok"
+      },
+      {
+        "domain_suffix": [
+          "anthropic.com",
+          "claude.ai"
+        ],
+        "outbound": "ai-claude"
       },
       {
         "domain_suffix": [
@@ -931,6 +1186,13 @@
           "msftncsi.com"
         ],
         "outbound": "network-test"
+      },
+      {
+        "domain_suffix": [
+          "connect.rom.miui.com",
+          "connectivitycheck.platform.hicloud.com"
+        ],
+        "outbound": "cn-direct"
       },
       {
         "domain_suffix": [
@@ -960,100 +1222,17 @@
         "outbound": "network-test"
       },
       {
-        "domain_keyword": [
-          "connectivitycheck",
-          "generate_204",
-          "captive",
-          "speedtest",
-          "ookla",
-          "nperf"
-        ],
-        "outbound": "network-test"
-      },
-      {
         "domain_suffix": [
           "google.com",
           "googleapis.com",
           "googleusercontent.com",
           "ggpht.com",
-          "ampproject.org",
-          "youtube.com",
-          "ytimg.com",
-          "googlevideo.com"
+          "ampproject.org"
         ],
         "outbound": "proxy-rule"
       },
       {
-        "package_name": [
-          "com.tencent.mm",
-          "com.tencent.mobileqq",
-          "com.tencent.tim",
-          "com.tencent.wework",
-          "com.tencent.mobileqqi",
-          "com.tencent.minihd.qq",
-          "com.tencent.qqlite",
-          "com.tencent.qqmusic",
-          "com.tencent.news",
-          "com.tencent.mtt",
-          "com.tencent.tmgp.sgame",
-          "com.tencent.tmgp.pubgmhd",
-          "com.eg.android.AlipayGphone",
-          "com.taobao.taobao",
-          "com.tmall.wireless",
-          "com.jingdong.app.mall",
-          "com.sina.weibo",
-          "com.ss.android.ugc.aweme",
-          "com.ss.android.article.news",
-          "com.smile.gifmaker",
-          "tv.danmaku.bili",
-          "com.xingin.xhs",
-          "com.zhihu.android",
-          "com.netease.cloudmusic",
-          "com.autonavi.minimap",
-          "com.baidu.BaiduMap",
-          "com.baidu.searchbox",
-          "com.baidu.netdisk",
-          "com.meituan.android",
-          "com.sankuai.meituan",
-          "com.dianping.v1",
-          "com.xunmeng.pinduoduo",
-          "com.xunmeng.merchant",
-          "com.huawei.appmarket",
-          "com.heytap.market",
-          "com.bbk.appstore",
-          "com.xiaomi.market",
-          "com.miui.weather2",
-          "com.coloros.weather2",
-          "com.coloros.browser",
-          "com.UCMobile",
-          "com.quark.browser",
-          "com.lenovo.leos.appstore"
-        ],
-        "outbound": "cn-direct"
-      },
-      {
         "domain_suffix": [
-          "qq.com",
-          "weixin.qq.com",
-          "wechat.com",
-          "wechatapp.com",
-          "wechatpay.cn",
-          "tenpay.com",
-          "tencent.com",
-          "tencent-cloud.com",
-          "myqcloud.com",
-          "qcloud.com",
-          "gtimg.com",
-          "idqqimg.com",
-          "qpic.cn",
-          "qlogo.cn",
-          "qmail.com",
-          "smtcdns.com",
-          "servicewechat.com",
-          "weixinbridge.com",
-          "weixinsxy.com",
-          "wx.gtimg.com",
-          "wx.qq.com",
           "alipay.com",
           "alipayobjects.com",
           "alicdn.com",
@@ -1168,6 +1347,12 @@
       },
       {
         "domain_suffix": [
+          "cn.bing.com"
+        ],
+        "outbound": "cn-direct"
+      },
+      {
+        "domain_suffix": [
           "bing.com",
           "bingapis.com",
           "bing.net",
@@ -1178,10 +1363,21 @@
           "assets.msn.com",
           "c.bing.com",
           "r.bing.com",
-          "www.bing.com",
-          "cn.bing.com"
+          "www.bing.com"
         ],
         "outbound": "bing"
+      },
+      {
+        "domain_suffix": [
+          "steamserver.net",
+          "steamcontent.com",
+          "steamusercontent.com",
+          "akamaihd.net",
+          "hwcdn.net",
+          "windowsupdate.com",
+          "download.windowsupdate.com"
+        ],
+        "outbound": "download-direct"
       },
       {
         "domain_suffix": [
@@ -1201,10 +1397,9 @@
         "domain_suffix": [
           "google.cn",
           "g.cn",
-          "googleapis.cn",
-          "google-analytics.com"
+          "googleapis.cn"
         ],
-        "outbound": "google-cn"
+        "outbound": "cn-direct"
       },
       {
         "domain_suffix": [
@@ -1228,42 +1423,6 @@
           "edu.cn"
         ],
         "outbound": "cn-direct"
-      },
-      {
-        "domain_suffix": [
-          "openai.com",
-          "chatgpt.com",
-          "chat.openai.com",
-          "auth.openai.com",
-          "oaistatic.com",
-          "oaiusercontent.com",
-          "openaiapi-site.azureedge.net"
-        ],
-        "outbound": "ai-chatgpt"
-      },
-      {
-        "domain_suffix": [
-          "gemini.google.com",
-          "bard.google.com",
-          "generativelanguage.googleapis.com",
-          "ai.google.dev"
-        ],
-        "outbound": "ai-gemini"
-      },
-      {
-        "domain_suffix": [
-          "grok.com",
-          "x.ai",
-          "api.x.ai"
-        ],
-        "outbound": "ai-grok"
-      },
-      {
-        "domain_suffix": [
-          "anthropic.com",
-          "claude.ai"
-        ],
-        "outbound": "ai-claude"
       },
       {
         "rule_set": [
@@ -1290,17 +1449,106 @@
         "outbound": "download-direct"
       },
       {
+        "domain_suffix": [
+          "steamcommunity.com",
+          "steampowered.com",
+          "steamstatic.com",
+          "epicgames.com",
+          "epicgames.dev",
+          "unrealengine.com",
+          "paragon.com",
+          "playstation.com",
+          "playstation.net",
+          "playstationnetwork.com",
+          "sonyentertainmentnetwork.com",
+          "xboxlive.com",
+          "nintendo.net"
+        ],
+        "outbound": "game-proxy"
+      },
+      {
+        "domain_suffix": [
+          "acm.org",
+          "acs.org",
+          "aiaa.org",
+          "amd.com",
+          "annualreviews.org",
+          "asm.org",
+          "asme.org",
+          "astm.org",
+          "bmj.com",
+          "cambridge.org",
+          "cdn.jetbrains.com",
+          "ieee.org",
+          "nature.com",
+          "sciencedirect.com",
+          "springer.com",
+          "wiley.com",
+          "ams.org",
+          "aps.org",
+          "ascelibrary.org",
+          "cas.org",
+          "clarivate.com",
+          "ebscohost.com",
+          "emerald.com",
+          "engineeringvillage.com",
+          "icevirtuallibrary.com",
+          "iop.org",
+          "jamanetwork.com",
+          "jstor.org",
+          "karger.com",
+          "oecd-ilibrary.org",
+          "osapublishing.org",
+          "oup.com",
+          "ovid.com",
+          "oxfordartonline.com",
+          "oxfordbibliographies.com",
+          "oxfordmusiconline.com",
+          "pnas.org",
+          "proquest.com",
+          "rsc.org",
+          "sagepub.com",
+          "scopus.com",
+          "siam.org",
+          "spiedigitallibrary.org",
+          "springerlink.com",
+          "tandfonline.com",
+          "udacity.com",
+          "un.org",
+          "webofknowledge.com",
+          "westlaw.com",
+          "worldscientific.com",
+          "oracle.com",
+          "sony.com",
+          "teamviewer.com",
+          "abercrombie.com",
+          "hollisterco.com",
+          "weather.com"
+        ],
+        "outbound": "proxy-rule"
+      },
+      {
         "rule_set": [
           "lyc-geosite-cn",
           "lyc-geosite-geolocation-cn",
           "lyc-geoip-cn",
-          "metacubex-geosite-cn",
           "metacubex-geoip-cn",
           "ddch-direct",
           "karing-acl4ssr-china-domain",
           "karing-acl4ssr-china-ip"
         ],
         "outbound": "cn-direct"
+      },
+      {
+        "domain_keyword": [
+          "connectivitycheck",
+          "generate_204",
+          "captive",
+          "speedtest",
+          "ookla",
+          "nperf"
+        ],
+        "outbound": "network-test"
       },
       {
         "rule_set": [
@@ -1311,45 +1559,6 @@
         "outbound": "ai-proxy"
       },
       {
-        "rule_set": "lyc-geosite-dev",
-        "outbound": "dev-proxy"
-      },
-      {
-        "rule_set": [
-          "lyc-geosite-media",
-          "yuu-geosite-stream-global",
-          "karing-acl4ssr-proxy-media"
-        ],
-        "outbound": "media-proxy"
-      },
-      {
-        "rule_set": "lyc-geosite-games",
-        "outbound": "game-proxy"
-      },
-      {
-        "rule_set": "lyc-geosite-social",
-        "outbound": "social-proxy"
-      },
-      {
-        "rule_set": [
-          "lyc-geosite-telegram",
-          "lyc-geoip-telegram"
-        ],
-        "outbound": "telegram-proxy"
-      },
-      {
-        "rule_set": [
-          "lyc-geosite-gfw",
-          "ddch-gfw",
-          "lyc-geosite-proxy",
-          "metacubex-geosite-geolocation-not-cn",
-          "ddch-proxy",
-          "karing-acl4ssr-proxy-lite",
-          "karing-acl4ssr-proxy-gfwlist"
-        ],
-        "outbound": "proxy-rule"
-      },
-      {
         "domain_suffix": [
           "challenges.cloudflare.com",
           "turnstile.cloudflare.com",
@@ -1357,6 +1566,10 @@
           "deepmind.com"
         ],
         "outbound": "ai-proxy"
+      },
+      {
+        "rule_set": "lyc-geosite-dev",
+        "outbound": "dev-proxy"
       },
       {
         "domain_suffix": [
@@ -1381,6 +1594,14 @@
         "outbound": "dev-proxy"
       },
       {
+        "rule_set": [
+          "lyc-geosite-media",
+          "yuu-geosite-stream-global",
+          "karing-acl4ssr-proxy-media"
+        ],
+        "outbound": "media-proxy"
+      },
+      {
         "domain_suffix": [
           "youtube.com",
           "ytimg.com",
@@ -1395,28 +1616,12 @@
         "outbound": "media-proxy"
       },
       {
-        "domain_suffix": [
-          "steamcommunity.com",
-          "steampowered.com",
-          "steamstatic.com",
-          "epicgames.com",
-          "playstation.net",
-          "xboxlive.com",
-          "nintendo.net"
-        ],
+        "rule_set": "lyc-geosite-games",
         "outbound": "game-proxy"
       },
       {
-        "domain_suffix": [
-          "steamserver.net",
-          "steamcontent.com",
-          "steamusercontent.com",
-          "akamaihd.net",
-          "hwcdn.net",
-          "windowsupdate.com",
-          "download.windowsupdate.com"
-        ],
-        "outbound": "download-direct"
+        "rule_set": "lyc-geosite-social",
+        "outbound": "social-proxy"
       },
       {
         "domain_suffix": [
@@ -1436,12 +1641,31 @@
         "outbound": "social-proxy"
       },
       {
+        "rule_set": [
+          "lyc-geosite-telegram",
+          "lyc-geoip-telegram"
+        ],
+        "outbound": "telegram-proxy"
+      },
+      {
         "domain_suffix": [
           "telegram.org",
           "t.me",
           "tdesktop.com"
         ],
         "outbound": "telegram-proxy"
+      },
+      {
+        "rule_set": [
+          "lyc-geosite-gfw",
+          "ddch-gfw",
+          "lyc-geosite-proxy",
+          "metacubex-geosite-geolocation-not-cn",
+          "ddch-proxy",
+          "karing-acl4ssr-proxy-lite",
+          "karing-acl4ssr-proxy-gfwlist"
+        ],
+        "outbound": "proxy-rule"
       },
       {
         "ip_cidr": [
@@ -1473,6 +1697,50 @@
           "discord"
         ],
         "outbound": "proxy-rule"
+      },
+      {
+        "package_name": [
+          "com.tencent.mm",
+          "com.tencent.mobileqq",
+          "com.tencent.tim",
+          "com.tencent.wework",
+          "com.tencent.mobileqqi",
+          "com.tencent.minihd.qq",
+          "com.tencent.qqlite",
+          "com.tencent.qqmusic",
+          "com.tencent.news",
+          "com.tencent.tmgp.sgame",
+          "com.tencent.tmgp.pubgmhd",
+          "com.eg.android.AlipayGphone",
+          "com.taobao.taobao",
+          "com.tmall.wireless",
+          "com.jingdong.app.mall",
+          "com.sina.weibo",
+          "com.ss.android.ugc.aweme",
+          "com.ss.android.article.news",
+          "com.smile.gifmaker",
+          "tv.danmaku.bili",
+          "com.xingin.xhs",
+          "com.zhihu.android",
+          "com.netease.cloudmusic",
+          "com.autonavi.minimap",
+          "com.baidu.BaiduMap",
+          "com.baidu.searchbox",
+          "com.baidu.netdisk",
+          "com.meituan.android",
+          "com.sankuai.meituan",
+          "com.dianping.v1",
+          "com.xunmeng.pinduoduo",
+          "com.xunmeng.merchant",
+          "com.huawei.appmarket",
+          "com.heytap.market",
+          "com.bbk.appstore",
+          "com.xiaomi.market",
+          "com.miui.weather2",
+          "com.coloros.weather2",
+          "com.lenovo.leos.appstore"
+        ],
+        "outbound": "cn-direct"
       }
     ],
     "final": "final",
