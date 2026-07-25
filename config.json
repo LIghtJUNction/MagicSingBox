@@ -985,6 +985,12 @@
       },
       {
         "package_name": [
+          "com.twitter.android"
+        ],
+        "outbound": "social-proxy"
+      },
+      {
+        "package_name": [
           "com.google.android.gms",
           "com.google.android.gsf"
         ],
@@ -1152,6 +1158,7 @@
           "auth.openai.com",
           "oaistatic.com",
           "oaiusercontent.com",
+          "oaistatsig.com",
           "openaiapi-site.azureedge.net"
         ],
         "outbound": "ai-chatgpt"
