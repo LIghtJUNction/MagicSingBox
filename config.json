@@ -991,12 +991,11 @@
       },
       {
         "package_name": [
+          "com.android.vending",
           "com.google.android.gms",
           "com.google.android.gsf"
         ],
-        "network": "udp",
-        "port": 443,
-        "outbound": "block"
+        "outbound": "proxy-rule"
       },
       {
         "clash_mode": "Direct",
