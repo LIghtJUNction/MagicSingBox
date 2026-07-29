@@ -511,6 +511,15 @@
     },
     {
       "type": "selector",
+      "tag": "hotspot",
+      "outbounds": [
+        "direct",
+        "proxy"
+      ],
+      "default": "direct"
+    },
+    {
+      "type": "selector",
       "tag": "ad-block",
       "outbounds": [
         "block",
