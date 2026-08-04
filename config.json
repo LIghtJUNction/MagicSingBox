@@ -40,11 +40,6 @@
           "enabled": true,
           "server_name": "cloudflare-dns.com"
         }
-      },
-      {
-        "type": "fakeip",
-        "tag": "fakeip",
-        "inet4_range": "198.18.0.1/16"
       }
     ],
     "rules": [
@@ -125,12 +120,6 @@
       {
         "clash_mode": "Global",
         "server": "doh-cloudflare"
-      },
-      {
-        "package_name": [
-          "com.tencent.mm"
-        ],
-        "server": "bootstrap-local-dns"
       },
       {
         "domain_suffix": [
@@ -384,7 +373,7 @@
         "server": "doh-cloudflare"
       }
     ],
-    "final": "doh-google",
+    "final": "bootstrap-local-dns",
     "strategy": "prefer_ipv4",
     "cache_capacity": 4096
   },
@@ -958,41 +947,6 @@
       },
       {
         "domain_suffix": [
-          "qq.com",
-          "weixin.qq.com",
-          "wechat.com",
-          "wechatapp.com",
-          "wechatpay.cn",
-          "tenpay.com",
-          "tencent.com",
-          "tencent-cloud.com",
-          "myqcloud.com",
-          "qcloud.com",
-          "gtimg.com",
-          "idqqimg.com",
-          "qpic.cn",
-          "qlogo.cn",
-          "qmail.com",
-          "smtcdns.com",
-          "servicewechat.com",
-          "weixinbridge.com",
-          "weixinsxy.com",
-          "wx.gtimg.com",
-          "wx.qq.com"
-        ],
-        "outbound": "cn-direct"
-      },
-      {
-        "ip_cidr": [
-          "127.0.0.1/32",
-          "::1/128",
-          "198.18.0.0/16",
-          "28.0.0.0/8"
-        ],
-        "outbound": "block"
-      },
-      {
-        "domain_suffix": [
           "local",
           "home.arpa",
           "lan"
@@ -1189,78 +1143,6 @@
         "outbound": "proxy-rule"
       },
       {
-        "domain_suffix": [
-          "alipay.com",
-          "alipayobjects.com",
-          "alicdn.com",
-          "aliyun.com",
-          "aliyuncs.com",
-          "taobao.com",
-          "tmall.com",
-          "mmstat.com",
-          "cainiao.com",
-          "1688.com",
-          "jd.com",
-          "360buyimg.com",
-          "jcloud.com",
-          "pinduoduo.com",
-          "yangkeduo.com",
-          "baidu.com",
-          "bdstatic.com",
-          "bdimg.com",
-          "baidubce.com",
-          "bcebos.com",
-          "bilibili.com",
-          "bilivideo.com",
-          "biliapi.com",
-          "hdslb.com",
-          "douyin.com",
-          "douyincdn.com",
-          "byteimg.com",
-          "bytedance.com",
-          "toutiao.com",
-          "snssdk.com",
-          "ixigua.com",
-          "kuaishou.com",
-          "ksyuncdn.com",
-          "gifshow.com",
-          "xiaohongshu.com",
-          "xhscdn.com",
-          "weibo.com",
-          "sina.com.cn",
-          "sinaimg.cn",
-          "zhihu.com",
-          "zhimg.com",
-          "meituan.com",
-          "dianping.com",
-          "amap.com",
-          "autonavi.com",
-          "xiaomi.com",
-          "mi.com",
-          "miui.com",
-          "mios.cn",
-          "huawei.com",
-          "hicloud.com",
-          "honor.com",
-          "oppo.com",
-          "heytapmobi.com",
-          "heytap.com",
-          "vivo.com",
-          "vivoglobal.com",
-          "netease.com",
-          "163.com",
-          "126.net",
-          "126.com",
-          "youdao.com",
-          "sogou.com",
-          "sohu.com",
-          "360.cn",
-          "360safe.com",
-          "qihu.com"
-        ],
-        "outbound": "cn-direct"
-      },
-      {
         "network": "udp",
         "port": 123,
         "outbound": "direct"
@@ -1387,6 +1269,14 @@
           "lyc-geoip-private"
         ],
         "outbound": "lan"
+      },
+      {
+        "rule_set": [
+          "lyc-geoip-cn",
+          "metacubex-geoip-cn",
+          "karing-acl4ssr-china-ip"
+        ],
+        "outbound": "cn-direct"
       },
       {
         "rule_set": "lyc-geosite-ads",
@@ -1664,8 +1554,7 @@
     "cache_file": {
       "enabled": true,
       "path": "cache.db",
-      "cache_id": "MagicNet",
-      "store_fakeip": true
+      "cache_id": "MagicNet"
     },
     "clash_api": {
       "external_controller": "127.0.0.1:9090",
