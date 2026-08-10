@@ -332,6 +332,14 @@
         "server": "doh-google"
       },
       {
+        "domain_suffix": [
+          "twitter.com",
+          "x.com",
+          "twimg.com"
+        ],
+        "server": "doh-google"
+      },
+      {
         "rule_set": [
           "lyc-geosite-cn",
           "lyc-geosite-geolocation-cn",
