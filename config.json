@@ -899,6 +899,12 @@
         "outbound": "block"
       },
       {
+        "ip_cidr": [
+          "0.0.0.0/8"
+        ],
+        "outbound": "block"
+      },
+      {
         "package_name": [
           "com.openai.chatgpt",
           "com.openai.chat",
@@ -927,6 +933,14 @@
       {
         "package_name": [
           "com.twitter.android"
+        ],
+        "outbound": "social-proxy"
+      },
+      {
+        "domain_suffix": [
+          "twitter.com",
+          "x.com",
+          "twimg.com"
         ],
         "outbound": "social-proxy"
       },
