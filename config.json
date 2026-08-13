@@ -123,6 +123,32 @@
       },
       {
         "domain_suffix": [
+          "qq.com",
+          "weixin.qq.com",
+          "wechat.com",
+          "wechatapp.com",
+          "wechatpay.cn",
+          "tenpay.com",
+          "tencent.com",
+          "tencent-cloud.com",
+          "myqcloud.com",
+          "qcloud.com",
+          "gtimg.com",
+          "idqqimg.com",
+          "qpic.cn",
+          "qlogo.cn",
+          "qmail.com",
+          "smtcdns.com",
+          "servicewechat.com",
+          "weixinbridge.com",
+          "weixinsxy.com",
+          "wx.gtimg.com",
+          "wx.qq.com"
+        ],
+        "server": "bootstrap-local-dns"
+      },
+      {
+        "domain_suffix": [
           "connect.rom.miui.com",
           "connectivitycheck.platform.hicloud.com"
         ],
@@ -967,6 +993,32 @@
       {
         "clash_mode": "Global",
         "outbound": "select"
+      },
+      {
+        "domain_suffix": [
+          "qq.com",
+          "weixin.qq.com",
+          "wechat.com",
+          "wechatapp.com",
+          "wechatpay.cn",
+          "tenpay.com",
+          "tencent.com",
+          "tencent-cloud.com",
+          "myqcloud.com",
+          "qcloud.com",
+          "gtimg.com",
+          "idqqimg.com",
+          "qpic.cn",
+          "qlogo.cn",
+          "qmail.com",
+          "smtcdns.com",
+          "servicewechat.com",
+          "weixinbridge.com",
+          "weixinsxy.com",
+          "wx.gtimg.com",
+          "wx.qq.com"
+        ],
+        "outbound": "cn-direct"
       },
       {
         "domain_suffix": [
