@@ -881,6 +881,12 @@
       },
       {
         "type": "local",
+        "tag": "karing-acl4ssr-wechat",
+        "format": "binary",
+        "path": "rules/karing-acl4ssr-wechat.srs"
+      },
+      {
+        "type": "local",
         "tag": "karing-acl4ssr-proxy-lite",
         "format": "binary",
         "path": "rules/karing-acl4ssr-proxy-lite.srs"
@@ -1018,6 +1024,10 @@
           "wx.gtimg.com",
           "wx.qq.com"
         ],
+        "outbound": "cn-direct"
+      },
+      {
+        "rule_set": "karing-acl4ssr-wechat",
         "outbound": "cn-direct"
       },
       {
