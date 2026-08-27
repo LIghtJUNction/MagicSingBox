@@ -24,5 +24,6 @@ Bundled rule-set families:
 - DDCHlsq fine split: `direct`, `proxy`, and `gfw`.
 - HaGeZi DNS blocklists: `hagezi-light`, `hagezi-normal`, and
   `hagezi-anti-piracy`.
-- Karing client-oriented ACL4SSR sets: AI, proxy-lite, proxy-GFW, ad block,
-  China domain/IP, and proxy media.
+- Karing client-oriented ACL4SSR sets: AI, WeChat (including dedicated
+  destination IPs), proxy-lite, proxy-GFW, ad block, China domain/IP, and
+  proxy media.
