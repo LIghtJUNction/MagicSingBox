@@ -44,6 +44,18 @@
     ],
     "rules": [
       {
+        "protocol": "icmp",
+        "server": "doh-google"
+      },
+      {
+        "clash_mode": "Direct",
+        "server": "bootstrap-local-dns"
+      },
+      {
+        "clash_mode": "Global",
+        "server": "doh-cloudflare"
+      },
+      {
         "domain_suffix": [
           "local",
           "home.arpa",
@@ -59,50 +71,124 @@
         "server": "bootstrap-local-dns"
       },
       {
-        "domain_suffix": [
-          "bash.ws",
-          "browserscan.net",
-          "browserleaks.com",
-          "browserleaks.org",
-          "dns.sb",
-          "dnscheck.tools",
-          "dnschecker.org",
-          "doileak.com",
-          "dns-oarc.net",
-          "dnsleak.com",
-          "dnsleaktest.com",
-          "dnsleaktest.org",
-          "dnslytics.com",
-          "ipleak.net",
-          "ipleak.org",
-          "ip-api.com",
-          "perfect-privacy.com",
-          "test.nextdns.io",
-          "surfsharkdns.com",
-          "whatsmydnsserver.com",
-          "whoer.net"
+        "rule_set": [
+          "lyc-geosite-ads",
+          "hagezi-light"
         ],
         "server": "doh-cloudflare"
       },
       {
-        "domain_suffix": [
-          "cloudflare-dns.com",
-          "mozilla.cloudflare-dns.com",
-          "dns.google",
-          "dns.quad9.net",
-          "quad9.net",
-          "dns.nextdns.io",
-          "nextdns.io",
-          "doh.opendns.com",
-          "dns.opendns.com",
-          "dns.adguard-dns.com",
-          "adguard-dns.io",
-          "family.adguard-dns.com",
-          "unfiltered.adguard-dns.com",
-          "doh.cleanbrowsing.org",
-          "doh.libredns.gr"
+        "rule_set": [
+          "meta-tencent"
+        ],
+        "server": "bootstrap-local-dns"
+      },
+      {
+        "rule_set": [
+          "karing-acl4ssr-wechat"
+        ],
+        "server": "bootstrap-local-dns"
+      },
+      {
+        "rule_set": [
+          "meta-category-doh",
+          "meta-category-ip-geo-detect"
         ],
         "server": "doh-cloudflare"
+      },
+      {
+        "domain": [
+          "connect.rom.miui.com",
+          "connectivitycheck.platform.hicloud.com"
+        ],
+        "server": "bootstrap-local-dns"
+      },
+      {
+        "rule_set": [
+          "meta-connectivity-check",
+          "meta-speedtest"
+        ],
+        "server": "doh-google"
+      },
+      {
+        "rule_set": [
+          "meta-openai"
+        ],
+        "server": "doh-google"
+      },
+      {
+        "rule_set": [
+          "meta-google-gemini"
+        ],
+        "server": "doh-google"
+      },
+      {
+        "rule_set": [
+          "meta-xai"
+        ],
+        "server": "doh-google"
+      },
+      {
+        "rule_set": [
+          "meta-anthropic"
+        ],
+        "server": "doh-google"
+      },
+      {
+        "rule_set": [
+          "meta-bing@cn"
+        ],
+        "server": "bootstrap-local-dns"
+      },
+      {
+        "rule_set": [
+          "meta-bing"
+        ],
+        "server": "doh-google"
+      },
+      {
+        "rule_set": [
+          "meta-category-game-platforms-download",
+          "meta-win-update",
+          "meta-apple-update"
+        ],
+        "server": "bootstrap-local-dns"
+      },
+      {
+        "rule_set": [
+          "meta-icloud"
+        ],
+        "server": "bootstrap-local-dns"
+      },
+      {
+        "rule_set": [
+          "meta-apple"
+        ],
+        "server": "bootstrap-local-dns"
+      },
+      {
+        "rule_set": [
+          "meta-category-dev"
+        ],
+        "server": "doh-google"
+      },
+      {
+        "rule_set": [
+          "meta-category-games-!cn"
+        ],
+        "server": "doh-google"
+      },
+      {
+        "rule_set": [
+          "meta-microsoft"
+        ],
+        "server": "bootstrap-local-dns"
+      },
+      {
+        "rule_set": [
+          "meta-category-scholar-!cn"
+        ],
+        "server": "doh-google"
       },
       {
         "domain_suffix": [
@@ -114,297 +200,50 @@
         "server": "bootstrap-local-dns"
       },
       {
-        "clash_mode": "Direct",
-        "server": "bootstrap-local-dns"
-      },
-      {
-        "clash_mode": "Global",
-        "server": "doh-cloudflare"
-      },
-      {
-        "domain_suffix": [
-          "qq.com",
-          "weixin.qq.com",
-          "wechat.com",
-          "wechatapp.com",
-          "wechatpay.cn",
-          "tenpay.com",
-          "tencent.com",
-          "tencent-cloud.com",
-          "myqcloud.com",
-          "qcloud.com",
-          "gtimg.com",
-          "idqqimg.com",
-          "qpic.cn",
-          "qlogo.cn",
-          "qmail.com",
-          "smtcdns.com",
-          "servicewechat.com",
-          "weixinbridge.com",
-          "weixinsxy.com",
-          "wx.gtimg.com",
-          "wx.qq.com"
-        ],
-        "server": "bootstrap-local-dns"
-      },
-      {
-        "domain_suffix": [
-          "connect.rom.miui.com",
-          "connectivitycheck.platform.hicloud.com"
-        ],
-        "server": "bootstrap-local-dns"
-      },
-      {
-        "domain_suffix": [
-          "msftconnecttest.com",
-          "msftncsi.com",
-          "connectivitycheck.gstatic.com",
-          "connectivitycheck.android.com",
-          "clients3.google.com",
-          "www.gstatic.com",
-          "gstatic.com",
-          "gvt1.com",
-          "gvt2.com",
-          "captive.apple.com",
-          "cp.cloudflare.com",
-          "speed.cloudflare.com",
-          "speedtest.net",
-          "ooklaserver.net",
-          "speedtestcdn.com",
-          "fast.com",
-          "nperf.com",
-          "nperf.net",
-          "testmy.net",
-          "browserscan.net",
-          "measurementlab.net",
-          "speed.measurementlab.net",
-          "speedof.me",
-          "speedcheck.org"
-        ],
-        "server": "doh-google"
-      },
-      {
-        "domain_suffix": [
-          "apple.com",
-          "icloud.com",
-          "icloud-content.com",
-          "me.com"
-        ],
-        "server": "bootstrap-local-dns"
-      },
-      {
-        "domain_suffix": [
-          "cn.bing.com"
-        ],
-        "server": "bootstrap-local-dns"
-      },
-      {
-        "domain_suffix": [
-          "bing.com",
-          "bingapis.com",
-          "bing.net",
-          "msn.com",
-          "login.live.com",
-          "account.live.com",
-          "edgeservices.bing.com",
-          "assets.msn.com",
-          "c.bing.com",
-          "r.bing.com",
-          "www.bing.com"
-        ],
-        "server": "doh-google"
-      },
-      {
-        "domain_suffix": [
-          "microsoft.com",
-          "windows.com",
-          "windowsupdate.com",
-          "msftauth.net",
-          "msauth.net",
-          "office.com",
-          "office365.com",
-          "live.com",
-          "steamserver.net",
-          "steamcontent.com",
-          "steamusercontent.com",
-          "akamaihd.net",
-          "hwcdn.net"
-        ],
-        "server": "bootstrap-local-dns"
-      },
-      {
-        "rule_set": [
-          "lyc-geosite-private",
-          "lyc-geoip-private"
-        ],
-        "server": "bootstrap-local-dns"
-      },
-      {
-        "domain_suffix": [
-          "mmstat.com"
-        ],
-        "server": "bootstrap-local-dns"
-      },
-      {
-        "domain_suffix": [
-          "doubleclick.net",
-          "googlesyndication.com",
-          "googleadservices.com",
-          "adservice.google.com",
-          "adsystem.com",
-          "adnxs.com",
-          "scorecardresearch.com",
-          "umeng.com",
-          "umengcloud.com"
-        ],
-        "server": "doh-cloudflare"
-      },
-      {
-        "domain_keyword": [
-          "adservice",
-          "analytics",
-          "tracking",
-          "tracker"
-        ],
-        "server": "doh-cloudflare"
-      },
-      {
-        "rule_set": [
-          "lyc-geosite-ads",
-          "hagezi-light",
-          "hagezi-normal",
-          "hagezi-anti-piracy",
-          "karing-acl4ssr-banad"
-        ],
-        "server": "doh-cloudflare"
-      },
-      {
-        "domain_suffix": [
-          "steamcommunity.com",
-          "steampowered.com",
-          "steamstatic.com",
-          "epicgames.com",
-          "epicgames.dev",
-          "unrealengine.com",
-          "paragon.com",
-          "playstation.com",
-          "playstation.net",
-          "playstationnetwork.com",
-          "sonyentertainmentnetwork.com",
-          "xboxlive.com",
-          "nintendo.net"
-        ],
-        "server": "doh-cloudflare"
-      },
-      {
-        "domain_suffix": [
-          "acm.org",
-          "acs.org",
-          "aiaa.org",
-          "amd.com",
-          "annualreviews.org",
-          "asm.org",
-          "asme.org",
-          "astm.org",
-          "bmj.com",
-          "cambridge.org",
-          "cdn.jetbrains.com",
-          "ieee.org",
-          "nature.com",
-          "sciencedirect.com",
-          "springer.com",
-          "wiley.com",
-          "ams.org",
-          "aps.org",
-          "ascelibrary.org",
-          "cas.org",
-          "clarivate.com",
-          "ebscohost.com",
-          "emerald.com",
-          "engineeringvillage.com",
-          "icevirtuallibrary.com",
-          "iop.org",
-          "jamanetwork.com",
-          "jstor.org",
-          "karger.com",
-          "oecd-ilibrary.org",
-          "osapublishing.org",
-          "oup.com",
-          "ovid.com",
-          "oxfordartonline.com",
-          "oxfordbibliographies.com",
-          "oxfordmusiconline.com",
-          "pnas.org",
-          "proquest.com",
-          "rsc.org",
-          "sagepub.com",
-          "scopus.com",
-          "siam.org",
-          "spiedigitallibrary.org",
-          "springerlink.com",
-          "tandfonline.com",
-          "udacity.com",
-          "un.org",
-          "webofknowledge.com",
-          "westlaw.com",
-          "worldscientific.com",
-          "oracle.com",
-          "sony.com",
-          "teamviewer.com",
-          "abercrombie.com",
-          "hollisterco.com",
-          "weather.com"
-        ],
-        "server": "doh-google"
-      },
-      {
-        "domain_suffix": [
-          "twitter.com",
-          "x.com",
-          "twimg.com"
-        ],
-        "server": "doh-google"
-      },
-      {
         "rule_set": [
           "lyc-geosite-cn",
-          "lyc-geosite-geolocation-cn",
-          "lyc-geoip-cn",
-          "metacubex-geoip-cn",
-          "ddch-direct",
-          "karing-acl4ssr-china-domain",
-          "karing-acl4ssr-china-ip",
-          "yuu-geosite-pcdn-cn"
+          "metacubex-geosite-cn",
+          "karing-acl4ssr-china-domain"
         ],
         "server": "bootstrap-local-dns"
       },
       {
         "rule_set": [
-          "lyc-geosite-ai",
-          "yuu-geosite-ai",
-          "karing-acl4ssr-ai",
-          "lyc-geosite-gfw",
-          "ddch-gfw",
-          "lyc-geosite-proxy",
-          "metacubex-geosite-geolocation-not-cn",
-          "ddch-proxy",
-          "karing-acl4ssr-proxy-lite",
-          "karing-acl4ssr-proxy-gfwlist"
+          "meta-category-ai-!cn"
         ],
         "server": "doh-google"
       },
       {
         "rule_set": [
-          "lyc-geosite-dev",
-          "lyc-geosite-media",
-          "yuu-geosite-stream-global",
-          "karing-acl4ssr-proxy-media",
-          "lyc-geosite-games",
-          "lyc-geosite-social",
-          "lyc-geosite-telegram",
-          "lyc-geoip-telegram"
+          "meta-category-media",
+          "meta-category-entertainment"
         ],
-        "server": "doh-cloudflare"
+        "server": "doh-google"
+      },
+      {
+        "rule_set": [
+          "meta-telegram"
+        ],
+        "server": "doh-google"
+      },
+      {
+        "rule_set": [
+          "meta-category-social-media-!cn",
+          "meta-category-communication"
+        ],
+        "server": "doh-google"
+      },
+      {
+        "rule_set": [
+          "meta-google"
+        ],
+        "server": "doh-google"
+      },
+      {
+        "rule_set": [
+          "metacubex-geosite-geolocation-not-cn"
+        ],
+        "server": "doh-google"
       }
     ],
     "final": "bootstrap-local-dns",
@@ -713,18 +552,6 @@
     "rule_set": [
       {
         "type": "local",
-        "tag": "lyc-geosite-private",
-        "format": "binary",
-        "path": "rules/geosite-private.srs"
-      },
-      {
-        "type": "local",
-        "tag": "lyc-geoip-private",
-        "format": "binary",
-        "path": "rules/geoip-private.srs"
-      },
-      {
-        "type": "local",
         "tag": "lyc-geosite-ads",
         "format": "binary",
         "path": "rules/geosite-category-ads-all.srs"
@@ -737,69 +564,15 @@
       },
       {
         "type": "local",
-        "tag": "lyc-geosite-geolocation-cn",
-        "format": "binary",
-        "path": "rules/geosite-geolocation-cn.srs"
-      },
-      {
-        "type": "local",
         "tag": "lyc-geoip-cn",
         "format": "binary",
         "path": "rules/geoip-cn.srs"
       },
       {
         "type": "local",
-        "tag": "lyc-geosite-ai",
-        "format": "binary",
-        "path": "rules/geosite-category-ai-!cn.srs"
-      },
-      {
-        "type": "local",
-        "tag": "lyc-geosite-dev",
-        "format": "binary",
-        "path": "rules/geosite-category-dev.srs"
-      },
-      {
-        "type": "local",
-        "tag": "lyc-geosite-media",
-        "format": "binary",
-        "path": "rules/geosite-category-media.srs"
-      },
-      {
-        "type": "local",
-        "tag": "lyc-geosite-games",
-        "format": "binary",
-        "path": "rules/geosite-category-games.srs"
-      },
-      {
-        "type": "local",
-        "tag": "lyc-geosite-social",
-        "format": "binary",
-        "path": "rules/geosite-category-social-media-!cn.srs"
-      },
-      {
-        "type": "local",
-        "tag": "lyc-geosite-telegram",
-        "format": "binary",
-        "path": "rules/geosite-telegram.srs"
-      },
-      {
-        "type": "local",
         "tag": "lyc-geoip-telegram",
         "format": "binary",
         "path": "rules/geoip-telegram.srs"
-      },
-      {
-        "type": "local",
-        "tag": "lyc-geosite-gfw",
-        "format": "binary",
-        "path": "rules/geosite-gfw.srs"
-      },
-      {
-        "type": "local",
-        "tag": "lyc-geosite-proxy",
-        "format": "binary",
-        "path": "rules/geosite-geolocation-!cn.srs"
       },
       {
         "type": "local",
@@ -821,87 +594,15 @@
       },
       {
         "type": "local",
-        "tag": "yuu-geosite-pcdn-cn",
-        "format": "binary",
-        "path": "rules/yuu-geosite-pcdn-cn.srs"
-      },
-      {
-        "type": "local",
-        "tag": "yuu-geosite-stream-global",
-        "format": "binary",
-        "path": "rules/yuu-geosite-stream-global.srs"
-      },
-      {
-        "type": "local",
-        "tag": "yuu-geosite-ai",
-        "format": "binary",
-        "path": "rules/yuu-geosite-ai.srs"
-      },
-      {
-        "type": "local",
-        "tag": "ddch-direct",
-        "format": "binary",
-        "path": "rules/ddch-direct.srs"
-      },
-      {
-        "type": "local",
-        "tag": "ddch-proxy",
-        "format": "binary",
-        "path": "rules/ddch-proxy.srs"
-      },
-      {
-        "type": "local",
-        "tag": "ddch-gfw",
-        "format": "binary",
-        "path": "rules/ddch-gfw.srs"
-      },
-      {
-        "type": "local",
         "tag": "hagezi-light",
         "format": "binary",
         "path": "rules/hagezi-light.srs"
       },
       {
         "type": "local",
-        "tag": "hagezi-normal",
-        "format": "binary",
-        "path": "rules/hagezi-normal.srs"
-      },
-      {
-        "type": "local",
-        "tag": "hagezi-anti-piracy",
-        "format": "binary",
-        "path": "rules/hagezi-anti-piracy.srs"
-      },
-      {
-        "type": "local",
-        "tag": "karing-acl4ssr-ai",
-        "format": "binary",
-        "path": "rules/karing-acl4ssr-ai.srs"
-      },
-      {
-        "type": "local",
         "tag": "karing-acl4ssr-wechat",
         "format": "binary",
         "path": "rules/karing-acl4ssr-wechat.srs"
-      },
-      {
-        "type": "local",
-        "tag": "karing-acl4ssr-proxy-lite",
-        "format": "binary",
-        "path": "rules/karing-acl4ssr-proxy-lite.srs"
-      },
-      {
-        "type": "local",
-        "tag": "karing-acl4ssr-proxy-gfwlist",
-        "format": "binary",
-        "path": "rules/karing-acl4ssr-proxy-gfwlist.srs"
-      },
-      {
-        "type": "local",
-        "tag": "karing-acl4ssr-banad",
-        "format": "binary",
-        "path": "rules/karing-acl4ssr-banad.srs"
       },
       {
         "type": "local",
@@ -917,15 +618,171 @@
       },
       {
         "type": "local",
-        "tag": "karing-acl4ssr-proxy-media",
-        "format": "binary",
-        "path": "rules/karing-acl4ssr-proxy-media.srs"
-      },
-      {
-        "type": "local",
         "tag": "sukka-chatgpt-voice",
         "format": "source",
         "path": "rules/sukka-chatgpt-voice.json"
+      },
+      {
+        "type": "local",
+        "tag": "meta-tencent",
+        "format": "binary",
+        "path": "rules/metacubex-service-tencent.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-category-doh",
+        "format": "binary",
+        "path": "rules/metacubex-service-category-doh.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-category-ip-geo-detect",
+        "format": "binary",
+        "path": "rules/metacubex-service-category-ip-geo-detect.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-connectivity-check",
+        "format": "binary",
+        "path": "rules/metacubex-service-connectivity-check.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-speedtest",
+        "format": "binary",
+        "path": "rules/metacubex-service-speedtest.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-openai",
+        "format": "binary",
+        "path": "rules/metacubex-service-openai.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-google-gemini",
+        "format": "binary",
+        "path": "rules/metacubex-service-google-gemini.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-xai",
+        "format": "binary",
+        "path": "rules/metacubex-service-xai.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-anthropic",
+        "format": "binary",
+        "path": "rules/metacubex-service-anthropic.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-bing@cn",
+        "format": "binary",
+        "path": "rules/metacubex-service-bing@cn.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-bing",
+        "format": "binary",
+        "path": "rules/metacubex-service-bing.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-category-game-platforms-download",
+        "format": "binary",
+        "path": "rules/metacubex-service-category-game-platforms-download.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-win-update",
+        "format": "binary",
+        "path": "rules/metacubex-service-win-update.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-apple-update",
+        "format": "binary",
+        "path": "rules/metacubex-service-apple-update.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-icloud",
+        "format": "binary",
+        "path": "rules/metacubex-service-icloud.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-apple",
+        "format": "binary",
+        "path": "rules/metacubex-service-apple.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-microsoft",
+        "format": "binary",
+        "path": "rules/metacubex-service-microsoft.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-category-scholar-!cn",
+        "format": "binary",
+        "path": "rules/metacubex-service-category-scholar-!cn.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-category-ai-!cn",
+        "format": "binary",
+        "path": "rules/metacubex-service-category-ai-!cn.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-category-dev",
+        "format": "binary",
+        "path": "rules/metacubex-service-category-dev.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-category-media",
+        "format": "binary",
+        "path": "rules/metacubex-service-category-media.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-category-games-!cn",
+        "format": "binary",
+        "path": "rules/metacubex-service-category-games-!cn.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-category-social-media-!cn",
+        "format": "binary",
+        "path": "rules/metacubex-service-category-social-media-!cn.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-telegram",
+        "format": "binary",
+        "path": "rules/metacubex-service-telegram.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-google",
+        "format": "binary",
+        "path": "rules/metacubex-service-google.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-category-entertainment",
+        "format": "binary",
+        "path": "rules/metacubex-service-category-entertainment.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-category-communication",
+        "format": "binary",
+        "path": "rules/metacubex-service-category-communication.srs"
       }
     ],
     "rules": [
@@ -951,90 +808,12 @@
         "outbound": "block"
       },
       {
-        "package_name": [
-          "com.openai.chatgpt",
-          "com.openai.chat",
-          "ai.openai.chatgpt"
-        ],
-        "outbound": "ai-chatgpt"
-      },
-      {
-        "package_name": [
-          "com.google.android.apps.bard"
-        ],
-        "outbound": "ai-gemini"
-      },
-      {
-        "package_name": [
-          "ai.x.grok"
-        ],
-        "outbound": "ai-grok"
-      },
-      {
-        "package_name": [
-          "com.anthropic.claude"
-        ],
-        "outbound": "ai-claude"
-      },
-      {
-        "package_name": [
-          "com.twitter.android"
-        ],
-        "outbound": "social-proxy"
-      },
-      {
-        "domain_suffix": [
-          "twitter.com",
-          "x.com",
-          "twimg.com"
-        ],
-        "outbound": "social-proxy"
-      },
-      {
-        "package_name": [
-          "com.android.vending",
-          "com.google.android.gms",
-          "com.google.android.gsf"
-        ],
-        "outbound": "proxy-rule"
-      },
-      {
         "clash_mode": "Direct",
         "outbound": "direct"
       },
       {
         "clash_mode": "Global",
         "outbound": "select"
-      },
-      {
-        "domain_suffix": [
-          "qq.com",
-          "weixin.qq.com",
-          "wechat.com",
-          "wechatapp.com",
-          "wechatpay.cn",
-          "tenpay.com",
-          "tencent.com",
-          "tencent-cloud.com",
-          "myqcloud.com",
-          "qcloud.com",
-          "gtimg.com",
-          "idqqimg.com",
-          "qpic.cn",
-          "qlogo.cn",
-          "qmail.com",
-          "smtcdns.com",
-          "servicewechat.com",
-          "weixinbridge.com",
-          "weixinsxy.com",
-          "wx.gtimg.com",
-          "wx.qq.com"
-        ],
-        "outbound": "cn-direct"
-      },
-      {
-        "rule_set": "karing-acl4ssr-wechat",
-        "outbound": "cn-direct"
       },
       {
         "domain_suffix": [
@@ -1073,71 +852,68 @@
         "outbound": "lan"
       },
       {
-        "domain_suffix": [
-          "doubleclick.net",
-          "googlesyndication.com",
-          "googleadservices.com",
-          "adservice.google.com",
-          "adsystem.com",
-          "adnxs.com",
-          "scorecardresearch.com",
-          "umeng.com",
-          "umengcloud.com"
+        "package_name": [
+          "com.openai.chatgpt",
+          "com.openai.chat",
+          "ai.openai.chatgpt"
+        ],
+        "outbound": "ai-chatgpt"
+      },
+      {
+        "package_name": [
+          "com.google.android.apps.bard"
+        ],
+        "outbound": "ai-gemini"
+      },
+      {
+        "package_name": [
+          "ai.x.grok"
+        ],
+        "outbound": "ai-grok"
+      },
+      {
+        "package_name": [
+          "com.anthropic.claude"
+        ],
+        "outbound": "ai-claude"
+      },
+      {
+        "package_name": [
+          "com.twitter.android"
+        ],
+        "outbound": "social-proxy"
+      },
+      {
+        "package_name": [
+          "com.android.vending",
+          "com.google.android.gms",
+          "com.google.android.gsf"
+        ],
+        "outbound": "proxy-rule"
+      },
+      {
+        "rule_set": [
+          "lyc-geosite-ads",
+          "hagezi-light"
         ],
         "outbound": "ad-block"
       },
       {
-        "domain_keyword": [
-          "adservice",
-          "analytics",
-          "tracking",
-          "tracker"
+        "rule_set": [
+          "meta-tencent"
         ],
-        "outbound": "ad-block"
+        "outbound": "cn-direct"
       },
       {
-        "domain_suffix": [
-          "bash.ws",
-          "browserscan.net",
-          "browserleaks.com",
-          "browserleaks.org",
-          "dns.sb",
-          "dnscheck.tools",
-          "dnschecker.org",
-          "doileak.com",
-          "dns-oarc.net",
-          "dnsleak.com",
-          "dnsleaktest.com",
-          "dnsleaktest.org",
-          "dnslytics.com",
-          "ipleak.net",
-          "ipleak.org",
-          "ip-api.com",
-          "perfect-privacy.com",
-          "test.nextdns.io",
-          "surfsharkdns.com",
-          "whatsmydnsserver.com",
-          "whoer.net"
+        "rule_set": [
+          "karing-acl4ssr-wechat"
         ],
-        "outbound": "dns-guard"
+        "outbound": "cn-direct"
       },
       {
-        "domain_suffix": [
-          "cloudflare-dns.com",
-          "mozilla.cloudflare-dns.com",
-          "dns.google",
-          "dns.quad9.net",
-          "quad9.net",
-          "dns.nextdns.io",
-          "nextdns.io",
-          "doh.opendns.com",
-          "dns.opendns.com",
-          "dns.adguard-dns.com",
-          "adguard-dns.io",
-          "family.adguard-dns.com",
-          "unfiltered.adguard-dns.com",
-          "doh.cleanbrowsing.org",
-          "doh.libredns.gr"
+        "rule_set": [
+          "meta-category-doh",
+          "meta-category-ip-geo-detect"
         ],
         "outbound": "dns-guard"
       },
@@ -1146,15 +922,22 @@
         "outbound": "dns-guard"
       },
       {
-        "domain_suffix": [
-          "openai.com",
-          "chatgpt.com",
-          "chat.openai.com",
-          "auth.openai.com",
-          "oaistatic.com",
-          "oaiusercontent.com",
-          "oaistatsig.com",
-          "openaiapi-site.azureedge.net"
+        "domain": [
+          "connect.rom.miui.com",
+          "connectivitycheck.platform.hicloud.com"
+        ],
+        "outbound": "cn-direct"
+      },
+      {
+        "rule_set": [
+          "meta-connectivity-check",
+          "meta-speedtest"
+        ],
+        "outbound": "network-test"
+      },
+      {
+        "rule_set": [
+          "meta-openai"
         ],
         "outbound": "ai-chatgpt"
       },
@@ -1175,176 +958,78 @@
         ]
       },
       {
-        "domain_suffix": [
-          "gemini.google.com",
-          "bard.google.com",
-          "generativelanguage.googleapis.com",
-          "ai.google.dev"
+        "rule_set": [
+          "meta-google-gemini"
         ],
         "outbound": "ai-gemini"
       },
       {
-        "domain_suffix": [
-          "grok.com",
-          "x.ai",
-          "api.x.ai"
+        "rule_set": [
+          "meta-xai"
         ],
         "outbound": "ai-grok"
       },
       {
-        "domain_suffix": [
-          "anthropic.com",
-          "claude.ai"
+        "rule_set": [
+          "meta-anthropic"
         ],
         "outbound": "ai-claude"
       },
       {
-        "domain_suffix": [
-          "msftconnecttest.com",
-          "msftncsi.com"
-        ],
-        "outbound": "network-test"
-      },
-      {
-        "domain_suffix": [
-          "connect.rom.miui.com",
-          "connectivitycheck.platform.hicloud.com"
+        "rule_set": [
+          "meta-bing@cn"
         ],
         "outbound": "cn-direct"
       },
       {
-        "domain_suffix": [
-          "connectivitycheck.gstatic.com",
-          "connectivitycheck.android.com",
-          "clients3.google.com",
-          "www.gstatic.com",
-          "gstatic.com",
-          "gvt1.com",
-          "gvt2.com",
-          "captive.apple.com",
-          "cp.cloudflare.com",
-          "speed.cloudflare.com",
-          "speedtest.net",
-          "ooklaserver.net",
-          "speedtestcdn.com",
-          "fast.com",
-          "nperf.com",
-          "nperf.net",
-          "testmy.net",
-          "browserscan.net",
-          "measurementlab.net",
-          "speed.measurementlab.net",
-          "speedof.me",
-          "speedcheck.org"
-        ],
-        "outbound": "network-test"
-      },
-      {
-        "domain_suffix": [
-          "google.com",
-          "googleapis.com",
-          "googleusercontent.com",
-          "ggpht.com",
-          "ampproject.org"
-        ],
-        "outbound": "proxy-rule"
-      },
-      {
-        "network": "udp",
-        "port": 123,
-        "outbound": "direct"
-      },
-      {
-        "network": "tcp",
-        "port": [
-          5228,
-          5229,
-          5230
-        ],
-        "outbound": "direct"
-      },
-      {
-        "network": "udp",
-        "port": [
-          135,
-          136,
-          137,
-          138,
-          139
-        ],
-        "outbound": "direct"
-      },
-      {
-        "domain_suffix": [
-          "apple.com",
-          "itunes.apple.com",
-          "push.apple.com"
-        ],
-        "outbound": "apple-cn"
-      },
-      {
-        "domain_suffix": [
-          "icloud.com",
-          "icloud-content.com",
-          "me.com"
-        ],
-        "outbound": "icloud"
-      },
-      {
-        "domain_suffix": [
-          "cn.bing.com"
-        ],
-        "outbound": "cn-direct"
-      },
-      {
-        "domain_suffix": [
-          "bing.com",
-          "bingapis.com",
-          "bing.net",
-          "msn.com",
-          "login.live.com",
-          "account.live.com",
-          "edgeservices.bing.com",
-          "assets.msn.com",
-          "c.bing.com",
-          "r.bing.com",
-          "www.bing.com"
+        "rule_set": [
+          "meta-bing"
         ],
         "outbound": "bing"
       },
       {
-        "domain_suffix": [
-          "steamserver.net",
-          "steamcontent.com",
-          "steamusercontent.com",
-          "akamaihd.net",
-          "hwcdn.net",
-          "windowsupdate.com",
-          "download.windowsupdate.com"
+        "rule_set": [
+          "meta-category-game-platforms-download",
+          "meta-win-update",
+          "meta-apple-update"
         ],
         "outbound": "download-direct"
       },
       {
-        "domain_suffix": [
-          "microsoft.com",
-          "windows.com",
-          "windowsupdate.com",
-          "msftauth.net",
-          "msauth.net",
-          "office.com",
-          "office365.com",
-          "live.com",
-          "msn.com"
+        "rule_set": [
+          "meta-icloud"
+        ],
+        "outbound": "icloud"
+      },
+      {
+        "rule_set": [
+          "meta-apple"
+        ],
+        "outbound": "apple-cn"
+      },
+      {
+        "rule_set": [
+          "meta-category-dev"
+        ],
+        "outbound": "dev-proxy"
+      },
+      {
+        "rule_set": [
+          "meta-category-games-!cn"
+        ],
+        "outbound": "game-proxy"
+      },
+      {
+        "rule_set": [
+          "meta-microsoft"
         ],
         "outbound": "microsoft-cn"
       },
       {
-        "domain_suffix": [
-          "google.cn",
-          "g.cn",
-          "googleapis.cn"
+        "rule_set": [
+          "meta-category-scholar-!cn"
         ],
-        "outbound": "cn-direct"
+        "outbound": "proxy-rule"
       },
       {
         "domain_suffix": [
@@ -1356,289 +1041,62 @@
         "outbound": "cn-direct"
       },
       {
-        "domain_suffix": [
-          "cnki.net",
-          "douban.com",
-          "maoyan.com",
-          "ctrip.com",
-          "qunar.com",
-          "12306.cn",
-          "chinatax.gov.cn",
-          "gov.cn",
-          "edu.cn"
-        ],
-        "outbound": "cn-direct"
-      },
-      {
-        "rule_set": [
-          "lyc-geosite-private",
-          "lyc-geoip-private"
-        ],
-        "outbound": "lan"
-      },
-      {
-        "rule_set": [
-          "lyc-geoip-cn",
-          "metacubex-geoip-cn",
-          "karing-acl4ssr-china-ip"
-        ],
-        "outbound": "cn-direct"
-      },
-      {
-        "rule_set": "lyc-geosite-ads",
-        "outbound": "ad-block"
-      },
-      {
-        "rule_set": [
-          "hagezi-light",
-          "hagezi-normal",
-          "hagezi-anti-piracy",
-          "karing-acl4ssr-banad"
-        ],
-        "outbound": "ad-block"
-      },
-      {
-        "rule_set": "yuu-geosite-pcdn-cn",
-        "outbound": "download-direct"
-      },
-      {
-        "domain_suffix": [
-          "steamcommunity.com",
-          "steampowered.com",
-          "steamstatic.com",
-          "epicgames.com",
-          "epicgames.dev",
-          "unrealengine.com",
-          "paragon.com",
-          "playstation.com",
-          "playstation.net",
-          "playstationnetwork.com",
-          "sonyentertainmentnetwork.com",
-          "xboxlive.com",
-          "nintendo.net"
-        ],
-        "outbound": "game-proxy"
-      },
-      {
-        "domain_suffix": [
-          "acm.org",
-          "acs.org",
-          "aiaa.org",
-          "amd.com",
-          "annualreviews.org",
-          "asm.org",
-          "asme.org",
-          "astm.org",
-          "bmj.com",
-          "cambridge.org",
-          "cdn.jetbrains.com",
-          "ieee.org",
-          "nature.com",
-          "sciencedirect.com",
-          "springer.com",
-          "wiley.com",
-          "ams.org",
-          "aps.org",
-          "ascelibrary.org",
-          "cas.org",
-          "clarivate.com",
-          "ebscohost.com",
-          "emerald.com",
-          "engineeringvillage.com",
-          "icevirtuallibrary.com",
-          "iop.org",
-          "jamanetwork.com",
-          "jstor.org",
-          "karger.com",
-          "oecd-ilibrary.org",
-          "osapublishing.org",
-          "oup.com",
-          "ovid.com",
-          "oxfordartonline.com",
-          "oxfordbibliographies.com",
-          "oxfordmusiconline.com",
-          "pnas.org",
-          "proquest.com",
-          "rsc.org",
-          "sagepub.com",
-          "scopus.com",
-          "siam.org",
-          "spiedigitallibrary.org",
-          "springerlink.com",
-          "tandfonline.com",
-          "udacity.com",
-          "un.org",
-          "webofknowledge.com",
-          "westlaw.com",
-          "worldscientific.com",
-          "oracle.com",
-          "sony.com",
-          "teamviewer.com",
-          "abercrombie.com",
-          "hollisterco.com",
-          "weather.com"
-        ],
-        "outbound": "proxy-rule"
-      },
-      {
         "rule_set": [
           "lyc-geosite-cn",
-          "lyc-geosite-geolocation-cn",
+          "metacubex-geosite-cn",
+          "karing-acl4ssr-china-domain"
+        ],
+        "outbound": "cn-direct"
+      },
+      {
+        "rule_set": [
+          "meta-category-ai-!cn"
+        ],
+        "outbound": "ai-proxy"
+      },
+      {
+        "rule_set": [
+          "meta-category-media",
+          "meta-category-entertainment"
+        ],
+        "outbound": "media-proxy"
+      },
+      {
+        "rule_set": [
+          "meta-telegram"
+        ],
+        "outbound": "telegram-proxy"
+      },
+      {
+        "rule_set": [
+          "meta-category-social-media-!cn",
+          "meta-category-communication"
+        ],
+        "outbound": "social-proxy"
+      },
+      {
+        "rule_set": [
+          "meta-google"
+        ],
+        "outbound": "proxy-rule"
+      },
+      {
+        "rule_set": [
+          "lyc-geoip-telegram"
+        ],
+        "outbound": "telegram-proxy"
+      },
+      {
+        "rule_set": [
           "lyc-geoip-cn",
           "metacubex-geoip-cn",
-          "ddch-direct",
-          "karing-acl4ssr-china-domain",
           "karing-acl4ssr-china-ip"
         ],
         "outbound": "cn-direct"
       },
       {
-        "domain_keyword": [
-          "connectivitycheck",
-          "generate_204",
-          "captive",
-          "speedtest",
-          "ookla",
-          "nperf"
-        ],
-        "outbound": "network-test"
-      },
-      {
         "rule_set": [
-          "lyc-geosite-ai",
-          "yuu-geosite-ai",
-          "karing-acl4ssr-ai"
-        ],
-        "outbound": "ai-proxy"
-      },
-      {
-        "domain_suffix": [
-          "challenges.cloudflare.com",
-          "turnstile.cloudflare.com",
-          "perplexity.ai",
-          "deepmind.com"
-        ],
-        "outbound": "ai-proxy"
-      },
-      {
-        "rule_set": "lyc-geosite-dev",
-        "outbound": "dev-proxy"
-      },
-      {
-        "domain_suffix": [
-          "github.com",
-          "githubusercontent.com",
-          "githubassets.com",
-          "githubcopilot.com",
-          "gitlab.com",
-          "docker.com",
-          "docker.io",
-          "dockerhub.com",
-          "npmjs.com",
-          "npmjs.org",
-          "pypi.org",
-          "pythonhosted.org",
-          "rubygems.org",
-          "crates.io",
-          "rust-lang.org",
-          "golang.org",
-          "go.dev"
-        ],
-        "outbound": "dev-proxy"
-      },
-      {
-        "rule_set": [
-          "lyc-geosite-media",
-          "yuu-geosite-stream-global",
-          "karing-acl4ssr-proxy-media"
-        ],
-        "outbound": "media-proxy"
-      },
-      {
-        "domain_suffix": [
-          "youtube.com",
-          "ytimg.com",
-          "googlevideo.com",
-          "netflix.com",
-          "nflxvideo.net",
-          "disneyplus.com",
-          "hulu.com",
-          "spotify.com",
-          "twitch.tv"
-        ],
-        "outbound": "media-proxy"
-      },
-      {
-        "rule_set": "lyc-geosite-games",
-        "outbound": "game-proxy"
-      },
-      {
-        "rule_set": "lyc-geosite-social",
-        "outbound": "social-proxy"
-      },
-      {
-        "domain_suffix": [
-          "facebook.com",
-          "fbcdn.net",
-          "instagram.com",
-          "threads.net",
-          "whatsapp.com",
-          "twitter.com",
-          "x.com",
-          "twimg.com",
-          "reddit.com",
-          "discord.com",
-          "discord.gg",
-          "discordapp.com"
-        ],
-        "outbound": "social-proxy"
-      },
-      {
-        "rule_set": [
-          "lyc-geosite-telegram",
-          "lyc-geoip-telegram"
-        ],
-        "outbound": "telegram-proxy"
-      },
-      {
-        "domain_suffix": [
-          "telegram.org",
-          "t.me",
-          "tdesktop.com"
-        ],
-        "outbound": "telegram-proxy"
-      },
-      {
-        "rule_set": [
-          "lyc-geosite-gfw",
-          "ddch-gfw",
-          "lyc-geosite-proxy",
-          "metacubex-geosite-geolocation-not-cn",
-          "ddch-proxy",
-          "karing-acl4ssr-proxy-lite",
-          "karing-acl4ssr-proxy-gfwlist"
-        ],
-        "outbound": "proxy-rule"
-      },
-      {
-        "outbound": "telegram-proxy",
-        "rule_set": [
-          "lyc-geoip-telegram"
-        ]
-      },
-      {
-        "domain_keyword": [
-          "google",
-          "youtube",
-          "facebook",
-          "instagram",
-          "twitter",
-          "x.com",
-          "github",
-          "telegram",
-          "wikipedia",
-          "reddit",
-          "discord"
+          "metacubex-geosite-geolocation-not-cn"
         ],
         "outbound": "proxy-rule"
       }

@@ -23,6 +23,11 @@ class RoutingConfigTests(unittest.TestCase):
             if rule.get("outbound") == "icloud"
         )
 
+        if icloud_rule.get("rule_set") == ["meta-icloud"]:
+            apple_index = next(i for i, r in enumerate(rules) if r.get("rule_set") == ["meta-apple"])
+            self.assertLess(icloud_index, apple_index)
+            return
+
         for domain in icloud_rule["domain_suffix"]:
             shadowing_rules = [
                 (index, rule["outbound"], suffix)
