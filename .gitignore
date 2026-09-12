@@ -196,6 +196,7 @@ cython_debug/
 
 zashboard/
 rules/*.srs
+rules/sukka-chatgpt-voice.json
 
 # Cursor
 #  Cursor is an AI-powered code editor. `.cursorignore` specifies files/directories to
