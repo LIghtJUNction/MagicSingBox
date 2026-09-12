@@ -79,12 +79,7 @@
       },
       {
         "rule_set": [
-          "meta-tencent"
-        ],
-        "server": "bootstrap-local-dns"
-      },
-      {
-        "rule_set": [
+          "meta-tencent",
           "karing-acl4ssr-wechat"
         ],
         "server": "bootstrap-local-dns"
@@ -106,30 +101,10 @@
       {
         "rule_set": [
           "meta-connectivity-check",
-          "meta-speedtest"
-        ],
-        "server": "doh-google"
-      },
-      {
-        "rule_set": [
-          "meta-openai"
-        ],
-        "server": "doh-google"
-      },
-      {
-        "rule_set": [
-          "meta-google-gemini"
-        ],
-        "server": "doh-google"
-      },
-      {
-        "rule_set": [
-          "meta-xai"
-        ],
-        "server": "doh-google"
-      },
-      {
-        "rule_set": [
+          "meta-speedtest",
+          "meta-openai",
+          "meta-google-gemini",
+          "meta-xai",
           "meta-anthropic"
         ],
         "server": "doh-google"
@@ -150,30 +125,20 @@
         "rule_set": [
           "meta-category-game-platforms-download",
           "meta-win-update",
-          "meta-apple-update"
-        ],
-        "server": "bootstrap-local-dns"
-      },
-      {
-        "rule_set": [
-          "meta-icloud"
-        ],
-        "server": "bootstrap-local-dns"
-      },
-      {
-        "rule_set": [
+          "meta-apple-update",
+          "meta-icloud",
           "meta-apple"
         ],
         "server": "bootstrap-local-dns"
       },
       {
         "rule_set": [
-          "meta-category-dev"
-        ],
-        "server": "doh-google"
-      },
-      {
-        "rule_set": [
+          "meta-github",
+          "meta-huggingface",
+          "meta-gitlab",
+          "meta-docker",
+          "meta-npmjs",
+          "meta-category-dev",
           "meta-category-games-!cn"
         ],
         "server": "doh-google"
@@ -209,38 +174,20 @@
       },
       {
         "rule_set": [
-          "meta-category-ai-!cn"
-        ],
-        "server": "doh-google"
-      },
-      {
-        "rule_set": [
+          "meta-category-ai-!cn",
+          "meta-spotify",
+          "meta-netflix",
+          "meta-youtube",
           "meta-category-media",
-          "meta-category-entertainment"
-        ],
-        "server": "doh-google"
-      },
-      {
-        "rule_set": [
-          "meta-telegram"
-        ],
-        "server": "doh-google"
-      },
-      {
-        "rule_set": [
+          "meta-category-entertainment",
+          "meta-telegram",
+          "meta-notion",
+          "meta-discord",
+          "meta-slack",
+          "meta-reddit",
           "meta-category-social-media-!cn",
-          "meta-category-communication"
-        ],
-        "server": "doh-google"
-      },
-      {
-        "rule_set": [
-          "meta-google"
-        ],
-        "server": "doh-google"
-      },
-      {
-        "rule_set": [
+          "meta-category-communication",
+          "meta-google",
           "metacubex-geosite-geolocation-not-cn"
         ],
         "server": "doh-google"
@@ -293,16 +240,16 @@
   ],
   "outbounds": [
     {
-      "type": "selector",
       "tag": "proxy",
+      "type": "selector",
       "outbounds": [
         "block"
       ],
       "default": "block"
     },
     {
-      "type": "selector",
       "tag": "select",
+      "type": "selector",
       "outbounds": [
         "proxy",
         "direct",
@@ -311,8 +258,8 @@
       "default": "proxy"
     },
     {
-      "type": "selector",
       "tag": "lan",
+      "type": "selector",
       "outbounds": [
         "direct",
         "proxy",
@@ -321,8 +268,8 @@
       "default": "direct"
     },
     {
-      "type": "selector",
       "tag": "hotspot",
+      "type": "selector",
       "outbounds": [
         "direct",
         "proxy"
@@ -330,8 +277,8 @@
       "default": "direct"
     },
     {
-      "type": "selector",
       "tag": "ad-block",
+      "type": "selector",
       "outbounds": [
         "block",
         "direct",
@@ -340,8 +287,8 @@
       "default": "block"
     },
     {
-      "type": "selector",
       "tag": "ad-allow",
+      "type": "selector",
       "outbounds": [
         "final",
         "direct",
@@ -350,8 +297,8 @@
       "default": "final"
     },
     {
-      "type": "selector",
       "tag": "cn-direct",
+      "type": "selector",
       "outbounds": [
         "direct",
         "proxy",
@@ -360,8 +307,8 @@
       "default": "direct"
     },
     {
-      "type": "selector",
       "tag": "apple-cn",
+      "type": "selector",
       "outbounds": [
         "direct",
         "proxy",
@@ -370,8 +317,8 @@
       "default": "direct"
     },
     {
-      "type": "selector",
       "tag": "microsoft-cn",
+      "type": "selector",
       "outbounds": [
         "direct",
         "proxy",
@@ -380,8 +327,8 @@
       "default": "direct"
     },
     {
-      "type": "selector",
       "tag": "icloud",
+      "type": "selector",
       "outbounds": [
         "direct",
         "proxy",
@@ -390,8 +337,8 @@
       "default": "direct"
     },
     {
-      "type": "selector",
       "tag": "bing",
+      "type": "selector",
       "outbounds": [
         "proxy",
         "direct",
@@ -400,8 +347,8 @@
       "default": "proxy"
     },
     {
-      "type": "selector",
       "tag": "network-test",
+      "type": "selector",
       "outbounds": [
         "proxy",
         "direct",
@@ -410,8 +357,8 @@
       "default": "proxy"
     },
     {
-      "type": "selector",
       "tag": "dns-guard",
+      "type": "selector",
       "outbounds": [
         "proxy",
         "block",
@@ -420,48 +367,48 @@
       "default": "proxy"
     },
     {
-      "type": "selector",
       "tag": "ai-chatgpt",
+      "type": "selector",
       "outbounds": [
         "block"
       ],
       "default": "block"
     },
     {
-      "type": "selector",
       "tag": "ai-gemini",
+      "type": "selector",
       "outbounds": [
         "block"
       ],
       "default": "block"
     },
     {
-      "type": "selector",
       "tag": "ai-grok",
+      "type": "selector",
       "outbounds": [
         "block"
       ],
       "default": "block"
     },
     {
-      "type": "selector",
       "tag": "ai-claude",
+      "type": "selector",
       "outbounds": [
         "block"
       ],
       "default": "block"
     },
     {
-      "type": "selector",
       "tag": "ai-proxy",
+      "type": "selector",
       "outbounds": [
         "block"
       ],
       "default": "block"
     },
     {
-      "type": "selector",
       "tag": "proxy-rule",
+      "type": "selector",
       "outbounds": [
         "proxy",
         "direct",
@@ -470,8 +417,8 @@
       "default": "proxy"
     },
     {
-      "type": "selector",
       "tag": "dev-proxy",
+      "type": "selector",
       "outbounds": [
         "proxy",
         "direct",
@@ -480,8 +427,8 @@
       "default": "proxy"
     },
     {
-      "type": "selector",
       "tag": "social-proxy",
+      "type": "selector",
       "outbounds": [
         "proxy",
         "direct",
@@ -490,8 +437,8 @@
       "default": "proxy"
     },
     {
-      "type": "selector",
       "tag": "download-direct",
+      "type": "selector",
       "outbounds": [
         "direct",
         "proxy",
@@ -500,8 +447,8 @@
       "default": "direct"
     },
     {
-      "type": "selector",
       "tag": "media-proxy",
+      "type": "selector",
       "outbounds": [
         "proxy",
         "direct",
@@ -510,8 +457,8 @@
       "default": "proxy"
     },
     {
-      "type": "selector",
       "tag": "game-proxy",
+      "type": "selector",
       "outbounds": [
         "proxy",
         "direct",
@@ -520,8 +467,8 @@
       "default": "proxy"
     },
     {
-      "type": "selector",
       "tag": "telegram-proxy",
+      "type": "selector",
       "outbounds": [
         "proxy",
         "direct",
@@ -530,8 +477,8 @@
       "default": "proxy"
     },
     {
-      "type": "selector",
       "tag": "final",
+      "type": "selector",
       "outbounds": [
         "proxy",
         "direct",
@@ -783,6 +730,78 @@
         "tag": "meta-category-communication",
         "format": "binary",
         "path": "rules/metacubex-service-category-communication.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-github",
+        "format": "binary",
+        "path": "rules/metacubex-service-github.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-huggingface",
+        "format": "binary",
+        "path": "rules/metacubex-service-huggingface.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-gitlab",
+        "format": "binary",
+        "path": "rules/metacubex-service-gitlab.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-docker",
+        "format": "binary",
+        "path": "rules/metacubex-service-docker.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-npmjs",
+        "format": "binary",
+        "path": "rules/metacubex-service-npmjs.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-notion",
+        "format": "binary",
+        "path": "rules/metacubex-service-notion.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-discord",
+        "format": "binary",
+        "path": "rules/metacubex-service-discord.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-slack",
+        "format": "binary",
+        "path": "rules/metacubex-service-slack.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-reddit",
+        "format": "binary",
+        "path": "rules/metacubex-service-reddit.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-spotify",
+        "format": "binary",
+        "path": "rules/metacubex-service-spotify.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-netflix",
+        "format": "binary",
+        "path": "rules/metacubex-service-netflix.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-youtube",
+        "format": "binary",
+        "path": "rules/metacubex-service-youtube.srs"
       }
     ],
     "rules": [
@@ -1009,6 +1028,11 @@
       },
       {
         "rule_set": [
+          "meta-github",
+          "meta-huggingface",
+          "meta-gitlab",
+          "meta-docker",
+          "meta-npmjs",
           "meta-category-dev"
         ],
         "outbound": "dev-proxy"
@@ -1056,6 +1080,9 @@
       },
       {
         "rule_set": [
+          "meta-spotify",
+          "meta-netflix",
+          "meta-youtube",
           "meta-category-media",
           "meta-category-entertainment"
         ],
@@ -1069,6 +1096,10 @@
       },
       {
         "rule_set": [
+          "meta-notion",
+          "meta-discord",
+          "meta-slack",
+          "meta-reddit",
           "meta-category-social-media-!cn",
           "meta-category-communication"
         ],

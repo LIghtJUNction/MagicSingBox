@@ -1,0 +1,319 @@
+{
+  "log": {"level": "error", "timestamp": true},
+  "dns": {
+    "servers": [
+      {
+        "type": "https",
+        "tag": "bootstrap-local-dns",
+        "server": "223.5.5.5",
+        "server_port": 443,
+        "path": "/dns-query",
+        "headers": {"Host": "dns.alidns.com"},
+        "tls": {"server_name": "dns.alidns.com"}
+      },
+      {
+        "type": "https",
+        "tag": "doh-google",
+        "detour": "proxy",
+        "server": "8.8.8.8",
+        "server_port": 443,
+        "path": "/dns-query",
+        "tls": {"server_name": "dns.google"}
+      },
+      {
+        "type": "https",
+        "tag": "doh-cloudflare",
+        "detour": "proxy",
+        "server": "1.1.1.1",
+        "server_port": 443,
+        "path": "/dns-query",
+        "tls": {"enabled": true, "server_name": "cloudflare-dns.com"}
+      }
+    ],
+    "rules": [
+      {"protocol": "icmp", "server": "doh-google"},
+      {"clash_mode": "Direct", "server": "bootstrap-local-dns"},
+      {"clash_mode": "Global", "server": "doh-cloudflare"},
+      {"domain_suffix": ["local", "home.arpa", "lan"], "server": "bootstrap-local-dns"},
+      {"domain_suffix": ["tailscale.net", "ts.net"], "server": "bootstrap-local-dns"},
+      {"rule_set": ["lyc-geosite-ads", "hagezi-light"], "server": "doh-cloudflare"},
+      {"rule_set": ["meta-tencent"], "server": "bootstrap-local-dns"},
+      {"rule_set": ["karing-acl4ssr-wechat"], "server": "bootstrap-local-dns"},
+      {"rule_set": ["meta-category-doh", "meta-category-ip-geo-detect"], "server": "doh-cloudflare"},
+      {"domain": ["connect.rom.miui.com", "connectivitycheck.platform.hicloud.com"], "server": "bootstrap-local-dns"},
+      {"rule_set": ["meta-connectivity-check", "meta-speedtest"], "server": "doh-google"},
+      {"rule_set": ["meta-openai"], "server": "doh-google"},
+      {"rule_set": ["meta-google-gemini"], "server": "doh-google"},
+      {"rule_set": ["meta-xai"], "server": "doh-google"},
+      {"rule_set": ["meta-anthropic"], "server": "doh-google"},
+      {"rule_set": ["meta-bing@cn"], "server": "bootstrap-local-dns"},
+      {"rule_set": ["meta-bing"], "server": "doh-google"},
+      {
+        "rule_set": ["meta-category-game-platforms-download", "meta-win-update", "meta-apple-update"],
+        "server": "bootstrap-local-dns"
+      },
+      {"rule_set": ["meta-icloud"], "server": "bootstrap-local-dns"},
+      {"rule_set": ["meta-apple"], "server": "bootstrap-local-dns"},
+      {
+        "rule_set": ["meta-github", "meta-huggingface", "meta-gitlab", "meta-docker", "meta-npmjs", "meta-category-dev"],
+        "server": "doh-google"
+      },
+      {"rule_set": ["meta-category-games-!cn"], "server": "doh-google"},
+      {"rule_set": ["meta-microsoft"], "server": "bootstrap-local-dns"},
+      {"rule_set": ["meta-category-scholar-!cn"], "server": "doh-google"},
+      {"domain_suffix": ["cn", "中国", "公司", "网络"], "server": "bootstrap-local-dns"},
+      {
+        "rule_set": ["lyc-geosite-cn", "metacubex-geosite-cn", "karing-acl4ssr-china-domain"],
+        "server": "bootstrap-local-dns"
+      },
+      {"rule_set": ["meta-category-ai-!cn"], "server": "doh-google"},
+      {
+        "rule_set": ["meta-spotify", "meta-netflix", "meta-youtube", "meta-category-media", "meta-category-entertainment"],
+        "server": "doh-google"
+      },
+      {"rule_set": ["meta-telegram"], "server": "doh-google"},
+      {
+        "rule_set": [
+          "meta-notion",
+          "meta-discord",
+          "meta-slack",
+          "meta-reddit",
+          "meta-category-social-media-!cn",
+          "meta-category-communication"
+        ],
+        "server": "doh-google"
+      },
+      {"rule_set": ["meta-google"], "server": "doh-google"},
+      {"rule_set": ["metacubex-geosite-geolocation-not-cn"], "server": "doh-google"}
+    ],
+    "final": "bootstrap-local-dns",
+    "strategy": "prefer_ipv4",
+    "cache_capacity": 4096,
+    "reverse_mapping": true
+  },
+  "inbounds": [
+    {"type": "mixed", "tag": "mixed-in", "listen": "127.0.0.1", "listen_port": 7892},
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "interface_name": "magicnet0",
+      "address": ["172.19.0.1/30", "fdfe:dcba:9876::1/126"],
+      "auto_route": true,
+      "auto_redirect": true,
+      "strict_route": true,
+      "mtu": 1400,
+      "udp_timeout": "5m",
+      "exclude_uid": [0],
+      "route_exclude_address": [
+        "192.168.0.0/16",
+        "10.0.0.0/8",
+        "172.16.0.0/12",
+        "100.64.0.0/10",
+        "127.0.0.0/8",
+        "169.254.0.0/16",
+        "224.0.0.0/4",
+        "::1/128",
+        "fc00::/7",
+        "fe80::/10",
+        "ff00::/8",
+        "fd7a:115c:a1e0::/48"
+      ],
+      "stack": "mixed"
+    }
+  ],
+  "outbounds": [
+    {"tag": "proxy", "profile": "block"},
+    {"tag": "select", "profile": "proxy,direct,block"},
+    {"tag": "lan", "profile": "direct,proxy,block"},
+    {"tag": "hotspot", "profile": "direct,proxy"},
+    {"tag": "ad-block", "profile": "block,direct,proxy"},
+    {"tag": "ad-allow", "profile": "final,direct,proxy"},
+    {"tag": "cn-direct", "profile": "direct,proxy,block"},
+    {"tag": "apple-cn", "profile": "direct,proxy,block"},
+    {"tag": "microsoft-cn", "profile": "direct,proxy,block"},
+    {"tag": "icloud", "profile": "direct,proxy,block"},
+    {"tag": "bing", "profile": "proxy,direct,block"},
+    {"tag": "network-test", "profile": "proxy,direct,block"},
+    {"tag": "dns-guard", "profile": "proxy,block,direct"},
+    {"tag": "ai-chatgpt", "profile": "block"},
+    {"tag": "ai-gemini", "profile": "block"},
+    {"tag": "ai-grok", "profile": "block"},
+    {"tag": "ai-claude", "profile": "block"},
+    {"tag": "ai-proxy", "profile": "block"},
+    {"tag": "proxy-rule", "profile": "proxy,direct,block"},
+    {"tag": "dev-proxy", "profile": "proxy,direct,block"},
+    {"tag": "social-proxy", "profile": "proxy,direct,block"},
+    {"tag": "download-direct", "profile": "direct,proxy,block"},
+    {"tag": "media-proxy", "profile": "proxy,direct,block"},
+    {"tag": "game-proxy", "profile": "proxy,direct,block"},
+    {"tag": "telegram-proxy", "profile": "proxy,direct,block"},
+    {"tag": "final", "profile": "proxy,direct,block"},
+    {"type": "direct", "tag": "direct"},
+    {"type": "block", "tag": "block"}
+  ],
+  "route": {
+    "rule_set": {
+      "lyc-geosite-ads": "rules/geosite-category-ads-all.srs",
+      "lyc-geosite-cn": "rules/geosite-cn.srs",
+      "lyc-geoip-cn": "rules/geoip-cn.srs",
+      "lyc-geoip-telegram": "rules/geoip-telegram.srs",
+      "metacubex-geosite-cn": "rules/metacubex-geosite-cn.srs",
+      "metacubex-geoip-cn": "rules/metacubex-geoip-cn.srs",
+      "metacubex-geosite-geolocation-not-cn": "rules/metacubex-geosite-geolocation-not-cn.srs",
+      "hagezi-light": "rules/hagezi-light.srs",
+      "karing-acl4ssr-wechat": "rules/karing-acl4ssr-wechat.srs",
+      "karing-acl4ssr-china-domain": "rules/karing-acl4ssr-china-domain.srs",
+      "karing-acl4ssr-china-ip": "rules/karing-acl4ssr-china-ip.srs",
+      "sukka-chatgpt-voice": "rules/sukka-chatgpt-voice.json",
+      "meta-tencent": "rules/metacubex-service-tencent.srs",
+      "meta-category-doh": "rules/metacubex-service-category-doh.srs",
+      "meta-category-ip-geo-detect": "rules/metacubex-service-category-ip-geo-detect.srs",
+      "meta-connectivity-check": "rules/metacubex-service-connectivity-check.srs",
+      "meta-speedtest": "rules/metacubex-service-speedtest.srs",
+      "meta-openai": "rules/metacubex-service-openai.srs",
+      "meta-google-gemini": "rules/metacubex-service-google-gemini.srs",
+      "meta-xai": "rules/metacubex-service-xai.srs",
+      "meta-anthropic": "rules/metacubex-service-anthropic.srs",
+      "meta-bing@cn": "rules/metacubex-service-bing@cn.srs",
+      "meta-bing": "rules/metacubex-service-bing.srs",
+      "meta-category-game-platforms-download": "rules/metacubex-service-category-game-platforms-download.srs",
+      "meta-win-update": "rules/metacubex-service-win-update.srs",
+      "meta-apple-update": "rules/metacubex-service-apple-update.srs",
+      "meta-icloud": "rules/metacubex-service-icloud.srs",
+      "meta-apple": "rules/metacubex-service-apple.srs",
+      "meta-microsoft": "rules/metacubex-service-microsoft.srs",
+      "meta-category-scholar-!cn": "rules/metacubex-service-category-scholar-!cn.srs",
+      "meta-category-ai-!cn": "rules/metacubex-service-category-ai-!cn.srs",
+      "meta-category-dev": "rules/metacubex-service-category-dev.srs",
+      "meta-category-media": "rules/metacubex-service-category-media.srs",
+      "meta-category-games-!cn": "rules/metacubex-service-category-games-!cn.srs",
+      "meta-category-social-media-!cn": "rules/metacubex-service-category-social-media-!cn.srs",
+      "meta-telegram": "rules/metacubex-service-telegram.srs",
+      "meta-google": "rules/metacubex-service-google.srs",
+      "meta-category-entertainment": "rules/metacubex-service-category-entertainment.srs",
+      "meta-category-communication": "rules/metacubex-service-category-communication.srs",
+      "meta-github": "rules/metacubex-service-github.srs",
+      "meta-huggingface": "rules/metacubex-service-huggingface.srs",
+      "meta-gitlab": "rules/metacubex-service-gitlab.srs",
+      "meta-docker": "rules/metacubex-service-docker.srs",
+      "meta-npmjs": "rules/metacubex-service-npmjs.srs",
+      "meta-notion": "rules/metacubex-service-notion.srs",
+      "meta-discord": "rules/metacubex-service-discord.srs",
+      "meta-slack": "rules/metacubex-service-slack.srs",
+      "meta-reddit": "rules/metacubex-service-reddit.srs",
+      "meta-spotify": "rules/metacubex-service-spotify.srs",
+      "meta-netflix": "rules/metacubex-service-netflix.srs",
+      "meta-youtube": "rules/metacubex-service-youtube.srs"
+    },
+    "rules": [
+      {"inbound": ["mixed-in", "tun-in"], "action": "sniff"},
+      {"protocol": "dns", "action": "hijack-dns"},
+      {"protocol": "icmp", "outbound": "block"},
+      {"ip_cidr": ["0.0.0.0/8"], "outbound": "block"},
+      {"clash_mode": "Direct", "outbound": "direct"},
+      {"clash_mode": "Global", "outbound": "select"},
+      {"domain_suffix": ["local", "home.arpa", "lan"], "outbound": "lan"},
+      {"domain_suffix": ["tailscale.net", "ts.net"], "outbound": "lan"},
+      {"ip_is_private": true, "outbound": "lan"},
+      {
+        "ip_cidr": [
+          "10.0.0.0/8",
+          "100.64.0.0/10",
+          "127.0.0.0/8",
+          "169.254.0.0/16",
+          "172.16.0.0/12",
+          "192.168.0.0/16",
+          "224.0.0.0/4",
+          "::1/128",
+          "fc00::/7",
+          "fe80::/10",
+          "ff00::/8",
+          "fd7a:115c:a1e0::/48"
+        ],
+        "outbound": "lan"
+      },
+      {"package_name": ["com.openai.chatgpt", "com.openai.chat", "ai.openai.chatgpt"], "outbound": "ai-chatgpt"},
+      {"package_name": ["com.google.android.apps.bard"], "outbound": "ai-gemini"},
+      {"package_name": ["ai.x.grok"], "outbound": "ai-grok"},
+      {"package_name": ["com.anthropic.claude"], "outbound": "ai-claude"},
+      {"package_name": ["com.twitter.android"], "outbound": "social-proxy"},
+      {
+        "package_name": ["com.android.vending", "com.google.android.gms", "com.google.android.gsf"],
+        "outbound": "proxy-rule"
+      },
+      {"rule_set": ["lyc-geosite-ads", "hagezi-light"], "outbound": "ad-block"},
+      {"rule_set": ["meta-tencent"], "outbound": "cn-direct"},
+      {"rule_set": ["karing-acl4ssr-wechat"], "outbound": "cn-direct"},
+      {"rule_set": ["meta-category-doh", "meta-category-ip-geo-detect"], "outbound": "dns-guard"},
+      {"port": 853, "outbound": "dns-guard"},
+      {"domain": ["connect.rom.miui.com", "connectivitycheck.platform.hicloud.com"], "outbound": "cn-direct"},
+      {"rule_set": ["meta-connectivity-check", "meta-speedtest"], "outbound": "network-test"},
+      {"rule_set": ["meta-openai"], "outbound": "ai-chatgpt"},
+      {"network": "udp", "port": 3478, "outbound": "ai-chatgpt", "rule_set": ["sukka-chatgpt-voice"]},
+      {"network": "tcp", "port": 443, "outbound": "ai-chatgpt", "rule_set": ["sukka-chatgpt-voice"]},
+      {"rule_set": ["meta-google-gemini"], "outbound": "ai-gemini"},
+      {"rule_set": ["meta-xai"], "outbound": "ai-grok"},
+      {"rule_set": ["meta-anthropic"], "outbound": "ai-claude"},
+      {"rule_set": ["meta-bing@cn"], "outbound": "cn-direct"},
+      {"rule_set": ["meta-bing"], "outbound": "bing"},
+      {
+        "rule_set": ["meta-category-game-platforms-download", "meta-win-update", "meta-apple-update"],
+        "outbound": "download-direct"
+      },
+      {"rule_set": ["meta-icloud"], "outbound": "icloud"},
+      {"rule_set": ["meta-apple"], "outbound": "apple-cn"},
+      {
+        "rule_set": ["meta-github", "meta-huggingface", "meta-gitlab", "meta-docker", "meta-npmjs", "meta-category-dev"],
+        "outbound": "dev-proxy"
+      },
+      {"rule_set": ["meta-category-games-!cn"], "outbound": "game-proxy"},
+      {"rule_set": ["meta-microsoft"], "outbound": "microsoft-cn"},
+      {"rule_set": ["meta-category-scholar-!cn"], "outbound": "proxy-rule"},
+      {"domain_suffix": ["cn", "中国", "公司", "网络"], "outbound": "cn-direct"},
+      {"rule_set": ["lyc-geosite-cn", "metacubex-geosite-cn", "karing-acl4ssr-china-domain"], "outbound": "cn-direct"},
+      {"rule_set": ["meta-category-ai-!cn"], "outbound": "ai-proxy"},
+      {
+        "rule_set": ["meta-spotify", "meta-netflix", "meta-youtube", "meta-category-media", "meta-category-entertainment"],
+        "outbound": "media-proxy"
+      },
+      {"rule_set": ["meta-telegram"], "outbound": "telegram-proxy"},
+      {
+        "rule_set": [
+          "meta-notion",
+          "meta-discord",
+          "meta-slack",
+          "meta-reddit",
+          "meta-category-social-media-!cn",
+          "meta-category-communication"
+        ],
+        "outbound": "social-proxy"
+      },
+      {"rule_set": ["meta-google"], "outbound": "proxy-rule"},
+      {"rule_set": ["lyc-geoip-telegram"], "outbound": "telegram-proxy"},
+      {"rule_set": ["lyc-geoip-cn", "metacubex-geoip-cn", "karing-acl4ssr-china-ip"], "outbound": "cn-direct"},
+      {"rule_set": ["metacubex-geosite-geolocation-not-cn"], "outbound": "proxy-rule"}
+    ],
+    "final": "final",
+    "auto_detect_interface": true,
+    "default_domain_resolver": "bootstrap-local-dns"
+  },
+  "experimental": {
+    "cache_file": {"enabled": true, "path": "cache.db", "cache_id": "MagicNet"},
+    "clash_api": {
+      "external_controller": "127.0.0.1:9090",
+      "external_ui": "zashboard",
+      "default_mode": "Rule",
+      "access_control_allow_origin": ["http://127.0.0.1", "http://localhost", "https://yacd.metacubex.one", "https://metacubex.github.io"],
+      "access_control_allow_private_network": true
+    }
+  },
+  "selector_profiles": {
+    "block": ["block"],
+    "proxy,direct,block": ["proxy", "direct", "block"],
+    "direct,proxy,block": ["direct", "proxy", "block"],
+    "direct,proxy": ["direct", "proxy"],
+    "block,direct,proxy": ["block", "direct", "proxy"],
+    "final,direct,proxy": ["final", "direct", "proxy"],
+    "proxy,block,direct": ["proxy", "block", "direct"]
+  }
+}
