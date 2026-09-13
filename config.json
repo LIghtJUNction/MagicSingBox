@@ -72,6 +72,24 @@
       },
       {
         "rule_set": [
+          "meta-google-play"
+        ],
+        "server": "doh-google"
+      },
+      {
+        "domain": [
+          "accounts.google.com",
+          "android.clients.google.com",
+          "android.googleapis.com",
+          "android.apis.google.com",
+          "oauth2.googleapis.com",
+          "mtalk.google.com",
+          "checkin.gstatic.com"
+        ],
+        "server": "doh-google"
+      },
+      {
+        "rule_set": [
           "lyc-geosite-ads",
           "hagezi-light"
         ],
@@ -815,6 +833,12 @@
       },
       {
         "type": "local",
+        "tag": "meta-google-play",
+        "format": "binary",
+        "path": "rules/metacubex-service-google-play.srs"
+      },
+      {
+        "type": "local",
         "tag": "meta-category-entertainment",
         "format": "binary",
         "path": "rules/metacubex-service-category-entertainment.srs"
@@ -1001,6 +1025,24 @@
           "com.android.vending",
           "com.google.android.gms",
           "com.google.android.gsf"
+        ],
+        "outbound": "google-proxy"
+      },
+      {
+        "rule_set": [
+          "meta-google-play"
+        ],
+        "outbound": "google-proxy"
+      },
+      {
+        "domain": [
+          "accounts.google.com",
+          "android.clients.google.com",
+          "android.googleapis.com",
+          "android.apis.google.com",
+          "oauth2.googleapis.com",
+          "mtalk.google.com",
+          "checkin.gstatic.com"
         ],
         "outbound": "google-proxy"
       },
