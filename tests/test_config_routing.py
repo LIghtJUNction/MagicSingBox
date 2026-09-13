@@ -15,6 +15,30 @@ class RoutingConfigTests(unittest.TestCase):
     def setUpClass(cls):
         cls.config = json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
 
+    def test_google_family_precedes_advertising(self):
+        for section in ("route", "dns"):
+            rules = self.config[section]["rules"]
+            ads = next(i for i, r in enumerate(rules) if "lyc-geosite-ads" in r.get("rule_set", []))
+            protected = [
+                next(i for i, r in enumerate(rules) if tag in r.get("rule_set", []))
+                for tag in ("meta-google-gemini", "meta-google-play", "meta-youtube", "meta-google")
+            ]
+            protected.append(
+                next(i for i, r in enumerate(rules) if "android.clients.google.com" in r.get("domain", []))
+            )
+            self.assertTrue(all(index < ads for index in protected))
+
+        route_rules = self.config["route"]["rules"]
+        expected = {
+            "meta-google-gemini": "ai-gemini",
+            "meta-google-play": "google-proxy",
+            "meta-youtube": "youtube-proxy",
+            "meta-google": "google-proxy",
+        }
+        for tag, outbound in expected.items():
+            rule = next(r for r in route_rules if tag in r.get("rule_set", []))
+            self.assertEqual(rule["outbound"], outbound)
+
     def test_icloud_domains_reach_icloud_selector(self):
         rules = self.config["route"]["rules"]
         icloud_index, icloud_rule = next(

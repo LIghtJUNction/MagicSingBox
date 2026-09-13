@@ -36,6 +36,11 @@
       {"clash_mode": "Global", "server": "doh-cloudflare"},
       {"domain_suffix": ["local", "home.arpa", "lan"], "server": "bootstrap-local-dns"},
       {"domain_suffix": ["tailscale.net", "ts.net"], "server": "bootstrap-local-dns"},
+      {"rule_set": ["meta-google-gemini"], "server": "doh-google"},
+      {"rule_set": ["meta-google-play"], "server": "doh-google"},
+      {"domain": ["accounts.google.com", "android.clients.google.com", "android.googleapis.com", "android.apis.google.com", "oauth2.googleapis.com", "mtalk.google.com", "checkin.gstatic.com"], "server": "doh-google"},
+      {"rule_set": ["meta-youtube"], "server": "doh-google"},
+      {"rule_set": ["meta-google"], "server": "doh-google"},
       {"rule_set": ["lyc-geosite-ads", "hagezi-light"], "server": "doh-cloudflare"},
       {"rule_set": ["meta-tencent"], "server": "bootstrap-local-dns"},
       {"rule_set": ["karing-acl4ssr-wechat"], "server": "bootstrap-local-dns"},
@@ -43,9 +48,15 @@
       {"domain": ["connect.rom.miui.com", "connectivitycheck.platform.hicloud.com"], "server": "bootstrap-local-dns"},
       {"rule_set": ["meta-connectivity-check", "meta-speedtest"], "server": "doh-google"},
       {"rule_set": ["meta-openai"], "server": "doh-google"},
-      {"rule_set": ["meta-google-gemini"], "server": "doh-google"},
       {"rule_set": ["meta-xai"], "server": "doh-google"},
       {"rule_set": ["meta-anthropic"], "server": "doh-google"},
+      {"rule_set": ["meta-github"], "server": "doh-google"},
+      {"rule_set": ["meta-discord"], "server": "doh-google"},
+      {"rule_set": ["meta-netflix"], "server": "doh-google"},
+      {"rule_set": ["meta-spotify"], "server": "doh-google"},
+      {"rule_set": ["meta-twitter"], "server": "doh-google"},
+      {"rule_set": ["meta-whatsapp"], "server": "doh-google"},
+      {"rule_set": ["meta-telegram"], "server": "doh-google"},
       {"rule_set": ["meta-bing@cn"], "server": "bootstrap-local-dns"},
       {"rule_set": ["meta-bing"], "server": "doh-google"},
       {
@@ -55,7 +66,7 @@
       {"rule_set": ["meta-icloud"], "server": "bootstrap-local-dns"},
       {"rule_set": ["meta-apple"], "server": "bootstrap-local-dns"},
       {
-        "rule_set": ["meta-github", "meta-huggingface", "meta-gitlab", "meta-docker", "meta-npmjs", "meta-category-dev"],
+        "rule_set": ["meta-huggingface", "meta-gitlab", "meta-docker", "meta-npmjs", "meta-category-dev"],
         "server": "doh-google"
       },
       {"rule_set": ["meta-category-games-!cn"], "server": "doh-google"},
@@ -68,14 +79,12 @@
       },
       {"rule_set": ["meta-category-ai-!cn"], "server": "doh-google"},
       {
-        "rule_set": ["meta-spotify", "meta-netflix", "meta-youtube", "meta-category-media", "meta-category-entertainment"],
+        "rule_set": ["meta-category-media", "meta-category-entertainment"],
         "server": "doh-google"
       },
-      {"rule_set": ["meta-telegram"], "server": "doh-google"},
       {
         "rule_set": [
           "meta-notion",
-          "meta-discord",
           "meta-slack",
           "meta-reddit",
           "meta-category-social-media-!cn",
@@ -83,7 +92,6 @@
         ],
         "server": "doh-google"
       },
-      {"rule_set": ["meta-google"], "server": "doh-google"},
       {"rule_set": ["metacubex-geosite-geolocation-not-cn"], "server": "doh-google"}
     ],
     "final": "bootstrap-local-dns",
@@ -146,6 +154,14 @@
     {"tag": "download-direct", "profile": "direct,proxy,block"},
     {"tag": "media-proxy", "profile": "proxy,direct,block"},
     {"tag": "game-proxy", "profile": "proxy,direct,block"},
+    {"tag": "google-proxy", "profile": "proxy,direct,block"},
+    {"tag": "youtube-proxy", "profile": "proxy,direct,block"},
+    {"tag": "github-proxy", "profile": "proxy,direct,block"},
+    {"tag": "discord-proxy", "profile": "proxy,direct,block"},
+    {"tag": "netflix-proxy", "profile": "proxy,direct,block"},
+    {"tag": "spotify-proxy", "profile": "proxy,direct,block"},
+    {"tag": "twitter-proxy", "profile": "proxy,direct,block"},
+    {"tag": "whatsapp-proxy", "profile": "proxy,direct,block"},
     {"tag": "telegram-proxy", "profile": "proxy,direct,block"},
     {"tag": "final", "profile": "proxy,direct,block"},
     {"type": "direct", "tag": "direct"},
@@ -189,7 +205,10 @@
       "meta-category-games-!cn": "rules/metacubex-service-category-games-!cn.srs",
       "meta-category-social-media-!cn": "rules/metacubex-service-category-social-media-!cn.srs",
       "meta-telegram": "rules/metacubex-service-telegram.srs",
+      "meta-twitter": "rules/metacubex-service-twitter.srs",
+      "meta-whatsapp": "rules/metacubex-service-whatsapp.srs",
       "meta-google": "rules/metacubex-service-google.srs",
+      "meta-google-play": "rules/metacubex-service-google-play.srs",
       "meta-category-entertainment": "rules/metacubex-service-category-entertainment.srs",
       "meta-category-communication": "rules/metacubex-service-category-communication.srs",
       "meta-github": "rules/metacubex-service-github.srs",
@@ -236,11 +255,16 @@
       {"package_name": ["com.google.android.apps.bard"], "outbound": "ai-gemini"},
       {"package_name": ["ai.x.grok"], "outbound": "ai-grok"},
       {"package_name": ["com.anthropic.claude"], "outbound": "ai-claude"},
-      {"package_name": ["com.twitter.android"], "outbound": "social-proxy"},
+      {"package_name": ["com.twitter.android"], "outbound": "twitter-proxy"},
       {
         "package_name": ["com.android.vending", "com.google.android.gms", "com.google.android.gsf"],
-        "outbound": "proxy-rule"
+        "outbound": "google-proxy"
       },
+      {"rule_set": ["meta-google-gemini"], "outbound": "ai-gemini"},
+      {"rule_set": ["meta-google-play"], "outbound": "google-proxy"},
+      {"domain": ["accounts.google.com", "android.clients.google.com", "android.googleapis.com", "android.apis.google.com", "oauth2.googleapis.com", "mtalk.google.com", "checkin.gstatic.com"], "outbound": "google-proxy"},
+      {"rule_set": ["meta-youtube"], "outbound": "youtube-proxy"},
+      {"rule_set": ["meta-google"], "outbound": "google-proxy"},
       {"rule_set": ["lyc-geosite-ads", "hagezi-light"], "outbound": "ad-block"},
       {"rule_set": ["meta-tencent"], "outbound": "cn-direct"},
       {"rule_set": ["karing-acl4ssr-wechat"], "outbound": "cn-direct"},
@@ -251,9 +275,15 @@
       {"rule_set": ["meta-openai"], "outbound": "ai-chatgpt"},
       {"network": "udp", "port": 3478, "outbound": "ai-chatgpt", "rule_set": ["sukka-chatgpt-voice"]},
       {"network": "tcp", "port": 443, "outbound": "ai-chatgpt", "rule_set": ["sukka-chatgpt-voice"]},
-      {"rule_set": ["meta-google-gemini"], "outbound": "ai-gemini"},
       {"rule_set": ["meta-xai"], "outbound": "ai-grok"},
       {"rule_set": ["meta-anthropic"], "outbound": "ai-claude"},
+      {"rule_set": ["meta-github"], "outbound": "github-proxy"},
+      {"rule_set": ["meta-discord"], "outbound": "discord-proxy"},
+      {"rule_set": ["meta-netflix"], "outbound": "netflix-proxy"},
+      {"rule_set": ["meta-spotify"], "outbound": "spotify-proxy"},
+      {"rule_set": ["meta-twitter"], "outbound": "twitter-proxy"},
+      {"rule_set": ["meta-whatsapp"], "outbound": "whatsapp-proxy"},
+      {"rule_set": ["meta-telegram"], "outbound": "telegram-proxy"},
       {"rule_set": ["meta-bing@cn"], "outbound": "cn-direct"},
       {"rule_set": ["meta-bing"], "outbound": "bing"},
       {
@@ -263,7 +293,7 @@
       {"rule_set": ["meta-icloud"], "outbound": "icloud"},
       {"rule_set": ["meta-apple"], "outbound": "apple-cn"},
       {
-        "rule_set": ["meta-github", "meta-huggingface", "meta-gitlab", "meta-docker", "meta-npmjs", "meta-category-dev"],
+        "rule_set": ["meta-huggingface", "meta-gitlab", "meta-docker", "meta-npmjs", "meta-category-dev"],
         "outbound": "dev-proxy"
       },
       {"rule_set": ["meta-category-games-!cn"], "outbound": "game-proxy"},
@@ -273,14 +303,12 @@
       {"rule_set": ["lyc-geosite-cn", "metacubex-geosite-cn", "karing-acl4ssr-china-domain"], "outbound": "cn-direct"},
       {"rule_set": ["meta-category-ai-!cn"], "outbound": "ai-proxy"},
       {
-        "rule_set": ["meta-spotify", "meta-netflix", "meta-youtube", "meta-category-media", "meta-category-entertainment"],
+        "rule_set": ["meta-category-media", "meta-category-entertainment"],
         "outbound": "media-proxy"
       },
-      {"rule_set": ["meta-telegram"], "outbound": "telegram-proxy"},
       {
         "rule_set": [
           "meta-notion",
-          "meta-discord",
           "meta-slack",
           "meta-reddit",
           "meta-category-social-media-!cn",
@@ -288,7 +316,6 @@
         ],
         "outbound": "social-proxy"
       },
-      {"rule_set": ["meta-google"], "outbound": "proxy-rule"},
       {"rule_set": ["lyc-geoip-telegram"], "outbound": "telegram-proxy"},
       {"rule_set": ["lyc-geoip-cn", "metacubex-geoip-cn", "karing-acl4ssr-china-ip"], "outbound": "cn-direct"},
       {"rule_set": ["metacubex-geosite-geolocation-not-cn"], "outbound": "proxy-rule"}

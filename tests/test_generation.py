@@ -37,7 +37,7 @@ class GenerationTests(unittest.TestCase):
             dns = next(
                 r for r in self.config["dns"]["rules"] if tag in r.get("rule_set", [])
             )
-            self.assertEqual(route["outbound"], "dev-proxy")
+            self.assertEqual(route["outbound"], "github-proxy" if service == "github" else "dev-proxy")
             self.assertEqual(dns["server"], "doh-google")
 
     def test_dns_merge_preserves_order_and_exceptions(self):

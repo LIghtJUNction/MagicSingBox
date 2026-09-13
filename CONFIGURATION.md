@@ -18,10 +18,12 @@ python3 -m unittest discover -s tests
 
 本次已通过 GitHub raw 获取对应 JSON 核实的服务：
 
-- 开发：GitHub、Hugging Face、GitLab、Docker、npmjs → `dev-proxy`
-- 协作/社区：Notion、Discord、Slack、Reddit → 原有通信规则出口
-- 媒体：Spotify、Netflix、YouTube → 原有媒体规则出口
+- 开发：Hugging Face、GitLab、Docker、npmjs → `dev-proxy`；GitHub → `github-proxy`
+- 协作/社区：Notion、Slack、Reddit → 原有通信规则出口；Discord → `discord-proxy`
+- 媒体：Spotify、Netflix、YouTube → 各自的 `<service>-proxy` 独立出口
 
 Hugging Face 的模型下载使用开发出口，不强制套用聊天 AI 的地区限制。以上服务同时加入对应 DNS 规则，沿用原分类的解析策略。
 
 `rules/metacubex-service-<name>.srs` 由主仓库 `hooks/pre-build/5450.update_sing_box_rules.sh` 从同一上游的 `sing/geo/geosite/<name>.srs` 打包。新增服务不再需要同步修改 shell 白名单。构建时仍须成功下载/校验实际 SRS 文件；源码测试不能替代真机连通性验证。
+
+Google、YouTube、GitHub、Discord、Netflix、Spotify、X/Twitter、WhatsApp 分别使用独立代理组，默认代理。Telegram 保留域名和 IP 双规则；新增 Twitter、WhatsApp 上游规则。Gemini、Google Play、Google 登录、YouTube 和 Google 总规则都先于广告规则，避免 Google 域名被宽泛广告分类误杀；DNS 保持同序。规则随 MagicNet 构建打包，更新订阅只更新节点。

@@ -72,6 +72,32 @@
       },
       {
         "rule_set": [
+          "meta-google-gemini",
+          "meta-google-play"
+        ],
+        "server": "doh-google"
+      },
+      {
+        "domain": [
+          "accounts.google.com",
+          "android.clients.google.com",
+          "android.googleapis.com",
+          "android.apis.google.com",
+          "oauth2.googleapis.com",
+          "mtalk.google.com",
+          "checkin.gstatic.com"
+        ],
+        "server": "doh-google"
+      },
+      {
+        "rule_set": [
+          "meta-youtube",
+          "meta-google"
+        ],
+        "server": "doh-google"
+      },
+      {
+        "rule_set": [
           "lyc-geosite-ads",
           "hagezi-light"
         ],
@@ -103,9 +129,15 @@
           "meta-connectivity-check",
           "meta-speedtest",
           "meta-openai",
-          "meta-google-gemini",
           "meta-xai",
-          "meta-anthropic"
+          "meta-anthropic",
+          "meta-github",
+          "meta-discord",
+          "meta-netflix",
+          "meta-spotify",
+          "meta-twitter",
+          "meta-whatsapp",
+          "meta-telegram"
         ],
         "server": "doh-google"
       },
@@ -133,7 +165,6 @@
       },
       {
         "rule_set": [
-          "meta-github",
           "meta-huggingface",
           "meta-gitlab",
           "meta-docker",
@@ -175,19 +206,13 @@
       {
         "rule_set": [
           "meta-category-ai-!cn",
-          "meta-spotify",
-          "meta-netflix",
-          "meta-youtube",
           "meta-category-media",
           "meta-category-entertainment",
-          "meta-telegram",
           "meta-notion",
-          "meta-discord",
           "meta-slack",
           "meta-reddit",
           "meta-category-social-media-!cn",
           "meta-category-communication",
-          "meta-google",
           "metacubex-geosite-geolocation-not-cn"
         ],
         "server": "doh-google"
@@ -467,6 +492,86 @@
       "default": "proxy"
     },
     {
+      "tag": "google-proxy",
+      "type": "selector",
+      "outbounds": [
+        "proxy",
+        "direct",
+        "block"
+      ],
+      "default": "proxy"
+    },
+    {
+      "tag": "youtube-proxy",
+      "type": "selector",
+      "outbounds": [
+        "proxy",
+        "direct",
+        "block"
+      ],
+      "default": "proxy"
+    },
+    {
+      "tag": "github-proxy",
+      "type": "selector",
+      "outbounds": [
+        "proxy",
+        "direct",
+        "block"
+      ],
+      "default": "proxy"
+    },
+    {
+      "tag": "discord-proxy",
+      "type": "selector",
+      "outbounds": [
+        "proxy",
+        "direct",
+        "block"
+      ],
+      "default": "proxy"
+    },
+    {
+      "tag": "netflix-proxy",
+      "type": "selector",
+      "outbounds": [
+        "proxy",
+        "direct",
+        "block"
+      ],
+      "default": "proxy"
+    },
+    {
+      "tag": "spotify-proxy",
+      "type": "selector",
+      "outbounds": [
+        "proxy",
+        "direct",
+        "block"
+      ],
+      "default": "proxy"
+    },
+    {
+      "tag": "twitter-proxy",
+      "type": "selector",
+      "outbounds": [
+        "proxy",
+        "direct",
+        "block"
+      ],
+      "default": "proxy"
+    },
+    {
+      "tag": "whatsapp-proxy",
+      "type": "selector",
+      "outbounds": [
+        "proxy",
+        "direct",
+        "block"
+      ],
+      "default": "proxy"
+    },
+    {
       "tag": "telegram-proxy",
       "type": "selector",
       "outbounds": [
@@ -715,9 +820,27 @@
       },
       {
         "type": "local",
+        "tag": "meta-twitter",
+        "format": "binary",
+        "path": "rules/metacubex-service-twitter.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-whatsapp",
+        "format": "binary",
+        "path": "rules/metacubex-service-whatsapp.srs"
+      },
+      {
+        "type": "local",
         "tag": "meta-google",
         "format": "binary",
         "path": "rules/metacubex-service-google.srs"
+      },
+      {
+        "type": "local",
+        "tag": "meta-google-play",
+        "format": "binary",
+        "path": "rules/metacubex-service-google-play.srs"
       },
       {
         "type": "local",
@@ -900,7 +1023,7 @@
         "package_name": [
           "com.twitter.android"
         ],
-        "outbound": "social-proxy"
+        "outbound": "twitter-proxy"
       },
       {
         "package_name": [
@@ -908,7 +1031,43 @@
           "com.google.android.gms",
           "com.google.android.gsf"
         ],
-        "outbound": "proxy-rule"
+        "outbound": "google-proxy"
+      },
+      {
+        "rule_set": [
+          "meta-google-gemini"
+        ],
+        "outbound": "ai-gemini"
+      },
+      {
+        "rule_set": [
+          "meta-google-play"
+        ],
+        "outbound": "google-proxy"
+      },
+      {
+        "domain": [
+          "accounts.google.com",
+          "android.clients.google.com",
+          "android.googleapis.com",
+          "android.apis.google.com",
+          "oauth2.googleapis.com",
+          "mtalk.google.com",
+          "checkin.gstatic.com"
+        ],
+        "outbound": "google-proxy"
+      },
+      {
+        "rule_set": [
+          "meta-youtube"
+        ],
+        "outbound": "youtube-proxy"
+      },
+      {
+        "rule_set": [
+          "meta-google"
+        ],
+        "outbound": "google-proxy"
       },
       {
         "rule_set": [
@@ -978,12 +1137,6 @@
       },
       {
         "rule_set": [
-          "meta-google-gemini"
-        ],
-        "outbound": "ai-gemini"
-      },
-      {
-        "rule_set": [
           "meta-xai"
         ],
         "outbound": "ai-grok"
@@ -993,6 +1146,48 @@
           "meta-anthropic"
         ],
         "outbound": "ai-claude"
+      },
+      {
+        "rule_set": [
+          "meta-github"
+        ],
+        "outbound": "github-proxy"
+      },
+      {
+        "rule_set": [
+          "meta-discord"
+        ],
+        "outbound": "discord-proxy"
+      },
+      {
+        "rule_set": [
+          "meta-netflix"
+        ],
+        "outbound": "netflix-proxy"
+      },
+      {
+        "rule_set": [
+          "meta-spotify"
+        ],
+        "outbound": "spotify-proxy"
+      },
+      {
+        "rule_set": [
+          "meta-twitter"
+        ],
+        "outbound": "twitter-proxy"
+      },
+      {
+        "rule_set": [
+          "meta-whatsapp"
+        ],
+        "outbound": "whatsapp-proxy"
+      },
+      {
+        "rule_set": [
+          "meta-telegram"
+        ],
+        "outbound": "telegram-proxy"
       },
       {
         "rule_set": [
@@ -1028,7 +1223,6 @@
       },
       {
         "rule_set": [
-          "meta-github",
           "meta-huggingface",
           "meta-gitlab",
           "meta-docker",
@@ -1080,9 +1274,6 @@
       },
       {
         "rule_set": [
-          "meta-spotify",
-          "meta-netflix",
-          "meta-youtube",
           "meta-category-media",
           "meta-category-entertainment"
         ],
@@ -1090,26 +1281,13 @@
       },
       {
         "rule_set": [
-          "meta-telegram"
-        ],
-        "outbound": "telegram-proxy"
-      },
-      {
-        "rule_set": [
           "meta-notion",
-          "meta-discord",
           "meta-slack",
           "meta-reddit",
           "meta-category-social-media-!cn",
           "meta-category-communication"
         ],
         "outbound": "social-proxy"
-      },
-      {
-        "rule_set": [
-          "meta-google"
-        ],
-        "outbound": "proxy-rule"
       },
       {
         "rule_set": [
