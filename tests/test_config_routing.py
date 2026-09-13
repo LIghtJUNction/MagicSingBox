@@ -15,6 +15,15 @@ class RoutingConfigTests(unittest.TestCase):
     def setUpClass(cls):
         cls.config = json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
 
+    def test_play_and_auth_precede_advertising(self):
+        for section in ("route", "dns"):
+            rules = self.config[section]["rules"]
+            ads = next(i for i, r in enumerate(rules) if "lyc-geosite-ads" in r.get("rule_set", []))
+            play = next(i for i, r in enumerate(rules) if "meta-google-play" in r.get("rule_set", []))
+            auth = next(i for i, r in enumerate(rules) if "android.clients.google.com" in r.get("domain", []))
+            self.assertLess(play, ads)
+            self.assertLess(auth, ads)
+
     def test_icloud_domains_reach_icloud_selector(self):
         rules = self.config["route"]["rules"]
         icloud_index, icloud_rule = next(
