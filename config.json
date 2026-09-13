@@ -91,17 +91,17 @@
       },
       {
         "rule_set": [
-          "meta-youtube",
-          "meta-google"
-        ],
-        "server": "doh-google"
-      },
-      {
-        "rule_set": [
           "lyc-geosite-ads",
           "hagezi-light"
         ],
         "server": "doh-cloudflare"
+      },
+      {
+        "rule_set": [
+          "meta-youtube",
+          "meta-google"
+        ],
+        "server": "doh-google"
       },
       {
         "rule_set": [
@@ -1059,6 +1059,13 @@
       },
       {
         "rule_set": [
+          "lyc-geosite-ads",
+          "hagezi-light"
+        ],
+        "outbound": "ad-block"
+      },
+      {
+        "rule_set": [
           "meta-youtube"
         ],
         "outbound": "youtube-proxy"
@@ -1068,13 +1075,6 @@
           "meta-google"
         ],
         "outbound": "google-proxy"
-      },
-      {
-        "rule_set": [
-          "lyc-geosite-ads",
-          "hagezi-light"
-        ],
-        "outbound": "ad-block"
       },
       {
         "rule_set": [
