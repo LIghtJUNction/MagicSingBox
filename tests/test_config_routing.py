@@ -15,18 +15,24 @@ class RoutingConfigTests(unittest.TestCase):
     def setUpClass(cls):
         cls.config = json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
 
-    def test_google_family_precedes_advertising(self):
+    def test_google_family_advertising_order(self):
         for section in ("route", "dns"):
             rules = self.config[section]["rules"]
             ads = next(i for i, r in enumerate(rules) if "lyc-geosite-ads" in r.get("rule_set", []))
             protected = [
                 next(i for i, r in enumerate(rules) if tag in r.get("rule_set", []))
-                for tag in ("meta-google-gemini", "meta-google-play", "meta-youtube", "meta-google")
+                for tag in ("meta-google-gemini", "meta-google-play")
             ]
             protected.append(
                 next(i for i, r in enumerate(rules) if "android.clients.google.com" in r.get("domain", []))
             )
+            broad_google = [
+                next(i for i, r in enumerate(rules) if tag in r.get("rule_set", []))
+                for tag in ("meta-youtube", "meta-google")
+            ]
+
             self.assertTrue(all(index < ads for index in protected))
+            self.assertTrue(all(ads < index for index in broad_google))
 
         route_rules = self.config["route"]["rules"]
         expected = {
