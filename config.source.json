@@ -39,9 +39,9 @@
       {"rule_set": ["meta-google-gemini"], "server": "doh-google"},
       {"rule_set": ["meta-google-play"], "server": "doh-google"},
       {"domain": ["accounts.google.com", "android.clients.google.com", "android.googleapis.com", "android.apis.google.com", "oauth2.googleapis.com", "mtalk.google.com", "checkin.gstatic.com"], "server": "doh-google"},
+      {"rule_set": ["lyc-geosite-ads", "hagezi-light"], "server": "doh-cloudflare"},
       {"rule_set": ["meta-youtube"], "server": "doh-google"},
       {"rule_set": ["meta-google"], "server": "doh-google"},
-      {"rule_set": ["lyc-geosite-ads", "hagezi-light"], "server": "doh-cloudflare"},
       {"rule_set": ["meta-tencent"], "server": "bootstrap-local-dns"},
       {
         "domain_suffix": [
@@ -279,9 +279,9 @@
       {"rule_set": ["meta-google-gemini"], "outbound": "ai-gemini"},
       {"rule_set": ["meta-google-play"], "outbound": "google-proxy"},
       {"domain": ["accounts.google.com", "android.clients.google.com", "android.googleapis.com", "android.apis.google.com", "oauth2.googleapis.com", "mtalk.google.com", "checkin.gstatic.com"], "outbound": "google-proxy"},
+      {"rule_set": ["lyc-geosite-ads", "hagezi-light"], "outbound": "ad-block"},
       {"rule_set": ["meta-youtube"], "outbound": "youtube-proxy"},
       {"rule_set": ["meta-google"], "outbound": "google-proxy"},
-      {"rule_set": ["lyc-geosite-ads", "hagezi-light"], "outbound": "ad-block"},
       {"rule_set": ["meta-tencent"], "outbound": "cn-direct"},
       {"rule_set": ["karing-acl4ssr-wechat"], "outbound": "cn-direct"},
       {"rule_set": ["meta-category-doh", "meta-category-ip-geo-detect"], "outbound": "dns-guard"},
