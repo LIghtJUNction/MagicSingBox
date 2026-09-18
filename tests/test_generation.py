@@ -53,6 +53,48 @@ class GenerationTests(unittest.TestCase):
         )
         self.assertEqual(self.source["route"]["rules"], self.config["route"]["rules"])
 
+    def test_dns_does_not_use_mixed_wechat_address_rules(self):
+        dns_rules = self.config["dns"]["rules"]
+        self.assertFalse(
+            any(
+                "karing-acl4ssr-wechat" in rule.get("rule_set", [])
+                for rule in dns_rules
+            )
+        )
+        for rule in dns_rules:
+            self.assertNotIn("ip_cidr", rule)
+            self.assertNotIn("ip_is_private", rule)
+
+        wechat_dns = next(
+            rule
+            for rule in dns_rules
+            if "wechatpay.com" in rule.get("domain_suffix", [])
+        )
+        self.assertEqual(wechat_dns["server"], "bootstrap-local-dns")
+        self.assertEqual(
+            set(wechat_dns["domain_suffix"]),
+            {
+                "qlogo.cn",
+                "qpic.cn",
+                "servicewechat.com",
+                "tenpay.com",
+                "wechat.com",
+                "wechatlegal.net",
+                "wechatpay.com",
+                "weixin.com",
+                "weixin.qq.com",
+                "weixinbridge.com",
+                "weixinsxy.com",
+                "wxapp.tc.qq.com",
+            },
+        )
+        route_rule = next(
+            rule
+            for rule in self.config["route"]["rules"]
+            if "karing-acl4ssr-wechat" in rule.get("rule_set", [])
+        )
+        self.assertEqual(route_rule["outbound"], "cn-direct")
+
     def test_generation_does_not_mutate_source(self):
         before = json.dumps(self.source)
         GENERATOR.generate(self.source)
