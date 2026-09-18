@@ -105,24 +105,8 @@
       },
       {
         "rule_set": [
-          "meta-tencent"
-        ],
-        "server": "bootstrap-local-dns"
-      },
-      {
-        "domain_suffix": [
-          "qlogo.cn",
-          "qpic.cn",
-          "servicewechat.com",
-          "tenpay.com",
-          "wechat.com",
-          "wechatlegal.net",
-          "wechatpay.com",
-          "weixin.com",
-          "weixin.qq.com",
-          "weixinbridge.com",
-          "weixinsxy.com",
-          "wxapp.tc.qq.com"
+          "meta-tencent",
+          "service-wechat-dns"
         ],
         "server": "bootstrap-local-dns"
       },
@@ -671,6 +655,12 @@
         "tag": "karing-acl4ssr-wechat",
         "format": "binary",
         "path": "rules/karing-acl4ssr-wechat.srs"
+      },
+      {
+        "type": "local",
+        "tag": "service-wechat-dns",
+        "format": "binary",
+        "path": "rules/service-wechat-dns.srs"
       },
       {
         "type": "local",
