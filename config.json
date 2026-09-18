@@ -91,13 +91,6 @@
       },
       {
         "rule_set": [
-          "lyc-geosite-ads",
-          "hagezi-light"
-        ],
-        "server": "doh-cloudflare"
-      },
-      {
-        "rule_set": [
           "meta-youtube",
           "meta-google"
         ],
@@ -105,8 +98,31 @@
       },
       {
         "rule_set": [
-          "meta-tencent",
-          "karing-acl4ssr-wechat"
+          "lyc-geosite-ads",
+          "hagezi-light"
+        ],
+        "server": "doh-cloudflare"
+      },
+      {
+        "rule_set": [
+          "meta-tencent"
+        ],
+        "server": "bootstrap-local-dns"
+      },
+      {
+        "domain_suffix": [
+          "qlogo.cn",
+          "qpic.cn",
+          "servicewechat.com",
+          "tenpay.com",
+          "wechat.com",
+          "wechatlegal.net",
+          "wechatpay.com",
+          "weixin.com",
+          "weixin.qq.com",
+          "weixinbridge.com",
+          "weixinsxy.com",
+          "wxapp.tc.qq.com"
         ],
         "server": "bootstrap-local-dns"
       },
@@ -1059,13 +1075,6 @@
       },
       {
         "rule_set": [
-          "lyc-geosite-ads",
-          "hagezi-light"
-        ],
-        "outbound": "ad-block"
-      },
-      {
-        "rule_set": [
           "meta-youtube"
         ],
         "outbound": "youtube-proxy"
@@ -1075,6 +1084,13 @@
           "meta-google"
         ],
         "outbound": "google-proxy"
+      },
+      {
+        "rule_set": [
+          "lyc-geosite-ads",
+          "hagezi-light"
+        ],
+        "outbound": "ad-block"
       },
       {
         "rule_set": [

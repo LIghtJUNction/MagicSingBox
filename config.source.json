@@ -43,7 +43,23 @@
       {"rule_set": ["meta-google"], "server": "doh-google"},
       {"rule_set": ["lyc-geosite-ads", "hagezi-light"], "server": "doh-cloudflare"},
       {"rule_set": ["meta-tencent"], "server": "bootstrap-local-dns"},
-      {"rule_set": ["karing-acl4ssr-wechat"], "server": "bootstrap-local-dns"},
+      {
+        "domain_suffix": [
+          "qlogo.cn",
+          "qpic.cn",
+          "servicewechat.com",
+          "tenpay.com",
+          "wechat.com",
+          "wechatlegal.net",
+          "wechatpay.com",
+          "weixin.com",
+          "weixin.qq.com",
+          "weixinbridge.com",
+          "weixinsxy.com",
+          "wxapp.tc.qq.com"
+        ],
+        "server": "bootstrap-local-dns"
+      },
       {"rule_set": ["meta-category-doh", "meta-category-ip-geo-detect"], "server": "doh-cloudflare"},
       {"domain": ["connect.rom.miui.com", "connectivitycheck.platform.hicloud.com"], "server": "bootstrap-local-dns"},
       {"rule_set": ["meta-connectivity-check", "meta-speedtest"], "server": "doh-google"},
