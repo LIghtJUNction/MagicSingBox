@@ -43,23 +43,7 @@
       {"rule_set": ["meta-youtube"], "server": "doh-google"},
       {"rule_set": ["meta-google"], "server": "doh-google"},
       {"rule_set": ["meta-tencent"], "server": "bootstrap-local-dns"},
-      {
-        "domain_suffix": [
-          "qlogo.cn",
-          "qpic.cn",
-          "servicewechat.com",
-          "tenpay.com",
-          "wechat.com",
-          "wechatlegal.net",
-          "wechatpay.com",
-          "weixin.com",
-          "weixin.qq.com",
-          "weixinbridge.com",
-          "weixinsxy.com",
-          "wxapp.tc.qq.com"
-        ],
-        "server": "bootstrap-local-dns"
-      },
+      {"rule_set": ["service-wechat-dns"], "server": "bootstrap-local-dns"},
       {"rule_set": ["meta-category-doh", "meta-category-ip-geo-detect"], "server": "doh-cloudflare"},
       {"domain": ["connect.rom.miui.com", "connectivitycheck.platform.hicloud.com"], "server": "bootstrap-local-dns"},
       {"rule_set": ["meta-connectivity-check", "meta-speedtest"], "server": "doh-google"},
@@ -194,6 +178,7 @@
       "metacubex-geosite-geolocation-not-cn": "rules/metacubex-geosite-geolocation-not-cn.srs",
       "hagezi-light": "rules/hagezi-light.srs",
       "karing-acl4ssr-wechat": "rules/karing-acl4ssr-wechat.srs",
+      "service-wechat-dns": "rules/service-wechat-dns.srs",
       "karing-acl4ssr-china-domain": "rules/karing-acl4ssr-china-domain.srs",
       "karing-acl4ssr-china-ip": "rules/karing-acl4ssr-china-ip.srs",
       "sukka-chatgpt-voice": "rules/sukka-chatgpt-voice.json",

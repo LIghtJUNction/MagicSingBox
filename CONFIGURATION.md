@@ -32,5 +32,5 @@ Google、YouTube、GitHub、Discord、Netflix、Spotify、X/Twitter、WhatsApp �
 
 `karing-acl4ssr-wechat.srs` 同时包含域名与 IP 匹配项。它仍用于路由层的微信直连判断，但不得直接用于 `dns.rules`：sing-box 1.14 起会把规则集中的 `ip_cidr` 视为旧式 DNS 响应地址过滤，并输出弃用警告，1.16 将移除这种隐式行为。
 
-DNS 侧仅保留该规则集当前对应的微信域名后缀，并继续交给 `bootstrap-local-dns`。不要用 `evaluate + match_response` 机械迁移这里的 9 个 IP；那会把它们变成真正的 DNS 响应路由条件，改变现有的域名分类语义。
+DNS 侧改用 MagicNetRules 的 `service-wechat-dns.srs`，它只由 Blackmatrix WeChat 域名源生成，并在规则构建阶段剔除非域名项；该规则继续交给 `bootstrap-local-dns`。路由层仍保留 `karing-acl4ssr-wechat.srs` 的域名 + IP 能力。不要用 `evaluate + match_response` 机械迁移 Karing 规则里的 IP；那会把它们变成真正的 DNS 响应路由条件，改变现有语义。
 

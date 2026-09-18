@@ -53,7 +53,7 @@ class GenerationTests(unittest.TestCase):
         )
         self.assertEqual(self.source["route"]["rules"], self.config["route"]["rules"])
 
-    def test_dns_does_not_use_mixed_wechat_address_rules(self):
+    def test_dns_uses_domain_only_wechat_ruleset(self):
         dns_rules = self.config["dns"]["rules"]
         self.assertFalse(
             any(
@@ -68,26 +68,18 @@ class GenerationTests(unittest.TestCase):
         wechat_dns = next(
             rule
             for rule in dns_rules
-            if "wechatpay.com" in rule.get("domain_suffix", [])
+            if "service-wechat-dns" in rule.get("rule_set", [])
         )
         self.assertEqual(wechat_dns["server"], "bootstrap-local-dns")
-        self.assertEqual(
-            set(wechat_dns["domain_suffix"]),
-            {
-                "qlogo.cn",
-                "qpic.cn",
-                "servicewechat.com",
-                "tenpay.com",
-                "wechat.com",
-                "wechatlegal.net",
-                "wechatpay.com",
-                "weixin.com",
-                "weixin.qq.com",
-                "weixinbridge.com",
-                "weixinsxy.com",
-                "wxapp.tc.qq.com",
-            },
+
+        definition = next(
+            rule
+            for rule in self.config["route"]["rule_set"]
+            if rule["tag"] == "service-wechat-dns"
         )
+        self.assertEqual(definition["format"], "binary")
+        self.assertEqual(definition["path"], "rules/service-wechat-dns.srs")
+
         route_rule = next(
             rule
             for rule in self.config["route"]["rules"]
