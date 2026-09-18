@@ -27,3 +27,10 @@ Hugging Face 的模型下载使用开发出口，不强制套用聊天 AI 的地
 `rules/metacubex-service-<name>.srs` 由主仓库 `hooks/pre-build/5450.update_sing_box_rules.sh` 从同一上游的 `sing/geo/geosite/<name>.srs` 打包。新增服务不再需要同步修改 shell 白名单。构建时仍须成功下载/校验实际 SRS 文件；源码测试不能替代真机连通性验证。
 
 Google、YouTube、GitHub、Discord、Netflix、Spotify、X/Twitter、WhatsApp 分别使用独立代理组，默认代理。Telegram 保留域名和 IP 双规则；新增 Twitter、WhatsApp 上游规则。Gemini、Google Play、Google 登录、YouTube 和 Google 总规则都先于广告规则，避免 Google 域名被宽泛广告分类误杀；DNS 保持同序。规则随 MagicNet 构建打包，更新订阅只更新节点。
+
+## sing-box 1.14 DNS 地址过滤兼容
+
+`karing-acl4ssr-wechat.srs` 同时包含域名与 IP 匹配项。它仍用于路由层的微信直连判断，但不得直接用于 `dns.rules`：sing-box 1.14 起会把规则集中的 `ip_cidr` 视为旧式 DNS 响应地址过滤，并输出弃用警告，1.16 将移除这种隐式行为。
+
+DNS 侧仅保留该规则集当前对应的微信域名后缀，并继续交给 `bootstrap-local-dns`。不要用 `evaluate + match_response` 机械迁移这里的 9 个 IP；那会把它们变成真正的 DNS 响应路由条件，改变现有的域名分类语义。
+
