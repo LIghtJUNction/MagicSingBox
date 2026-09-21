@@ -9,7 +9,7 @@
         "server_port": 443,
         "path": "/dns-query",
         "headers": {"Host": "dns.alidns.com"},
-        "tls": {"server_name": "dns.alidns.com"}
+        "tls": {"enabled": true, "server_name": "dns.alidns.com"}
       },
       {
         "type": "https",
@@ -18,7 +18,7 @@
         "server": "8.8.8.8",
         "server_port": 443,
         "path": "/dns-query",
-        "tls": {"server_name": "dns.google"}
+        "tls": {"enabled": true, "server_name": "dns.google"}
       },
       {
         "type": "https",
@@ -226,6 +226,7 @@
       "meta-youtube": "rules/metacubex-service-youtube.srs"
     },
     "rules": [
+      {"port": 53, "action": "hijack-dns"},
       {"inbound": ["mixed-in", "tun-in"], "action": "sniff"},
       {"protocol": "dns", "action": "hijack-dns"},
       {"protocol": "icmp", "outbound": "block"},
@@ -317,9 +318,9 @@
         ],
         "outbound": "social-proxy"
       },
+      {"rule_set": ["metacubex-geosite-geolocation-not-cn"], "outbound": "proxy-rule"},
       {"rule_set": ["lyc-geoip-telegram"], "outbound": "telegram-proxy"},
-      {"rule_set": ["lyc-geoip-cn", "metacubex-geoip-cn", "karing-acl4ssr-china-ip"], "outbound": "cn-direct"},
-      {"rule_set": ["metacubex-geosite-geolocation-not-cn"], "outbound": "proxy-rule"}
+      {"rule_set": ["lyc-geoip-cn", "metacubex-geoip-cn", "karing-acl4ssr-china-ip"], "outbound": "cn-direct"}
     ],
     "final": "final",
     "auto_detect_interface": true,
