@@ -15,6 +15,7 @@
           "Host": "dns.alidns.com"
         },
         "tls": {
+          "enabled": true,
           "server_name": "dns.alidns.com"
         }
       },
@@ -26,6 +27,7 @@
         "server_port": 443,
         "path": "/dns-query",
         "tls": {
+          "enabled": true,
           "server_name": "dns.google"
         }
       },
@@ -935,6 +937,10 @@
     ],
     "rules": [
       {
+        "port": 53,
+        "action": "hijack-dns"
+      },
+      {
         "inbound": [
           "mixed-in",
           "tun-in"
@@ -1297,6 +1303,12 @@
       },
       {
         "rule_set": [
+          "metacubex-geosite-geolocation-not-cn"
+        ],
+        "outbound": "proxy-rule"
+      },
+      {
+        "rule_set": [
           "lyc-geoip-telegram"
         ],
         "outbound": "telegram-proxy"
@@ -1308,12 +1320,6 @@
           "karing-acl4ssr-china-ip"
         ],
         "outbound": "cn-direct"
-      },
-      {
-        "rule_set": [
-          "metacubex-geosite-geolocation-not-cn"
-        ],
-        "outbound": "proxy-rule"
       }
     ],
     "final": "final",
