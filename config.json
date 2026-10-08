@@ -46,6 +46,12 @@
     ],
     "rules": [
       {
+        "domain_suffix": [
+          "lmm.best"
+        ],
+        "server": "doh-cloudflare"
+      },
+      {
         "protocol": "icmp",
         "server": "doh-google"
       },
@@ -171,7 +177,6 @@
           "meta-gitlab",
           "meta-docker",
           "meta-npmjs",
-          "meta-category-dev",
           "meta-category-games-!cn"
         ],
         "server": "doh-google"
@@ -184,16 +189,21 @@
       },
       {
         "rule_set": [
-          "meta-category-scholar-!cn"
+          "meta-category-scholar-!cn",
+          "meta-category-ai-!cn",
+          "meta-notion",
+          "meta-slack",
+          "meta-reddit",
+          "meta-category-social-media-!cn"
         ],
         "server": "doh-google"
       },
       {
         "domain_suffix": [
           "cn",
-          "中国",
-          "公司",
-          "网络"
+          "xn--fiqs8s",
+          "xn--55qx5d",
+          "xn--io0a7i"
         ],
         "server": "bootstrap-local-dns"
       },
@@ -207,13 +217,9 @@
       },
       {
         "rule_set": [
-          "meta-category-ai-!cn",
+          "meta-category-dev",
           "meta-category-media",
           "meta-category-entertainment",
-          "meta-notion",
-          "meta-slack",
-          "meta-reddit",
-          "meta-category-social-media-!cn",
           "meta-category-communication",
           "metacubex-geosite-geolocation-not-cn"
         ],
@@ -962,6 +968,12 @@
         "outbound": "block"
       },
       {
+        "domain_suffix": [
+          "lmm.best"
+        ],
+        "outbound": "proxy"
+      },
+      {
         "clash_mode": "Direct",
         "outbound": "direct"
       },
@@ -1238,8 +1250,7 @@
           "meta-huggingface",
           "meta-gitlab",
           "meta-docker",
-          "meta-npmjs",
-          "meta-category-dev"
+          "meta-npmjs"
         ],
         "outbound": "dev-proxy"
       },
@@ -1262,11 +1273,26 @@
         "outbound": "proxy-rule"
       },
       {
+        "rule_set": [
+          "meta-category-ai-!cn"
+        ],
+        "outbound": "ai-proxy"
+      },
+      {
+        "rule_set": [
+          "meta-notion",
+          "meta-slack",
+          "meta-reddit",
+          "meta-category-social-media-!cn"
+        ],
+        "outbound": "social-proxy"
+      },
+      {
         "domain_suffix": [
           "cn",
-          "中国",
-          "公司",
-          "网络"
+          "xn--fiqs8s",
+          "xn--55qx5d",
+          "xn--io0a7i"
         ],
         "outbound": "cn-direct"
       },
@@ -1280,9 +1306,9 @@
       },
       {
         "rule_set": [
-          "meta-category-ai-!cn"
+          "meta-category-dev"
         ],
-        "outbound": "ai-proxy"
+        "outbound": "dev-proxy"
       },
       {
         "rule_set": [
@@ -1293,10 +1319,6 @@
       },
       {
         "rule_set": [
-          "meta-notion",
-          "meta-slack",
-          "meta-reddit",
-          "meta-category-social-media-!cn",
           "meta-category-communication"
         ],
         "outbound": "social-proxy"

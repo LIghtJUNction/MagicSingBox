@@ -31,6 +31,7 @@
       }
     ],
     "rules": [
+      {"domain_suffix": ["lmm.best"], "server": "doh-cloudflare"},
       {"protocol": "icmp", "server": "doh-google"},
       {"clash_mode": "Direct", "server": "bootstrap-local-dns"},
       {"clash_mode": "Global", "server": "doh-cloudflare"},
@@ -66,32 +67,25 @@
       {"rule_set": ["meta-icloud"], "server": "bootstrap-local-dns"},
       {"rule_set": ["meta-apple"], "server": "bootstrap-local-dns"},
       {
-        "rule_set": ["meta-huggingface", "meta-gitlab", "meta-docker", "meta-npmjs", "meta-category-dev"],
+        "rule_set": ["meta-huggingface", "meta-gitlab", "meta-docker", "meta-npmjs"],
         "server": "doh-google"
       },
       {"rule_set": ["meta-category-games-!cn"], "server": "doh-google"},
       {"rule_set": ["meta-microsoft"], "server": "bootstrap-local-dns"},
       {"rule_set": ["meta-category-scholar-!cn"], "server": "doh-google"},
-      {"domain_suffix": ["cn", "中国", "公司", "网络"], "server": "bootstrap-local-dns"},
+      {"rule_set": ["meta-category-ai-!cn"], "server": "doh-google"},
+      {"rule_set": ["meta-notion", "meta-slack", "meta-reddit", "meta-category-social-media-!cn"], "server": "doh-google"},
+      {"domain_suffix": ["cn", "xn--fiqs8s", "xn--55qx5d", "xn--io0a7i"], "server": "bootstrap-local-dns"},
       {
         "rule_set": ["lyc-geosite-cn", "metacubex-geosite-cn", "karing-acl4ssr-china-domain"],
         "server": "bootstrap-local-dns"
       },
-      {"rule_set": ["meta-category-ai-!cn"], "server": "doh-google"},
+      {"rule_set": ["meta-category-dev"], "server": "doh-google"},
       {
         "rule_set": ["meta-category-media", "meta-category-entertainment"],
         "server": "doh-google"
       },
-      {
-        "rule_set": [
-          "meta-notion",
-          "meta-slack",
-          "meta-reddit",
-          "meta-category-social-media-!cn",
-          "meta-category-communication"
-        ],
-        "server": "doh-google"
-      },
+      {"rule_set": ["meta-category-communication"], "server": "doh-google"},
       {"rule_set": ["metacubex-geosite-geolocation-not-cn"], "server": "doh-google"}
     ],
     "final": "bootstrap-local-dns",
@@ -231,6 +225,7 @@
       {"protocol": "dns", "action": "hijack-dns"},
       {"protocol": "icmp", "outbound": "block"},
       {"ip_cidr": ["0.0.0.0/8"], "outbound": "block"},
+      {"domain_suffix": ["lmm.best"], "outbound": "proxy"},
       {"clash_mode": "Direct", "outbound": "direct"},
       {"clash_mode": "Global", "outbound": "select"},
       {"domain_suffix": ["local", "home.arpa", "lan"], "outbound": "lan"},
@@ -295,29 +290,22 @@
       {"rule_set": ["meta-icloud"], "outbound": "icloud"},
       {"rule_set": ["meta-apple"], "outbound": "apple-cn"},
       {
-        "rule_set": ["meta-huggingface", "meta-gitlab", "meta-docker", "meta-npmjs", "meta-category-dev"],
+        "rule_set": ["meta-huggingface", "meta-gitlab", "meta-docker", "meta-npmjs"],
         "outbound": "dev-proxy"
       },
       {"rule_set": ["meta-category-games-!cn"], "outbound": "game-proxy"},
       {"rule_set": ["meta-microsoft"], "outbound": "microsoft-cn"},
       {"rule_set": ["meta-category-scholar-!cn"], "outbound": "proxy-rule"},
-      {"domain_suffix": ["cn", "中国", "公司", "网络"], "outbound": "cn-direct"},
-      {"rule_set": ["lyc-geosite-cn", "metacubex-geosite-cn", "karing-acl4ssr-china-domain"], "outbound": "cn-direct"},
       {"rule_set": ["meta-category-ai-!cn"], "outbound": "ai-proxy"},
+      {"rule_set": ["meta-notion", "meta-slack", "meta-reddit", "meta-category-social-media-!cn"], "outbound": "social-proxy"},
+      {"domain_suffix": ["cn", "xn--fiqs8s", "xn--55qx5d", "xn--io0a7i"], "outbound": "cn-direct"},
+      {"rule_set": ["lyc-geosite-cn", "metacubex-geosite-cn", "karing-acl4ssr-china-domain"], "outbound": "cn-direct"},
+      {"rule_set": ["meta-category-dev"], "outbound": "dev-proxy"},
       {
         "rule_set": ["meta-category-media", "meta-category-entertainment"],
         "outbound": "media-proxy"
       },
-      {
-        "rule_set": [
-          "meta-notion",
-          "meta-slack",
-          "meta-reddit",
-          "meta-category-social-media-!cn",
-          "meta-category-communication"
-        ],
-        "outbound": "social-proxy"
-      },
+      {"rule_set": ["meta-category-communication"], "outbound": "social-proxy"},
       {"rule_set": ["metacubex-geosite-geolocation-not-cn"], "outbound": "proxy-rule"},
       {"rule_set": ["lyc-geoip-telegram"], "outbound": "telegram-proxy"},
       {"rule_set": ["lyc-geoip-cn", "metacubex-geoip-cn", "karing-acl4ssr-china-ip"], "outbound": "cn-direct"}
