@@ -66,32 +66,19 @@ jobs:
               replace(media, f'      {{"rule_set": ["meta-category-dev"], "{key}": "{dev}"}},\n' + media)
           json.loads(text)
           path.write_text(text, encoding='utf-8')
-          doc = Path('CONFIGURATION.md')
-          doc.write_text(doc.read_text(encoding='utf-8') + '''
-
-## Routing policy update (2026-10-08)
-
-- `lmm.best` and every subdomain use `proxy`; their DNS queries use `doh-cloudflare` through `proxy`. This deliberate exception precedes Rule/Direct/Global selection and broad app, country, and advertising rules. DNS interception and invalid-address/ICMP rejection still retain their existing priority. No substring or IP-wide match is added.
-- The empty proxy selector stays blocked instead of silently falling back to a direct connection. A node must be configured. Explicit user configuration overrides remain user-owned.
-- Specific foreign AI and social-service rules precede generic China rules. Broad developer and communication categories stay after China rules, so domestic mirrors and services are not moved to a proxy solely by a broad category. Named developer services keep their specific proxy rules.
-- Chinese top-level domains use ASCII IDNA labels so wire-format DNS names match.
-- The direct bootstrap resolver, domestic DNS exceptions, and default DNS profile are unchanged. This update does not move node bootstrap resolution behind the proxy or change TUN/eBPF ownership.
-
-`tests/test_routing_policy.py` exercises synthetic conflicting rule-set memberships. These are rule-order tests, not claims of Android-device or live-SRS network validation.
-''', encoding='utf-8')
           PY
           python3 generate.py
           python3 generate.py --check
           python3 -m unittest discover -s tests -v
           git diff --check
           sha256sum config.json
-      - name: Commit only the reviewed configuration and documentation
+      - name: Commit only the reviewed configuration
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh auth setup-git
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add config.source.json config.json CONFIGURATION.md
+          git add config.source.json config.json
           git commit -m 'fix: require LMM proxy routing and refine domain classification priority'
           git push origin HEAD:refs/heads/fix/routing-lmm-best-20261008
