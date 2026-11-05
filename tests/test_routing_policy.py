@@ -1,12 +1,20 @@
 """Policy regressions. Rule-set memberships are synthetic, not live SRS data."""
 import json
 import unittest
+from itertools import product
 from pathlib import Path
 
 from test_dns_routing_priority import first_action, values
 
 ROOT = Path(__file__).resolve().parents[1]
 CN_TAGS = ("lyc-geosite-cn", "metacubex-geosite-cn", "karing-acl4ssr-china-domain")
+BLOCKED_DOMAINS = (
+    "flash.sec.miui.com",
+    "fraud-detection.engine.miui.com",
+    "eps.caict.ac.cn",
+    "gateway-papa.cloud.weizhi.com",
+)
+PORT_BLOCK_DOMAIN = "dm.wo.com.cn"
 
 
 def dns_target(config, domain="", tags=(), mode="Rule", protocol=""):
@@ -36,6 +44,59 @@ class RoutingPolicyTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.config = json.loads((ROOT / "config.json").read_text(encoding="utf-8"))
+
+    def test_explicit_blocks_precede_modes_apps_and_classifiers(self):
+        conflicting = CN_TAGS + ("lyc-geoip-cn", "lyc-geosite-ads", "meta-google-play")
+        targets = list(product(BLOCKED_DOMAINS, (1, 80, 443, 853, 18080, 65535)))
+        targets.append((PORT_BLOCK_DOMAIN, 18080))
+        for (domain, port), mode, network, inbound in product(
+            targets, ("Rule", "Direct", "Global"), ("tcp", "udp"),
+            ("tun-in", "mixed-in", "ebpf-in"),
+        ):
+            with self.subTest(domain=domain, port=port, mode=mode,
+                              network=network, inbound=inbound):
+                self.assertEqual(first_action(
+                    self.config, domain=domain, port=port, mode=mode,
+                    network=network, inbound=inbound, tags=conflicting,
+                    package="com.android.vending",
+                ), "reject")
+
+    def test_explicit_blocks_keep_exact_host_boundaries(self):
+        for domain, network in product(BLOCKED_DOMAINS + (PORT_BLOCK_DOMAIN,), ("tcp", "udp")):
+            neighbors = (domain.split(".", 1)[1], "sub." + domain,
+                         "not" + domain, domain + ".example.invalid")
+            for neighbor in neighbors:
+                with self.subTest(domain=neighbor, network=network):
+                    self.assertEqual(first_action(
+                        self.config, domain=neighbor, port=18080,
+                        network=network, tags=CN_TAGS,
+                    ), "cn-direct")
+
+    def test_port_scoped_block_preserves_other_ports_and_dns(self):
+        for port, network, (mode, expected) in product(
+            (1, 80, 443, 18079, 18081, 65535), ("tcp", "udp"),
+            (("Rule", "cn-direct"), ("Direct", "direct"), ("Global", "select")),
+        ):
+            with self.subTest(port=port, network=network, mode=mode):
+                self.assertEqual(first_action(
+                    self.config, domain=PORT_BLOCK_DOMAIN, port=port,
+                    network=network, mode=mode, tags=CN_TAGS,
+                ), expected)
+        self.assertEqual(dns_target(self.config, PORT_BLOCK_DOMAIN), "bootstrap-local-dns")
+
+    def test_dns_capture_still_precedes_explicit_blocks(self):
+        for domain, mode, network in product(
+            BLOCKED_DOMAINS + (PORT_BLOCK_DOMAIN,),
+            ("Rule", "Direct", "Global"), ("tcp", "udp"),
+        ):
+            with self.subTest(domain=domain, mode=mode, network=network):
+                self.assertEqual(first_action(
+                    self.config, domain=domain, port=53, mode=mode, network=network,
+                ), "hijack-dns")
+                self.assertEqual(first_action(
+                    self.config, domain=domain, port=18080, protocol="dns",
+                    mode=mode, network=network,
+                ), "hijack-dns")
 
     def test_lmm_uses_proxy_and_remote_dns_in_every_mode(self):
         conflicting = CN_TAGS + ("lyc-geoip-cn", "meta-category-dev", "lyc-geosite-ads", "meta-tencent")

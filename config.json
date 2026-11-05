@@ -968,6 +968,22 @@
         "outbound": "block"
       },
       {
+        "domain": [
+          "flash.sec.miui.com",
+          "fraud-detection.engine.miui.com",
+          "eps.caict.ac.cn",
+          "gateway-papa.cloud.weizhi.com"
+        ],
+        "action": "reject"
+      },
+      {
+        "domain": [
+          "dm.wo.com.cn"
+        ],
+        "port": 18080,
+        "action": "reject"
+      },
+      {
         "domain_suffix": [
           "lmm.best"
         ],

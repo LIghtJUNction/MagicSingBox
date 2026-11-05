@@ -12,6 +12,22 @@ python3 -m unittest discover -s tests
 
 源文件将重复的 selector 选项提取到 `selector_profiles`，将本地规则定义简化为 tag → path 映射。生成器只合并相邻且服务器相同的纯 rule_set DNS 规则，不跨越例外，不调整路由优先级。
 
+## 指定目标阻断
+
+模板使用原生 `action: "reject"` 拒绝以下目标，TCP 和 UDP 均适用：
+
+| 完整域名 | 目标端口 |
+| --- | --- |
+| `flash.sec.miui.com` | 全部 |
+| `fraud-detection.engine.miui.com` | 全部 |
+| `eps.caict.ac.cn` | 全部 |
+| `gateway-papa.cloud.weizhi.com` | 全部 |
+| `dm.wo.com.cn` | `18080` |
+
+域名采用精确匹配；父域、子域及相似名称沿用其他规则。`dm.wo.com.cn` 的其他端口也沿用其他规则。模板中的 DNS 捕获和嗅探先执行，指定目标阻断随后执行，优先于 Direct/Global 模式、LAN、应用和国内分类规则。这两条拒绝规则独立于广告组及社区名单开关；DNS 服务器选择沿用原配置。
+
+规则适用于进入 sing-box 且能识别到目标域名的流量。`tests/test_routing_policy.py` 检查匹配范围、端口、优先级及 DNS 捕获；这些配置测试不代表真机流量验证，也不说明上述域名的实际业务用途。
+
 ## 服务规则来源
 
 上游：<https://github.com/MetaCubeX/meta-rules-dat/tree/sing/geo/geosite>

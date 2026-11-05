@@ -225,6 +225,16 @@
       {"protocol": "dns", "action": "hijack-dns"},
       {"protocol": "icmp", "outbound": "block"},
       {"ip_cidr": ["0.0.0.0/8"], "outbound": "block"},
+      {
+        "domain": [
+          "flash.sec.miui.com",
+          "fraud-detection.engine.miui.com",
+          "eps.caict.ac.cn",
+          "gateway-papa.cloud.weizhi.com"
+        ],
+        "action": "reject"
+      },
+      {"domain": ["dm.wo.com.cn"], "port": 18080, "action": "reject"},
       {"domain_suffix": ["lmm.best"], "outbound": "proxy"},
       {"clash_mode": "Direct", "outbound": "direct"},
       {"clash_mode": "Global", "outbound": "select"},
