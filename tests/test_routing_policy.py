@@ -199,6 +199,22 @@ class RoutingPolicyTests(unittest.TestCase):
         self.assertEqual(proxy["default"], "block")
         self.assertEqual(proxy["outbounds"], ["block"])
 
+    def test_unclassified_dns_uses_proxy_without_direct_fallback(self):
+        source = json.loads((ROOT / "config.source.json").read_text(encoding="utf-8"))
+        for config in (source, self.config):
+            servers = {server["tag"]: server for server in config["dns"]["servers"]}
+            for domain in ("unclassified.example.invalid", "query-7.dns-test.invalid"):
+                with self.subTest(domain=domain, generated=config is self.config):
+                    target = dns_target(config, domain)
+                    self.assertEqual(target, "doh-cloudflare")
+                    self.assertEqual(servers[target]["type"], "https")
+                    self.assertEqual(servers[target]["detour"], "proxy")
+                    self.assertEqual(dns_target(config, domain, mode="Direct"), "bootstrap-local-dns")
+                    self.assertEqual(dns_target(config, domain, mode="Global"), "doh-cloudflare")
+        proxy = next(o for o in self.config["outbounds"] if o["tag"] == "proxy")
+        self.assertEqual(proxy["default"], "block")
+        self.assertEqual(proxy["outbounds"], ["block"])
+
     def test_explicit_foreign_services_precede_generic_cn(self):
         services = (("meta-category-ai-!cn", "ai-proxy"), ("meta-notion", "social-proxy"),
                     ("meta-slack", "social-proxy"), ("meta-reddit", "social-proxy"),

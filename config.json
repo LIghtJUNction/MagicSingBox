@@ -247,7 +247,7 @@
         "server": "doh-google"
       }
     ],
-    "final": "bootstrap-local-dns",
+    "final": "doh-cloudflare",
     "strategy": "prefer_ipv4",
     "cache_capacity": 4096,
     "reverse_mapping": true

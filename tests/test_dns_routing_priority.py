@@ -105,7 +105,7 @@ class DnsRoutingPriorityTests(unittest.TestCase):
         self.assertNotIn("detour", bootstrap)
         ipaddress.ip_address(bootstrap["server"])
         self.assertEqual(self.config["route"]["default_domain_resolver"], "bootstrap-local-dns")
-        self.assertEqual(self.config["dns"]["final"], "bootstrap-local-dns")
+        self.assertEqual(self.config["dns"]["final"], "doh-cloudflare")
         self.assertNotIn("independent_cache", self.config["dns"])
         for server in servers.values():
             if server["type"] == "https":
