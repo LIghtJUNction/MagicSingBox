@@ -15,6 +15,14 @@ class RoutingConfigTests(unittest.TestCase):
     def setUpClass(cls):
         cls.config = json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
 
+    def test_tun_uses_native_stack_in_both_templates(self):
+        for name in ("config.json", "config.source.json"):
+            config = json.loads(CONFIG_PATH.with_name(name).read_text(encoding="utf-8"))
+            tuns = [inbound for inbound in config["inbounds"] if inbound["type"] == "tun"]
+            self.assertTrue(tuns, name)
+            for tun in tuns:
+                self.assertNotIn("stack", tun, name)
+
     def test_google_family_advertising_order(self):
         for section in ("route", "dns"):
             rules = self.config[section]["rules"]
