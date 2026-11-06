@@ -12,6 +12,12 @@ python3 -m unittest discover -s tests
 
 源文件将重复的 selector 选项提取到 `selector_profiles`，将本地规则定义简化为 tag → path 映射。生成器只合并相邻且服务器相同的纯 rule_set DNS 规则，不跨越例外，不调整路由优先级。
 
+## 默认 DNS 出口
+
+未匹配显式分类的域名使用 `dns.final: doh-cloudflare`，查询通过该服务器的 `detour: proxy` 发送。代理不可用或模板尚无节点时，这条默认解析路径随代理失败，不自动回落到直连 DNS。现有国内分类、LAN/Tailnet 和 Direct 模式的 DNS 规则仍优先匹配。
+
+代理节点域名继续通过 `route.default_domain_resolver: bootstrap-local-dns` 引导解析。这个本地加密解析器保留独立的直连路径，使建立代理连接不依赖尚未建立的代理。`tests/test_routing_policy.py` 覆盖未知域名、显式模式和无节点默认；`tests/test_dns_routing_priority.py` 覆盖引导解析与规则次序。真实查询与 Android 流量验收由 MagicNet 的运行时测试记录。
+
 ## 指定目标阻断
 
 模板使用原生 `action: "reject"` 拒绝以下目标，TCP 和 UDP 均适用：

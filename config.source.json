@@ -97,7 +97,7 @@
       {"rule_set": ["meta-category-communication"], "server": "doh-google"},
       {"rule_set": ["metacubex-geosite-geolocation-not-cn"], "server": "doh-google"}
     ],
-    "final": "bootstrap-local-dns",
+    "final": "doh-cloudflare",
     "strategy": "prefer_ipv4",
     "cache_capacity": 4096,
     "reverse_mapping": true
