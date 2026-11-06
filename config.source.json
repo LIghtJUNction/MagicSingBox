@@ -46,6 +46,15 @@
       {"rule_set": ["meta-tencent"], "server": "bootstrap-local-dns"},
       {"rule_set": ["service-wechat-dns"], "server": "bootstrap-local-dns"},
       {"rule_set": ["meta-category-doh", "meta-category-ip-geo-detect"], "server": "doh-cloudflare"},
+      {
+        "domain_suffix": [
+          "edu.cn", "moe.gov.cn", "chsi.com.cn", "smartedu.cn",
+          "neea.cn", "ncss.cn", "icourse163.org", "icourses.cn",
+          "xuetangx.com", "yuketang.cn", "chaoxing.com", "zhihuishu.com",
+          "eol.cn", "cnki.net", "wanfangdata.com.cn", "cqvip.com"
+        ],
+        "server": "bootstrap-local-dns"
+      },
       {"domain": ["connect.rom.miui.com", "connectivitycheck.platform.hicloud.com"], "server": "bootstrap-local-dns"},
       {"rule_set": ["meta-connectivity-check", "meta-speedtest"], "server": "doh-google"},
       {"rule_set": ["meta-openai"], "server": "doh-google"},
@@ -275,6 +284,15 @@
       {"rule_set": ["karing-acl4ssr-wechat"], "outbound": "cn-direct"},
       {"rule_set": ["meta-category-doh", "meta-category-ip-geo-detect"], "outbound": "dns-guard"},
       {"port": 853, "outbound": "dns-guard"},
+      {
+        "domain_suffix": [
+          "edu.cn", "moe.gov.cn", "chsi.com.cn", "smartedu.cn",
+          "neea.cn", "ncss.cn", "icourse163.org", "icourses.cn",
+          "xuetangx.com", "yuketang.cn", "chaoxing.com", "zhihuishu.com",
+          "eol.cn", "cnki.net", "wanfangdata.com.cn", "cqvip.com"
+        ],
+        "outbound": "cn-direct"
+      },
       {"domain": ["connect.rom.miui.com", "connectivitycheck.platform.hicloud.com"], "outbound": "cn-direct"},
       {"rule_set": ["meta-connectivity-check", "meta-speedtest"], "outbound": "network-test"},
       {"rule_set": ["meta-openai"], "outbound": "ai-chatgpt"},

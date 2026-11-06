@@ -28,6 +28,33 @@ python3 -m unittest discover -s tests
 
 规则适用于进入 sing-box 且能识别到目标域名的流量。`tests/test_routing_policy.py` 检查匹配范围、端口、优先级及 DNS 捕获；这些配置测试不代表真机流量验证，也不说明上述域名的实际业务用途。
 
+## 大陆教育站点默认直连
+
+规则模式下，下列域名及其子域名优先使用 `cn-direct`（默认 `direct`），DNS 使用既有的本地加密解析器 `bootstrap-local-dns`。两侧使用同一份 16 项后缀清单，不新增 selector、DNS server 或下载依赖。
+
+| 范围 | 域名后缀 | 官方来源 |
+| --- | --- | --- |
+| 学校与教育科研域名空间 | `edu.cn` | [CERNIC](https://www.nic.edu.cn/home.html) |
+| 教育部 | `moe.gov.cn` | [政府门户年度报表](https://www.moe.gov.cn/jyb_xxgk/s5743/s5744/A01/202601/t20260130_1427931.html) |
+| 学信网 | `chsi.com.cn` | [网站介绍](https://www.chsi.com.cn/about/about_site.shtml) |
+| 国家智慧教育平台 | `smartedu.cn` | [平台域名规范](https://hudong.moe.gov.cn/srcsite/A16/s3342/202208/t20220819_653868.html) |
+| 教育考试报名 | `neea.cn` | [中国教育考试网](https://www.neea.edu.cn/) |
+| 国家大学生就业服务 | `ncss.cn` | [平台介绍](https://gyu.ncss.cn/intro) |
+| 中国大学 MOOC | `icourse163.org` | [关于我们](https://www.icourse163.org/about/aboutus.htm) |
+| 爱课程 | `icourses.cn` | [服务说明](https://www.icourses.cn/webInfo?type=contactUs) |
+| 学堂在线 | `xuetangx.com` | [官方平台](https://next.xuetangx.com/) |
+| 雨课堂 | `yuketang.cn` | [使用帮助](https://www.yuketang.cn/static/html/faq.html) |
+| 超星、学习通 | `chaoxing.com` | [官方学习通介绍](https://apps.chaoxing.com/d/app/198.html) |
+| 智慧树 | `zhihuishu.com` | [官方平台](https://www.zhihuishu.com/) |
+| 教育资讯 | `eol.cn` | [教育在线](https://www.eol.cn/) |
+| 知网 | `cnki.net` | [官方论文管理服务说明](https://co2.cnki.net/User/agreement.html) |
+| 万方 | `wanfangdata.com.cn` | [官方平台](https://www.wanfangdata.com.cn/) |
+| 维普 | `cqvip.com` | [官方平台](https://www.cqvip.com/) |
+
+教育路由位于目标端口 `853` 的 `dns-guard` 之后，教育 DNS 位于 DoH/IP 检测分类之后，二者都先于后续国外学术、AI、游戏、开发和媒体分类。既有指定目标拒绝、Direct/Global 模式、LAN、应用与用户增量、广告及 DNS 防护保持优先。用户仍可手选 `cn-direct` 的出口；教育路由省略 `action`，按普通业务规则参与应用策略重建。
+
+后缀按域名边界匹配；全球 `.edu`、`.edu.hk`、`.edu.tw`、相似拼写或在教育域名后附加其他域名的名称不属于这份清单。学校独立域名和第三方共享 CDN 沿用其他既有规则。官方来源用于核对域名与服务范围，不代表已验证视频、下载或真实设备的全链路直连。
+
 ## 服务规则来源
 
 上游：<https://github.com/MetaCubeX/meta-rules-dat/tree/sing/geo/geosite>

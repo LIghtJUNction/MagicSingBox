@@ -126,6 +126,27 @@
         "server": "doh-cloudflare"
       },
       {
+        "domain_suffix": [
+          "edu.cn",
+          "moe.gov.cn",
+          "chsi.com.cn",
+          "smartedu.cn",
+          "neea.cn",
+          "ncss.cn",
+          "icourse163.org",
+          "icourses.cn",
+          "xuetangx.com",
+          "yuketang.cn",
+          "chaoxing.com",
+          "zhihuishu.com",
+          "eol.cn",
+          "cnki.net",
+          "wanfangdata.com.cn",
+          "cqvip.com"
+        ],
+        "server": "bootstrap-local-dns"
+      },
+      {
         "domain": [
           "connect.rom.miui.com",
           "connectivitycheck.platform.hicloud.com"
@@ -1131,6 +1152,27 @@
       {
         "port": 853,
         "outbound": "dns-guard"
+      },
+      {
+        "domain_suffix": [
+          "edu.cn",
+          "moe.gov.cn",
+          "chsi.com.cn",
+          "smartedu.cn",
+          "neea.cn",
+          "ncss.cn",
+          "icourse163.org",
+          "icourses.cn",
+          "xuetangx.com",
+          "yuketang.cn",
+          "chaoxing.com",
+          "zhihuishu.com",
+          "eol.cn",
+          "cnki.net",
+          "wanfangdata.com.cn",
+          "cqvip.com"
+        ],
+        "outbound": "cn-direct"
       },
       {
         "domain": [

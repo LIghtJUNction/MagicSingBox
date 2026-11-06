@@ -15,6 +15,11 @@ BLOCKED_DOMAINS = (
     "gateway-papa.cloud.weizhi.com",
 )
 PORT_BLOCK_DOMAIN = "dm.wo.com.cn"
+EDUCATION_SUFFIXES = (
+    "edu.cn", "moe.gov.cn", "chsi.com.cn", "smartedu.cn", "neea.cn", "ncss.cn",
+    "icourse163.org", "icourses.cn", "xuetangx.com", "yuketang.cn", "chaoxing.com",
+    "zhihuishu.com", "eol.cn", "cnki.net", "wanfangdata.com.cn", "cqvip.com",
+)
 
 
 def dns_target(config, domain="", tags=(), mode="Rule", protocol=""):
@@ -97,6 +102,69 @@ class RoutingPolicyTests(unittest.TestCase):
                     self.config, domain=domain, port=18080, protocol="dns",
                     mode=mode, network=network,
                 ), "hijack-dns")
+
+    def test_education_roots_and_subdomains_use_domestic_route_and_dns(self):
+        domains = [prefix + suffix for suffix, prefix in product(
+            EDUCATION_SUFFIXES, ("", "www.", "campus.portal."),
+        )] + ["www.pku.edu.cn", "sso.tsinghua.edu.cn", "vpn.sjtu.edu.cn"]
+        for domain, network in product(domains, ("tcp", "udp")):
+            with self.subTest(domain=domain, network=network):
+                self.assertEqual(first_action(self.config, domain=domain, network=network), "cn-direct")
+                self.assertEqual(dns_target(self.config, domain), "bootstrap-local-dns")
+
+    def test_education_precedes_later_proxy_classifiers(self):
+        categories = (
+            "meta-category-scholar-!cn", "meta-category-ai-!cn", "meta-category-games-!cn",
+            "meta-category-dev", "meta-category-media", "meta-category-entertainment",
+            "meta-category-communication", "meta-category-social-media-!cn",
+            "metacubex-geosite-geolocation-not-cn", "meta-gitlab", "meta-huggingface",
+            "meta-docker", "meta-npmjs",
+        )
+        for suffix, category in product(EDUCATION_SUFFIXES, categories):
+            domain = "www." + suffix
+            with self.subTest(domain=domain, category=category):
+                self.assertEqual(first_action(self.config, domain=domain, tags=(category,)), "cn-direct")
+                self.assertEqual(dns_target(self.config, domain, (category,)), "bootstrap-local-dns")
+
+    def test_education_does_not_capture_foreign_or_lookalike_domains(self):
+        domains = ["mit.edu", "cuhk.edu.hk", "ntu.edu.tw", "ox.ac.uk", "example.school"]
+        for suffix in EDUCATION_SUFFIXES:
+            domains.extend(("not" + suffix, suffix + ".example.invalid", suffix + "-other.invalid"))
+        for domain in domains:
+            with self.subTest(domain=domain):
+                # A foreign-scholar membership makes an accidental education
+                # match visible even for lookalikes under the generic .cn suffix.
+                tags = ("meta-category-scholar-!cn",)
+                self.assertEqual(first_action(self.config, domain=domain, tags=tags), "proxy-rule")
+                self.assertEqual(dns_target(self.config, domain, tags), "doh-google")
+
+    def test_education_preserves_modes_and_front_loaded_guards(self):
+        for domain in ("www.pku.edu.cn", "www.icourse163.org"):
+            for mode, route, dns in (("Direct", "direct", "bootstrap-local-dns"),
+                                     ("Global", "select", "doh-cloudflare")):
+                with self.subTest(domain=domain, mode=mode):
+                    self.assertEqual(first_action(self.config, domain=domain, mode=mode), route)
+                    self.assertEqual(dns_target(self.config, domain, mode=mode), dns)
+            self.assertEqual(first_action(self.config, domain=domain, address="192.168.1.10"), "lan")
+            self.assertEqual(first_action(self.config, domain=domain, port=53), "hijack-dns")
+            self.assertEqual(first_action(self.config, domain=domain, port=853), "dns-guard")
+            self.assertEqual(first_action(self.config, domain=domain,
+                                          package="com.android.vending"), "google-proxy")
+            for tag, route, dns in (("lyc-geosite-ads", "ad-block", "doh-cloudflare"),
+                                    ("meta-category-doh", "dns-guard", "doh-cloudflare"),
+                                    ("meta-google", "google-proxy", "doh-google")):
+                with self.subTest(domain=domain, guard=tag):
+                    self.assertEqual(first_action(self.config, domain=domain, tags=(tag,)), route)
+                    self.assertEqual(dns_target(self.config, domain, (tag,)), dns)
+
+    def test_education_route_and_dns_share_the_bounded_suffix_inventory(self):
+        for config in (self.config, json.loads((ROOT / "config.source.json").read_text(encoding="utf-8"))):
+            route = [rule for rule in config["route"]["rules"] if "edu.cn" in rule.get("domain_suffix", [])]
+            dns = [rule for rule in config["dns"]["rules"] if "edu.cn" in rule.get("domain_suffix", [])]
+            self.assertEqual(route, [{"domain_suffix": list(EDUCATION_SUFFIXES), "outbound": "cn-direct"}])
+            self.assertEqual(dns, [{"domain_suffix": list(EDUCATION_SUFFIXES), "server": "bootstrap-local-dns"}])
+        domestic = next(outbound for outbound in self.config["outbounds"] if outbound["tag"] == "cn-direct")
+        self.assertEqual(domestic["default"], "direct")
 
     def test_lmm_uses_proxy_and_remote_dns_in_every_mode(self):
         conflicting = CN_TAGS + ("lyc-geoip-cn", "meta-category-dev", "lyc-geosite-ads", "meta-tencent")
