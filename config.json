@@ -683,12 +683,6 @@
       },
       {
         "type": "local",
-        "tag": "sukka-chatgpt-voice",
-        "format": "source",
-        "path": "rules/sukka-chatgpt-voice.json"
-      },
-      {
-        "type": "local",
         "tag": "meta-tencent",
         "format": "binary",
         "path": "rules/metacubex-service-tencent.srs"
@@ -1157,22 +1151,6 @@
           "meta-openai"
         ],
         "outbound": "ai-chatgpt"
-      },
-      {
-        "network": "udp",
-        "port": 3478,
-        "outbound": "ai-chatgpt",
-        "rule_set": [
-          "sukka-chatgpt-voice"
-        ]
-      },
-      {
-        "network": "tcp",
-        "port": 443,
-        "outbound": "ai-chatgpt",
-        "rule_set": [
-          "sukka-chatgpt-voice"
-        ]
       },
       {
         "rule_set": [

@@ -9,14 +9,12 @@ The template contains classifier references rather than service domain/IP lists.
 - lyc8503/sing-box-rules: China domains/IPs, advertising and Telegram IPs.
 - KaringX/karing-ruleset: WeChat and China domain/IP classifiers.
 - razaxq/dns-blocklists-sing-box: HaGeZi light advertising/tracking list.
-- SukkaLab/ruleset.skk.moe, branch `master`, `sing-box/ip/ai.json`:
-  ChatGPT Voice IPs. The generator in SukkaW/Surge reads OpenAI's published feed.
 
-`5450.update_sing_box_rules.sh` resolves immutable revisions and refreshes
-referenced binary rules. `5460.update_chatgpt_voice_rules.sh` validates and
-atomically refreshes the local Voice JSON rule set without rewriting config.
-Resolved revisions are recorded in the build state. Rule data updates with a
-new build, not with ordinary subscription refresh.
+`5450.update_sing_box_rules.sh` installs referenced binary rules from the
+reviewed MagicNetRules Release pin after verifying its manifest and checksums.
+Rule data updates with a new build, not with ordinary subscription refresh.
+ChatGPT uses the existing OpenAI domain classifier and app routing; connections
+without either match follow the remaining routing policy.
 
 Only mode selection, app choices, local/reserved address policy and classifier
 ordering remain in the template. See MagicNet's `docs/maintained-routing.md`
