@@ -22,11 +22,17 @@ class GenerationTests(unittest.TestCase):
         tags = [r["tag"] for r in self.config["route"]["rule_set"]]
         self.assertEqual(len(tags), len(set(tags)))
         outbounds = {o["tag"] for o in self.config["outbounds"]}
+        servers = [server["tag"] for server in self.config["dns"]["servers"]]
+        self.assertEqual(len(servers), len(set(servers)))
+        self.assertIn(self.config["dns"]["final"], servers)
+        self.assertIn(self.config["route"]["default_domain_resolver"], servers)
         for section in ("dns", "route"):
             for rule in self.config[section]["rules"]:
                 self.assertTrue(set(rule.get("rule_set", [])) <= set(tags))
                 if "outbound" in rule:
                     self.assertIn(rule["outbound"], outbounds)
+                if "server" in rule:
+                    self.assertIn(rule["server"], servers)
 
     def test_services_have_consistent_dns_and_route(self):
         for service in ("github", "huggingface", "gitlab", "docker", "npmjs"):

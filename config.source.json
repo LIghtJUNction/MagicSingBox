@@ -2,6 +2,7 @@
   "log": {"level": "error", "timestamp": true},
   "dns": {
     "servers": [
+      {"type": "mdns", "tag": "lan-mdns"},
       {
         "type": "https",
         "tag": "bootstrap-local-dns",
@@ -31,11 +32,18 @@
       }
     ],
     "rules": [
+      {
+        "domain_suffix": [
+          "local", "254.169.in-addr.arpa",
+          "8.e.f.ip6.arpa", "9.e.f.ip6.arpa", "a.e.f.ip6.arpa", "b.e.f.ip6.arpa"
+        ],
+        "server": "lan-mdns"
+      },
       {"domain_suffix": ["lmm.best"], "server": "doh-cloudflare"},
       {"protocol": "icmp", "server": "doh-google"},
       {"clash_mode": "Direct", "server": "bootstrap-local-dns"},
       {"clash_mode": "Global", "server": "doh-cloudflare"},
-      {"domain_suffix": ["local", "home.arpa", "lan"], "server": "bootstrap-local-dns"},
+      {"domain_suffix": ["home.arpa", "lan"], "server": "bootstrap-local-dns"},
       {"domain_suffix": ["tailscale.net", "ts.net"], "server": "bootstrap-local-dns"},
       {"rule_set": ["meta-google-gemini"], "server": "doh-google"},
       {"rule_set": ["meta-google-play"], "server": "doh-google"},
