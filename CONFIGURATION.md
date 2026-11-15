@@ -18,6 +18,16 @@ python3 -m unittest discover -s tests
 
 代理节点域名继续通过 `route.default_domain_resolver: bootstrap-local-dns` 引导解析。这个本地加密解析器保留独立的直连路径，使建立代理连接不依赖尚未建立的代理。`tests/test_routing_policy.py` 覆盖未知域名、显式模式和无节点默认；`tests/test_dns_routing_priority.py` 覆盖引导解析与规则次序。真实查询与 Android 流量验收由 MagicNet 的运行时测试记录。
 
+## 本地链路 mDNS
+
+`.local` 名称改用原生 `type: mdns` 解析器 `lan-mdns`，不再交给公共 AliDNS DoH。规则同时覆盖 `254.169.in-addr.arpa` 和 `8.e.f.ip6.arpa`、`9.e.f.ip6.arpa`、`a.e.f.ip6.arpa`、`b.e.f.ip6.arpa`，分别对应 IPv4、IPv6 链路本地地址的反向查询区域。`.local` 名称范围见 [RFC 6762 第 3 节](https://www.rfc-editor.org/rfc/rfc6762.html#section-3)，反向查询范围见 [第 4 节](https://www.rfc-editor.org/rfc/rfc6762.html#section-4)。
+
+mDNS 规则先于 Direct/Global 模式的公共 DNS 规则，按域名后缀边界匹配；`printer.local.example.com` 等公网名称不受影响。解析器通过可用的本地组播接口查询，没有公共或系统 DNS 后备。若没有可用接口或本地设备不响应，该查询失败；未知公网域名仍沿用原有代理 DNS 默认。接口选择和传输行为见 [sing-box mDNS 文档](https://sing-box.sagernet.org/configuration/dns/server/mdns/)。启用 Tailscale 时，MagicNet 运行时仍把专用 `ts.net` MagicDNS 规则置于前方，两者的名称范围不重叠。
+
+本次变更只覆盖 mDNS 名称与上述反向区域。`home.arpa` 和 `.lan` 暂时保留既有 DNS 规则；它们不会因新增 mDNS 而自动获得局域网解析能力。尤其 `home.arpa` 应使用家庭网络提供的解析器，参见 [RFC 8375 第 4 节](https://www.rfc-editor.org/rfc/rfc8375.html#section-4)。Android 命令行核心尚未接入可靠的当前网络 DNS 发现，不应把 `type: local` 当成这一问题的已验证修复。
+
+`tests/test_mdns_policy.py` 检查规则模式、全局模式、直连模式的优先级，IPv4/IPv6 反向区域、后缀边界和公网默认。MagicNet 的 `scripts/test-maintained-routing.py` 另检查 DNS profile 物化和 Tailscale 注入保留这条规则。配置测试不代表 Android 真机上的组播连通性验证。
+
 ## 指定目标阻断
 
 模板使用原生 `action: "reject"` 拒绝以下目标，TCP 和 UDP 均适用：

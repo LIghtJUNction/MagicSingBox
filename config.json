@@ -6,6 +6,10 @@
   "dns": {
     "servers": [
       {
+        "type": "mdns",
+        "tag": "lan-mdns"
+      },
+      {
         "type": "https",
         "tag": "bootstrap-local-dns",
         "server": "223.5.5.5",
@@ -47,6 +51,17 @@
     "rules": [
       {
         "domain_suffix": [
+          "local",
+          "254.169.in-addr.arpa",
+          "8.e.f.ip6.arpa",
+          "9.e.f.ip6.arpa",
+          "a.e.f.ip6.arpa",
+          "b.e.f.ip6.arpa"
+        ],
+        "server": "lan-mdns"
+      },
+      {
+        "domain_suffix": [
           "lmm.best"
         ],
         "server": "doh-cloudflare"
@@ -65,7 +80,6 @@
       },
       {
         "domain_suffix": [
-          "local",
           "home.arpa",
           "lan"
         ],
